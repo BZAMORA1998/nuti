@@ -1,1 +1,34 @@
-<p>login works!</p>
+
+<div class="principal">
+    <div class="box-left">
+        <div class="form-login">
+            <img class="img-login" src="../../assets/img/logo-notisurvey.png">
+            <p id="bienvenido">¡Bienvenido!</p>
+            <p id="inicio">Iniciar Sesión</p>
+            <form #formLogin="ngForm" class="form">
+                <label>Usuario o Correo Electrónico</label>
+                <input autocomplete="off" type="text" name="usuario" autofocus required/>
+                <!-- <br><span class="validacion"  *ngIf="usuario.touched && !usuario.valid"> Debe ingresar un usuario</span> -->
+                <label>Constraseña</label>
+                <input autocomplete="off" type="password" name="contrasena" required/>
+                <span id="show-hide-passwd" action="hide" class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
+                <!-- <br><span class="validacion" *ngIf="contrasena.touched && !contrasena.valid">Debe ingresar una contraseña</span> -->
+                <input type="submit" value="Continuar"/>
+            </form>
+            <a>Regístrate</a>
+            <a>Olvide mi usuario y/o contraseña</a>
+            
+        </div>
+    </div>
+    <div class="box-right">
+        <img src="../../assets/img/notisurvey-portada.jpg">
+    </div>
+</div>
+
+<div id="modelo">
+    <div id="cuerpo">
+        <div class="spinner-border"></div>
+        <p id="texto">Procesando, espere por favor...</p>
+    </div>  
+</div>
+

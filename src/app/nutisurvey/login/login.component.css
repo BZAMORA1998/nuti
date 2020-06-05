@@ -1,0 +1,243 @@
+.principal{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+@media screen and (min-width: 1023px){
+    .box-left{
+        min-width: 50%;
+        height: 650px;
+        float: left;
+    }
+
+    .box-right{
+        width: 50%;
+        height: 650px;
+        float: left;
+    }
+
+    #modelo{
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.4);
+    }
+    
+    #modelo #cuerpo{
+        border-radius: 5px;
+        background-color: white;
+        margin: 23% auto;
+        padding: 10px;
+        width: 20%;
+    }
+    
+    #texto{
+        font-size: 15px;
+        margin: 5px;
+        float: left;
+    }
+    
+    .spinner-border{
+        padding: 0px;
+        margin-left: 15px;
+        text-align: center;
+        margin: 5px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width:559px){
+    .box-left{
+        width: 100%;
+        float: left;
+    }
+
+    #modelo{
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.4);
+    }
+    
+    #modelo #cuerpo{
+        border-radius: 5px;
+        background-color: white;
+        margin: 80% auto !important;
+        padding: 10px;
+        width: 74% !important;
+    }
+    
+    #texto{
+        font-size: 15px;
+        margin: 5px;
+        float: left;
+    }
+    
+    .spinner-border{
+        padding: 0px;
+        margin-left: 15px;
+        text-align: center;
+        margin: 5px;
+    }
+}
+
+.validacion{
+    position: absolute;
+    color: red;
+    font-size: small;
+    width: 200px !important;
+    margin-left: 120px !important;
+    text-align: right;
+}
+
+.box-right img{
+    margin: 0px;
+    padding: 0px;
+    width: 50%;
+    height: 100%;
+    position: fixed;
+}
+
+.form-login{
+    width: 350px;
+    height: 530px;
+    margin:60px auto;  
+    padding-top: 150px;
+    padding: 15px;
+}
+
+.form-login label{
+    color: #757E7F;
+    margin-top: 20px;
+    display: block;
+}
+
+.form-login #bienvenido{
+    font-size: 30px;
+    color: #757E7F;
+}
+
+.form-login #inicio{
+    font-size: 25px;
+    color:#EA792D;
+}
+
+
+form input[type=text]{
+    width: 100%;
+    height: 40px;
+    border: 1px solid #EA792D;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+form input[type=password]{
+    width: 100%;
+    height: 40px;
+    border: 1px solid #EA792D;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+
+}
+
+form input[type="submit"]{
+    margin-top: 20px;
+    height: 40px;
+    width: 100%;
+    border-radius: 4px;
+    background-color:#EA8947;
+    border: 2px solid #EA792D;
+    color:  white;
+    box-sizing: border-box;
+    border-color: .15s;
+    outline:none;
+    margin-top: 30px;
+}
+
+form input[type=submit]:hover{
+    box-shadow: 0 0 5px 0 #EA792D;
+}
+
+form input[type=text]:click{
+    box-shadow: 0 0 5px 0 #EA792D;
+}
+
+form input[type=text]:focus{
+    box-shadow: 0 0 5px 0 #ea792d;
+}
+
+form input[type=password]:focus{
+    box-shadow: 0 0 5px 0 #ea792d;
+}
+
+a{
+    display: block;
+    color: 868E91;
+    text-decoration:none;
+    margin-left: 100px;
+    margin-top: 40px;
+    text-align: right;
+}
+
+img{
+    height: 100px;
+    margin-left: 100px;
+}
+
+#show-hide-passwd{
+    position: absolute;
+    margin-top: 422px;
+    margin-left: 290px;
+    border: none;
+    background-color: transparent;
+}
+
+#swal2-shown .swal2-height-auto {
+    box-shadow: none !important;
+}
+
+.validacion{
+    position: absolute;
+    color: red;
+    font-size: small;
+    width: 14%;
+    margin-left: 130px;
+    text-align: right;
+}
+
+#modelo{
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.4);
+}
+
+#modelo #cuerpo{
+    border-radius: 5px;
+    background-color: white;
+    margin: 23% auto;
+    padding: 10px;
+    width: 20%;
+}
+
+#texto{
+    font-size: 15px;
+    margin: 5px;
+    float: left;
+}
+
+.spinner-border{
+    padding: 0px;
+    margin-left: 15px;
+    text-align: center;
+    margin: 5px;
+}
