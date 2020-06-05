@@ -1,0 +1,49 @@
+
+a{
+    border-right: 1px solid #bebebe;
+    text-decoration: none;
+    cursor:pointer;
+    color:  #bebebe;
+    margin-top: 4px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.nav-link :last-child{
+    border-right:none !important;
+}
+
+.active{
+    color: #ea792d;
+}
+
+.nav-item{
+    height: 50px;
+}
+
+.navbar{
+   border: 2px solid #f3f3f3;
+   background-color: #f7f7f7;
+   color: #b8b8b8;
+}
+
+.btn-guardar{
+    background-color: #393e41;
+    color: white; 
+    border: black;
+    height:30px;
+    border-radius: 4px;
+}
+
+
+#header{
+    background: #ea792d;
+}
+
+#description{
+    height: 60px;
+}
+
+a:hover{
+    color:#ea792d;
+}
