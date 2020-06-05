@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "notisurvay"
+    }
+  },
+  "defaultProject": "notisurvay",
+  "cli": {
+    "analytics": "d3eb02cf-9a4f-4991-9e29-555351e53842"
+  }
 }
