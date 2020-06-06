@@ -1,0 +1,346 @@
+.principal{
+    margin:0;
+    padding:0; 
+    font-family: 'Open Sans', sans-serif !important;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+}
+
+.step-process{
+    position: absolute;
+    width: 95%;
+    margin-left: -17px;    
+    padding-top: -200px;
+}
+
+.step-process ul{
+    margin-top: 100px;
+    list-style: none;
+    position: relative;
+    counter-reset: step;
+    margin-top: 40px;
+}
+
+.step-process ul li{
+    position: relative;
+    padding: 30px 0;
+    border-left: 1px solid #bec3d2;
+    margin-left: 100px;
+    padding-left: 50px;
+    border-left: 1px solid #bec3d2;
+}
+
+.step-process ul li::before{
+    position: absolute;
+    content: counter(step);
+    counter-increment: step;
+    color: #bec3d2;
+    text-align: center;
+    background-color: white;
+    margin-top: -30px;
+    margin-left: -65px;
+    width: 30px;
+    height: 30px;
+    border-radius:50px;
+    border: 1px solid #bec3d2;
+}
+
+.step-process ul li:last-child{
+    border: none !important;
+}
+
+.up-image{
+    margin-left: -20px;
+    margin-top: -40px;
+    width: 100%;
+    height: 50px;
+    background: #fcfcfc;
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+}
+
+.up-image input[type=file]{
+    list-style-type: none;
+}
+
+.up-image #txt-enviarfile{
+    width: 150px;
+    height: 100%;
+    padding-left: 25px;
+    padding-top: 12px;
+    text-align: left;
+    color: #bebebe;
+    background-color: #fcfcfc;
+    background-image: url("../../../../assets/img/ico-file.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    display: block;
+}
+
+.up-image #btn_enviarfile{
+    position: absolute;
+    margin: 0px;
+    background-color: #fcfcfc;
+    top: 0;
+    margin-left: 15px;
+    display: block;
+    opacity: 0;
+}
+
+.up-image #btn_eliminarfile{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 1030px;
+    border: none;
+    background: #fcfcfc;
+    color: #ee9052;
+    display: none;
+}
+
+.up-image #img_logo{
+    position:absolute;
+    margin-top: 10px;
+    margin-left: 30px;
+    display: none;
+}
+
+.up-image #txt_value{
+    position:absolute;
+    margin-top: 12px;
+    margin-left: 90px;
+    text-align: left;
+    display: none;
+    color: #515558;
+}
+
+::placeholder { 
+    color: #bebebe; 
+}
+
+.nombre{
+    margin-left: -20px;
+    margin-top: -40px;
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+    background: #ea792d;
+    border-radius: 4px;
+    text-align: left;
+    border: none !important;
+}
+
+.nombre input[type=text]{
+    border: 0;
+    width: 100%;
+    font-size: 25px;
+    background: #ea792d;
+    padding-left: 25px;
+    color: white;
+}
+
+.nombre input[type=text]:focus{
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;   
+}
+
+.nombre input[type=text]::placeholder{
+    color: white;
+}
+
+.descripcion{
+    margin-left: -20px;
+    margin-top: -30px;
+    width: 100%;
+    height: 150px;
+    padding: 5px;
+    background: white;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.descripcion p{
+    margin-left: 25px;
+    color: #ee9052;
+    font-size: 16px;
+    text-decoration: none;
+    border: none !important;
+}
+
+.descripcion p:click{
+    border:none !important;
+}
+
+.descripcion div{
+    width: 282%;
+    height: 50px;
+    padding: 5px;
+    background: white;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.descripcion textarea{
+    width: 100%;
+    height: 90px;
+    resize: none;
+    background: #fcfcfc;
+    border: 1px solid #e7e7e7;
+    padding-left: 25px;
+    display: block;
+    border-radius: 4px;
+    color: #515558;
+}
+.descripcion textarea:focus{
+    outline: none;
+    border: 1px solid #ee9052;
+}
+
+.side{
+    margin-left: -20px;
+    margin-top: -30px;
+    width: 100%;
+    height: 250px;
+    padding: 5px;
+    background: white;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.side p{
+    margin-left: 25px;
+    color: #ee9052;
+    font-size: 16px;
+    text-decoration: none;
+    border: none !important;
+}
+
+.side #left{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.side #right{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+input{
+    color: #515558;
+}
+
+#left input[type=date]{
+    width: 92%;
+    height: 15%;
+    background: #fcfcfc;
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    padding-left: 75px;
+    background-image: url("../../../../assets/img/ico-calendar.png");
+    background-repeat: no-repeat;
+    background-position-x: 450px;
+}
+
+#left #txt-fecha-inicio{
+    position: absolute;
+    margin-top: -45px;
+    color:#bebebe;
+}
+
+#left #txt-fecha-fin{
+    position: absolute;
+    margin-top: -45px;
+    color:#bebebe;
+}
+
+#right input[type=radio]{
+    display: none;
+}
+
+#right input[type=radio]:checked + label{
+    border:1px solid #ea792d;
+}
+
+#right label{
+    font-weight:normal;
+    background: #fcfcfc;
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+    width: 47%;
+    height: 37%;
+    padding-top: 60px;
+    padding-left: 100px;
+    margin-left: 31px;
+    color: #c3c3c3;
+}
+
+#right input[type=submit]{
+    text-decoration: none;
+     outline: none;
+     border-radius: 4px;
+     width: 130px;
+     height: 35px;
+     background-color: #ea792d;
+     color: white; 
+    float: right;
+    margin-top: 50px;
+}
+
+#right input[type=submit]:hover{
+    box-shadow: 0 0 5px 0 #EA792D;
+}
+
+#right input[type=submit]:disabled{
+    background-color: #f8d6c0;
+    color: #fef9f7;
+    border: none;
+}
+
+#right #lbl-negocio{
+    background-image: url("../../../../assets/img/ico-negocio.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 0px !important;
+}
+
+#right #lbl-estracto{
+    background-image: url("../../../../assets/img/ico-estracto.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#modelo{
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 130%;
+    top: 0px;
+    background: rgba(0,0,0,.4);
+}
+
+#modelo #cuerpo{
+    border-radius: 5px;
+    background-color: white;
+    margin: 23% auto;
+    padding: 10px;
+    width: 20%;
+}
+
+#texto{
+    font-size: 15px;
+    margin-top: -27px;
+    float: left;
+}
+
+.spinner-border{
+    padding: 0px;
+    margin-left:230px !important;
+    text-align: center;
+    margin: 5px;
+}
