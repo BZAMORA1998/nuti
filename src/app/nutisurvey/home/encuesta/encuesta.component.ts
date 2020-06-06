@@ -23,6 +23,7 @@ export class EncuestaComponent implements OnInit {
     
     //this.usuario=JSON.parse(localStorage.getItem("usuario"));
     this.crearEncuesta=JSON.parse(localStorage.getItem("crearEncuesta"));
+    console.log(this.crearEncuesta.imagenCab);
     console.log(this.crearEncuesta);
 
    }
@@ -57,6 +58,7 @@ export class EncuestaComponent implements OnInit {
 
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = event.target.result;
+        this.crearEncuesta.imagenMedi=this.url;
         $("#img_logo").attr("src",this.url);
       }
     }
@@ -65,6 +67,8 @@ export class EncuestaComponent implements OnInit {
   }
 
   crearencuesta(){
+    //let logo = (document.getElementById("btn_enviarfile") as HTMLInputElement).value;
+    //this.crearEncuesta.imagenCab=logo.split( '\\' ).pop();;
     console.log(this.crearEncuesta);
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
   }

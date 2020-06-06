@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { CrearEncuesta } from 'src/app/models/crearEncuesta';
+import { CrearSeccion } from 'src/app/models/crearSeccion';
+import { SeccionPk } from 'src/app/models/seccionPk';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +12,9 @@ import { CrearEncuesta } from 'src/app/models/crearEncuesta';
 export class LoginComponent implements OnInit {
 
   public crearEncuesta: CrearEncuesta;
+  public crearSeccion:CrearSeccion[]=[
+    new CrearSeccion(""," ",0, new SeccionPk(0,0,0)) 
+  ];
 
   constructor() { }
 
@@ -17,6 +22,7 @@ export class LoginComponent implements OnInit {
     localStorage.clear();
     this.crearEncuesta=new CrearEncuesta("","","","","","",0,"","","","",0);
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
+    localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccion));
   }
 
   loading(){

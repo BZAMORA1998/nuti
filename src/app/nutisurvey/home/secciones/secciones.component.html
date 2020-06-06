@@ -1,18 +1,18 @@
 <div class="principal">
-    <nav class="step-process">
-      <p>Definir nombre y descripcion a las secciones de su encuenta</p>
-      <form>
-           <ul class="ul-step">
-                <li id="li-clonar">
-                  <div class="seccion">
-                      <p>Sección</p>
-                          <input  class="nombres" name="nombres" autocomplete="off" class="campo" type="text" placeholder="Ingresar el nombre"/>
-                          <textarea name="descripcion" autocomplete="off" class="campo" placeholder="Ingresar descripcion, máximo 100 caracteres"></textarea>
-                    </div>  
-                </li>
-          </ul>
-          <input type="button"  id="btn-agregarSeccion"value="Agregar Sección"/>
-          <input type="submit" value="Continuar" />
-      </form>
-    </nav>
-  </div> 
+  <nav class="step-process">
+    <p>Definir nombre y descripcion a las secciones de su encuenta</p>
+    <form #formProducto="ngForm">
+         <ul  class="ul-step">
+              <li *ngFor="let crear of crearSeccionList ; index as i" id="li-clonar">
+                <div class="seccion">
+                    <p>Sección</p>
+                        <input  name="titulo" value="{{crear.titulo}}" class="nombres" name="nombres" autocomplete="off" class="campo" type="text" placeholder="Ingresar el nombre"/>
+                        <textarea name="descripcion" value="{{crear.descripcion}}" class="nombres" autocomplete="off" class="campo" placeholder="Ingresar descripcion, máximo 100 caracteres"></textarea>
+                </div>  
+              </li>
+        </ul>
+        <input type="button"  id="btn-agregarSeccion"value="Agregar Sección"/>
+        <input type="submit" value="Continuar" (click)=" CrearSeccion()"/>
+    </form>
+  </nav>
+</div> 

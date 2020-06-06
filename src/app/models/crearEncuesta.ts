@@ -7,8 +7,8 @@ export class CrearEncuesta{
         public fechaFin:String,
         public link:String,
         public unidadNegocio:number,
-        public imagenCab: String,
-        public imagenMedi: String,
+        public imagenCab: any,
+        public imagenMedi: any,
         public imagenPie: String,
         public notaPie:String,
         public idEncuesta:number
