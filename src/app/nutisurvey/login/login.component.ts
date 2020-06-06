@@ -3,26 +3,71 @@ import Swal from 'sweetalert2';
 import { CrearEncuesta } from 'src/app/models/crearEncuesta';
 import { CrearSeccion } from 'src/app/models/crearSeccion';
 import { SeccionPk } from 'src/app/models/seccionPk';
+import {Router, ActivatedRoute} from '@angular/router';
+import { LoginService } from 'src/app/servicios/login.service';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers:[LoginService]
 })
 export class LoginComponent implements OnInit {
 
   public crearEncuesta: CrearEncuesta;
   public crearSeccion:CrearSeccion[]=[
     new CrearSeccion(""," ",0, new SeccionPk(0,0,0)) 
-  ];
+  ]; 
 
-  constructor() { }
+  constructor(
+    private _route:ActivatedRoute,
+    private _router:Router,
+    private _loginService:LoginService
+  ) { 
+    this.usuario=new Usuario("","","","","",0);
+  }
 
   ngOnInit(): void {
     localStorage.clear();
     this.crearEncuesta=new CrearEncuesta("","","","","","",0,"","","","",0);
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
     localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccion));
+  }
+  public usuario:Usuario;
+   public nick:String;
+   public password:String;
+
+   redidirigirRegistroEncuesta(){
+      return this._router.navigate(['../notisurvey/home/diseño-encuesta']);
+  }
+
+  showModal(message){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: message,
+      confirmButtonColor:'#ea792d',
+    })
+  }
+
+  autenticacion(){
+    this._loginService.getAutenticacion(this.nick,this.password).subscribe(
+      Response=>{
+        if(Response.respuestaProceso.codigo==200){
+          this.usuario=Response.usuario;
+          localStorage.setItem("usuario",JSON.stringify(this.usuario));
+          console.log(this.usuario);
+          this.redidirigirRegistroEncuesta();
+        }else{
+          console.log(Response.respuestaProceso);
+          this.showModal(Response.respuestaProceso.mensaje);
+        }
+      },
+      error=>{
+        console.log(<any>error);
+      }
+    );
   }
 
   loading(){

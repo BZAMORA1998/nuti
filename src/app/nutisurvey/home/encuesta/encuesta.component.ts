@@ -21,10 +21,10 @@ export class EncuestaComponent implements OnInit {
   ) {
     this.nombre="";
     
-    //this.usuario=JSON.parse(localStorage.getItem("usuario"));
+    this.usuario=JSON.parse(localStorage.getItem("usuario"));
     this.crearEncuesta=JSON.parse(localStorage.getItem("crearEncuesta"));
-    console.log(this.crearEncuesta.imagenCab);
-    console.log(this.crearEncuesta);
+    // console.log(this.crearEncuesta.imagenCab);
+    // console.log(this.crearEncuesta);
 
    }
 

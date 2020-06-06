@@ -5,18 +5,18 @@
             <img class="img-login" src="../../assets/img/logo-notisurvey.png">
             <p id="bienvenido">¡Bienvenido!</p>
             <p id="inicio">Iniciar Sesión</p>
-            <form #formLogin="ngForm" class="form">
+            <form #formLogin="ngForm" (ngSubmit)="autenticacion()" class="form">
                 <label>Usuario o Correo Electrónico</label>
-                <input autocomplete="off" type="text" name="usuario" autofocus required/>
-                <!-- <br><span class="validacion"  *ngIf="usuario.touched && !usuario.valid"> Debe ingresar un usuario</span> -->
+                <input autocomplete="off" type="text" name="usuario"  #usuario="ngModel" [(ngModel)]="nick" autofocus required/>
+                <br><span class="validacion"  *ngIf="usuario.touched && !usuario.valid"> Debe ingresar un usuario</span>
                 <label>Constraseña</label>
-                <input autocomplete="off" type="password" name="contrasena" required/>
+                <input autocomplete="off" type="password" name="contrasena" #contrasena="ngModel" [(ngModel)]="password" required/>
                 <span id="show-hide-passwd" action="hide" class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
-                <!-- <br><span class="validacion" *ngIf="contrasena.touched && !contrasena.valid">Debe ingresar una contraseña</span> -->
+                <br><span class="validacion" *ngIf="contrasena.touched && !contrasena.valid">Debe ingresar una contraseña</span>
                 <input type="submit" value="Continuar"/>
             </form>
-            <a>Regístrate</a>
-            <a>Olvide mi usuario y/o contraseña</a>
+            <a [routerLink]="['/crear-usuario']">Regístrate</a>
+            <a  style="margin-top: 10px !important;" [routerLink]="['/olvide-contrasena']">Olvide mi usuario y/o contraseña</a>
             
         </div>
     </div>

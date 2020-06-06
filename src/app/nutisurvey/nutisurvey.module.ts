@@ -11,7 +11,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [LoginComponent, HomeComponent],
   imports: [
     CommonModule,
-    NutisurveyRoutingModule,FormsModule
+    NutisurveyRoutingModule,
+    FormsModule
   ]
 })
 export class NutisurveyModule { }
