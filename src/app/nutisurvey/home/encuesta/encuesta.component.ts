@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as jQuery from 'jquery';
+import { CrearEncuesta } from 'src/app/models/crearEncuesta';
+import { Usuario } from 'src/app/models/usuario';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-encuesta',
@@ -8,7 +11,21 @@ import * as jQuery from 'jquery';
 })
 export class EncuestaComponent implements OnInit {
 
-  constructor() { }
+  public crearEncuesta:CrearEncuesta;
+  public usuario:Usuario;
+  public nombre:String;
+
+  constructor(
+               private _route:ActivatedRoute,
+               private _router:Router,
+  ) {
+    this.nombre="";
+    
+    //this.usuario=JSON.parse(localStorage.getItem("usuario"));
+    this.crearEncuesta=JSON.parse(localStorage.getItem("crearEncuesta"));
+    console.log(this.crearEncuesta);
+
+   }
 
   ngOnInit(): void {
     $('#btn_enviarfile').on('change',function (e){
@@ -45,6 +62,15 @@ export class EncuestaComponent implements OnInit {
     }
 
     $("#txt_value").text(event.target.files[0].name);
-}
+  }
+
+  crearencuesta(){
+    console.log(this.crearEncuesta);
+    localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
+  }
+
+  setIdEncuesta(){
+
+  }
 
 }
