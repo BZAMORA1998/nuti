@@ -1,37 +1,68 @@
-<div class="principal">
+
+<div class="container-fluid">
     <h1>Selecciona e ingresa las preguntas adecuada para cada sección</h1>
-        <div id="box-acordeon">
-            <button class="accordion" class="accordion active">Section 1</button>
-            <div class="panel" style="display: block;">
+
+    <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Collapsible Group Item #1
+              </button>
+            </h5>
+          </div>
+      
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
                 <nav class="step-process">
-                      <ul class="   ul-stepPregunta">
-                          <li id="li-clonarPregunta">
-                            <div class="seccion">
-                                <p>. Enunciado</p>
-                                <input autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
-                                <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
-                                <input id="rd-abierta" name="unidad" type="radio"/><label for="rd-abierta" >Negocio</label>
-                                <input id="rd-cerrada" name="unidad" type="radio"/><label for="rd-cerrada" >Estracto</label>
-                                <input id="rd-multiple" name="unidad" type="radio"/><label for="rd-multiple" >Estracto</label>
-                                <input id="rd-multipleRespuesta" name="unidad" type="radio"/><label for="rd-multipleRespuesta">Negocio</label>
-                                <input id="rd-obligatoria" name="unidad" type="radio"/><label for="rd-obligatoria">Negocio</label>
-                                <input id="rd-tabulada" name="unidad" type="radio"/><label for="rd-tabulada">Estracto</label>
-                            </div>  
-                          </li>
-                      </ul>
-                      <input type="button" id="btn-agregarPregunta"value="Agregar Pregunta"/>
-                  </nav>
+                    <ul class="ul-stepPregunta">
+                        <li id="li-clonarPregunta">
+                          <div class="seccion">
+                              <p>. Enunciado</p>
+                              <input autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
+                              <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
+                              <input id="rd-abierta" name="unidad" type="radio"/><label for="rd-abierta" >Negocio</label>
+                              <input id="rd-cerrada" name="unidad" type="radio"/><label for="rd-cerrada" >Estracto</label>
+                              <input id="rd-multiple" name="unidad" type="radio"/><label for="rd-multiple" >Estracto</label>
+                              <input id="rd-multipleRespuesta" name="unidad" type="radio"/><label for="rd-multipleRespuesta">Negocio</label>
+                              <input id="rd-obligatoria" name="unidad" type="radio"/><label for="rd-obligatoria">Negocio</label>
+                              <input id="rd-tabulada" name="unidad" type="radio"/><label for="rd-tabulada">Estracto</label>
+                          </div>  
+                        </li>
+                    </ul>
+                    <input type="button" id="btn-agregarPregunta"value="Agregar Pregunta"/>
+                </nav>
             </div>
-
-            <button class="accordion">Section 2</button>
-            <div class="panel">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-
-            <button class="accordion">Section 3</button>
-            <div class="panel">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
+          </div>
         </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Collapsible Group Item #2
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Collapsible Group Item #3
+              </button>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
 
