@@ -1,13 +1,8 @@
-import{SeccionPk} from './seccionPk'
+import { ListaSecciones } from './listaSecciones';
+
 
 export class CrearSeccion{
-    constructor(
-        public descripcion:string,
-        public titulo:string,
-        public nroSeccion:number,
-        public seccionPk:SeccionPk
-        )
-        {
+    constructor(listaSecciones:ListaSecciones[]){
 
-        }
     }
+}

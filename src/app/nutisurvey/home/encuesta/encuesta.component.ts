@@ -3,24 +3,30 @@ import * as jQuery from 'jquery';
 import { CrearEncuesta } from 'src/app/models/crearEncuesta';
 import { Usuario } from 'src/app/models/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CrearEncuestaService } from 'src/app/servicios/crearEncuesta.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-encuesta',
   templateUrl: './encuesta.component.html',
-  styleUrls: ['./encuesta.component.css']
+  styleUrls: ['./encuesta.component.css'],
+  providers:[CrearEncuestaService]
 })
 export class EncuestaComponent implements OnInit {
-
   public crearEncuesta:CrearEncuesta;
   public usuario:Usuario;
   public nombre:String;
+  public idEncuesta:number=0;
 
   constructor(
-               private _route:ActivatedRoute,
-               private _router:Router,
+    private _route:ActivatedRoute,
+    private _router:Router,
+    private _crearEncuestaService:CrearEncuestaService
   ) {
     this.nombre="";
-    
+    this.crearEncuesta=new CrearEncuesta(" "," "," "," "," "," ",0," "," "," "," ",0);
+    localStorage.setItem("idEncuesta",JSON.stringify(0));
+
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
     this.crearEncuesta=JSON.parse(localStorage.getItem("crearEncuesta"));
     // console.log(this.crearEncuesta.imagenCab);
@@ -66,15 +72,63 @@ export class EncuestaComponent implements OnInit {
     $("#txt_value").text(event.target.files[0].name);
   }
 
+  setIdEncuesta():void{        
+    if(this.crearEncuesta.mensaje=="" && this.crearEncuesta.titulo==""){
+         localStorage.setItem("idEncuesta",JSON.stringify(0));
+    }
+  }
+
+  showModal(message){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: message,
+      confirmButtonColor:'#ea792d',
+    });
+  }
+
+  
+  mostrarModalConfirmacion(message){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: message,
+      confirmButtonColor:'#ea792d',
+      showConfirmButton: true,
+    });
+  }
+
   crearencuesta(){
-    //let logo = (document.getElementById("btn_enviarfile") as HTMLInputElement).value;
-    //this.crearEncuesta.imagenCab=logo.split( '\\' ).pop();;
+
     console.log(this.crearEncuesta);
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
+
+    let logo = (document.getElementById("btn_enviarfile") as HTMLInputElement).value;
+
+    this.idEncuesta=JSON.parse(localStorage.getItem("idEncuesta"));
+    this.crearEncuesta.idEncuesta=this.idEncuesta;
+    this.crearEncuesta.imagenCab=logo.split( '\\' ).pop();;
+    this.crearEncuesta.correo=this.usuario.correo;
+    this.crearEncuesta.unidadNegocio=this.usuario.unidadNegocio;
+    console.log(this.crearEncuesta);
+    
+    this._crearEncuestaService.postCrearEncuesta(this.crearEncuesta).subscribe( Response=>{
+      console.log(Response);
+      if(Response.codigo==200){
+        console.log(Response.causa);
+        localStorage.setItem("idEncuesta",JSON.stringify(Response.causa));
+        console.log(this.usuario);
+        this.mostrarModalConfirmacion(Response.mensaje);
+      }else{
+        this.showModal(Response.mensaje);
+      }
+    },
+      error=>{
+        console.log(<any>error);
+      }
+    );
   }
-
-  setIdEncuesta(){
-
-  }
-
 }
+
+
+

@@ -1,4 +1,4 @@
-export class SeccionPk{
+export class SesSeccionPK{
     constructor(
         public idEncuesta:number,
         public idIndice:number,

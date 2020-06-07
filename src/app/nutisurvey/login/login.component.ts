@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { CrearEncuesta } from 'src/app/models/crearEncuesta';
-import { CrearSeccion } from 'src/app/models/crearSeccion';
-import { SeccionPk } from 'src/app/models/seccionPk';
+import { ListaSecciones } from 'src/app/models/listaSecciones';
+import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
 import {Router, ActivatedRoute} from '@angular/router';
 import { LoginService } from 'src/app/servicios/login.service';
 import { Usuario } from 'src/app/models/usuario';
@@ -16,8 +16,8 @@ import { Usuario } from 'src/app/models/usuario';
 export class LoginComponent implements OnInit {
 
   public crearEncuesta: CrearEncuesta;
-  public crearSeccion:CrearSeccion[]=[
-    new CrearSeccion(""," ",0, new SeccionPk(0,0,0)) 
+  public crearSeccion:ListaSecciones[]=[
+    new ListaSecciones(""," ",0, new SesSeccionPK(0,0,0)) 
   ]; 
 
   constructor(
@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit {
     this._loginService.getAutenticacion(this.nick,this.password).subscribe(
       Response=>{
         if(Response.respuestaProceso.codigo==200){
+          console.log(Response);
           this.usuario=Response.usuario;
           localStorage.setItem("usuario",JSON.stringify(this.usuario));
-          console.log(this.usuario);
           this.redidirigirRegistroEncuesta();
         }else{
           console.log(Response.respuestaProceso);

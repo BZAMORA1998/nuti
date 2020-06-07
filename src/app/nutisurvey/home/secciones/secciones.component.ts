@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { CrearSeccion } from 'src/app/models/crearSeccion';
-import { SeccionPk } from 'src/app/models/seccionPk';
+import { ListaSecciones } from 'src/app/models/listaSecciones';
+import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
+import { CrearSeccionService } from 'src/app/servicios/crearSeccion.service';
 
 @Component({
   selector: 'app-secciones',
   templateUrl: './secciones.component.html',
-  styleUrls: ['./secciones.component.css']
+  styleUrls: ['./secciones.component.css'],
+  providers:[CrearSeccionService]
 })
 export class SeccionesComponent implements OnInit {
   public contador:number;
-  public crearSeccion:CrearSeccion;
-  public crearSeccionList:CrearSeccion[];
-  public list:CrearSeccion[];
+  public crearSeccion:ListaSecciones;
+  public crearSeccionList:ListaSecciones[];
+  public list:ListaSecciones[];
 
 
-  constructor() {
+  constructor(private _crearSeccionService:CrearSeccionService) {
     this.contador=0;
-    this.crearSeccion=new CrearSeccion("","",0,new SeccionPk(0,0,0));
-    this.list=[new CrearSeccion("","",0,new SeccionPk(0,0,0))]
+    this.crearSeccion=new ListaSecciones("","",0,new SesSeccionPK(0,0,0));
+    this.list=[new ListaSecciones("","",0,new SesSeccionPK(0,0,0))]
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
     console.log(this.crearSeccionList);
    }
@@ -36,10 +38,10 @@ export class SeccionesComponent implements OnInit {
       this.list=[];
     
       for (var i = 0; i < nombres.length; i++) {
-        this.crearSeccion=new CrearSeccion("","",0,new SeccionPk(0,0,0));
-        this.crearSeccion.seccionPk.idEncuesta=47;
-        this.crearSeccion.seccionPk.idIndice=1;
-        this.crearSeccion.seccionPk.idSeccion=47;
+        this.crearSeccion=new ListaSecciones("","",0,new SesSeccionPK(0,0,0));
+        this.crearSeccion.sesSeccionPK.idEncuesta=47;
+        this.crearSeccion.sesSeccionPK.idIndice=1;
+        this.crearSeccion.sesSeccionPK.idSeccion=47;
         this.crearSeccion.descripcion=(descripcion[i]as HTMLInputElement).value;
         this.crearSeccion.titulo=(nombres[i]as HTMLInputElement).value;
         this.crearSeccion.nroSeccion=1;
@@ -50,5 +52,14 @@ export class SeccionesComponent implements OnInit {
       localStorage.removeItem('crearSeccionLista');
       localStorage.setItem("crearSeccionLista",JSON.stringify(this.list));
       console.log(this.list);
+
+      this._crearSeccionService.postCrearSeccion(this.list).subscribe(
+        Response=>{
+            console.log(Response);
+        },
+        error=>{
+          console.log(<any>error);
+        }
+      );
   }
 }
