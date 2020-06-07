@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders,HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CrearEncuestaService{
     public url:String;
     
     constructor(private _http:HttpClient){
-        this.url="https://notisurvey.goitsa.me/notisurvey/resources/encuesta";
+        this.url=environment.apiUrl;
     }
     
     postCrearEncuesta(encuesta):Observable<any>{
@@ -28,6 +29,6 @@ export class CrearEncuestaService{
        let headers=new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded');
             
-      return this._http.post(this.url+'/crearEncuesta',body.toString(),{headers:headers});
+      return this._http.post(this.url+'encuesta/crearEncuesta',body.toString(),{headers:headers});
     } 
 }

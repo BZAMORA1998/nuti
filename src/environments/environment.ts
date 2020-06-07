@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  apiUrl : 'https://notisurvey.goitsa.me/notisurvey/resources/',
   production: false
 };
 

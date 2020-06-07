@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders,HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import { GLOBAL } from './global';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class LoginService{
     public url:String;
     
     constructor(private _http:HttpClient){
-      this.url = GLOBAL.url;
+      this.url = environment.apiUrl;
     }
     
     getAutenticacion(nick,password):Observable<any>{

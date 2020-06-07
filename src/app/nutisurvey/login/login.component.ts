@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
     this._loginService.getAutenticacion(this.nick,this.password).subscribe(
       Response=>{
         if(Response.respuestaProceso.codigo==200){
-          console.log(Response);
           this.usuario=Response.usuario;
+          console.log(this.usuario);
           localStorage.setItem("usuario",JSON.stringify(this.usuario));
           this.redidirigirRegistroEncuesta();
         }else{

@@ -26,11 +26,8 @@ export class EncuestaComponent implements OnInit {
     this.nombre="";
     this.crearEncuesta=new CrearEncuesta(" "," "," "," "," "," ",0," "," "," "," ",0);
     localStorage.setItem("idEncuesta",JSON.stringify(0));
-
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
     this.crearEncuesta=JSON.parse(localStorage.getItem("crearEncuesta"));
-    // console.log(this.crearEncuesta.imagenCab);
-    // console.log(this.crearEncuesta);
 
    }
 
@@ -64,7 +61,7 @@ export class EncuestaComponent implements OnInit {
 
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = event.target.result;
-        this.crearEncuesta.imagenMedi=this.url;
+        //this.crearEncuesta.imagenMedi=this.url;
         $("#img_logo").attr("src",this.url);
       }
     }

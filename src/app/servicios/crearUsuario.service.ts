@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders,HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CrearUsuarioService{
     public url:String;
     
     constructor(private _http:HttpClient){
-        this.url="http://vmi244822.contaboserver.net:8080/notisurvey-war/resources/seguridades";
+        this.url=environment.apiUrl;
     }
     
     postCrearUsuario(user):Observable<any>{
@@ -22,6 +23,6 @@ export class CrearUsuarioService{
        let headers=new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded');
             
-      return this._http.post(this.url+'/crearCuenta',body.toString(),{headers:headers});
+      return this._http.post(this.url+'seguridades/crearCuenta',body.toString(),{headers:headers});
     } 
 }

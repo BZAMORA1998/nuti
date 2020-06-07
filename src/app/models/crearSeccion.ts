@@ -1,8 +1,10 @@
 import { ListaSecciones } from './listaSecciones';
+import { SesSeccionPK } from './sesSeccionPK';
 
 
 export class CrearSeccion{
-    constructor(listaSecciones:ListaSecciones[]){
-
+    
+    constructor(public listaSecciones:ListaSecciones[]){
+      
     }
 }
