@@ -13,13 +13,13 @@
           </li>
           <li class="step">
             <div class="nombre">
-              <input  type="text" autocomplete="off" name="titulo" #titulo="ngModel" [(ngModel)]="crearEncuesta.titulo" placeholder="Ingresar el nombre de la encuesta"/>
+              <input  (change)="setIdEncuesta()"  type="text" autocomplete="off" name="titulo" #titulo="ngModel" [(ngModel)]="crearEncuesta.titulo" placeholder="Ingresar el nombre de la encuesta"/>
             </div>
           </li>
           <li class="step">
             <div class="descripcion">
                 <p>Descripción</p>
-                <textarea  autocomplete="off" placeholder="Ingresar máximo 100 caracteres" name="mensaje" #mensaje="ngModel" [(ngModel)]="crearEncuesta.mensaje"></textarea>
+                <textarea  (change)="setIdEncuesta()" autocomplete="off" placeholder="Ingresar máximo 100 caracteres" name="mensaje" #mensaje="ngModel" [(ngModel)]="crearEncuesta.mensaje"></textarea>
             </div>  
           </li>
           <li class="step">

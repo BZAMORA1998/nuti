@@ -16,7 +16,7 @@ export class EncuestaComponent implements OnInit {
   public crearEncuesta:CrearEncuesta;
   public usuario:Usuario;
   public nombre:String;
-  public idEncuesta:number=0;
+  public idEncuesta:number;
 
   constructor(
     private _route:ActivatedRoute,
@@ -25,10 +25,8 @@ export class EncuestaComponent implements OnInit {
   ) {
     this.nombre="";
     this.crearEncuesta=new CrearEncuesta(" "," "," "," "," "," ",0," "," "," "," ",0);
-    localStorage.setItem("idEncuesta",JSON.stringify(0));
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
     this.crearEncuesta=JSON.parse(localStorage.getItem("crearEncuesta"));
-
    }
 
   ngOnInit(): void {
@@ -71,7 +69,7 @@ export class EncuestaComponent implements OnInit {
 
   setIdEncuesta():void{        
     if(this.crearEncuesta.mensaje=="" && this.crearEncuesta.titulo==""){
-         localStorage.setItem("idEncuesta",JSON.stringify(0));
+      localStorage.setItem("idEncuesta",JSON.stringify(0));
     }
   }
 

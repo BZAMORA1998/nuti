@@ -18,17 +18,20 @@ export class SeccionesComponent implements OnInit {
   public list:ListaSecciones[];
   public crearS:CrearSeccion;
   public prueba:ListaSecciones[];
+  public idEncuesta:number;
 
   constructor(private _crearSeccionService:CrearSeccionService) {
     this.contador=0;
     this.crearSeccion=new ListaSecciones("","",0,new SesSeccionPK(0,0,0));
     this.list=[new ListaSecciones("","",0,new SesSeccionPK(0,0,0))];
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
+    this.idEncuesta=JSON.parse(localStorage.getItem("idEncuesta"));
     console.log(this.crearSeccionList);
 
    }
 
   ngOnInit(): void {
+
     $("#btn-agregarSeccion").click(function(){
       $('#li-clonar').clone().removeAttr("id").insertAfter('.ul-step li:last').find('.campo').val("");
     });
@@ -68,6 +71,7 @@ export class SeccionesComponent implements OnInit {
         this.crearSeccion.descripcion=(descripcion[i]as HTMLInputElement).value;
         this.crearSeccion.titulo=(nombres[i]as HTMLInputElement).value;
         // this.crearSeccion.nroSeccion=1;
+        this.crearSeccion.sesSeccionPK.idEncuesta=this.idEncuesta;
         this.list.push(this.crearSeccion);
       }
 
