@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListaSecciones } from 'src/app/models/listaSecciones';
 import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
-import { CrearSeccionService } from 'src/app/servicios/crearSeccion.service';
+import { SeccionService } from 'src/app/servicios/seccion.service';
 import { CrearSeccion } from 'src/app/models/crearSeccion';
 import Swal from 'sweetalert2';
 
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   selector: 'app-secciones',
   templateUrl: './secciones.component.html',
   styleUrls: ['./secciones.component.css'],
-  providers:[CrearSeccionService]
+  providers:[SeccionService]
 })
 export class SeccionesComponent implements OnInit {
   public contador:number;
@@ -20,7 +20,7 @@ export class SeccionesComponent implements OnInit {
   public prueba:ListaSecciones[];
   public idEncuesta:number;
 
-  constructor(private _crearSeccionService:CrearSeccionService) {
+  constructor(private _seccionService:SeccionService) {
     this.contador=0;
     this.crearSeccion=new ListaSecciones("","",0,new SesSeccionPK(0,0,0));
     this.list=[new ListaSecciones("","",0,new SesSeccionPK(0,0,0))];
@@ -79,7 +79,7 @@ export class SeccionesComponent implements OnInit {
       localStorage.setItem("crearSeccionLista",JSON.stringify(this.list));
       console.log(this.list);
       this.crearS= new CrearSeccion(this.list);
-      this._crearSeccionService.postCrearSeccion(this.crearS).subscribe(
+      this._seccionService.postCrearSeccion(this.crearS).subscribe(
         Response=>{
               if(Response.codigo==200){
                 console.log(Response.causa);

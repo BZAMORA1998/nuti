@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
-export class CrearSeccionService{
+export class SeccionService{
 	public url: string;
 
 	constructor(

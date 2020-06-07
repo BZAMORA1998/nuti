@@ -52,16 +52,39 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  loading(active){
+    Swal.fire({
+      html: "<div class='row'>"+
+                "<div class='col-2'>"+
+                    "<div class='spinner-border'></div>"+
+                '</div>'+
+                "<div class='col-10'>"+
+                    "<p class='text-dark'>Procesando, espere por favor...</p>"+
+                '</div>'+
+             "</div>",    
+      showCancelButton: false,
+      showConfirmButton: false,
+      width: '380px',
+    });
+
+    if(!active){
+      Swal.close();
+    }
+}
+
   autenticacion(){
+    this.loading(true);
     this._loginService.getAutenticacion(this.nick,this.password).subscribe(
       Response=>{
         if(Response.respuestaProceso.codigo==200){
           this.usuario=Response.usuario;
           console.log(this.usuario);
           localStorage.setItem("usuario",JSON.stringify(this.usuario));
+          this.loading(false);
           this.redidirigirRegistroEncuesta();
         }else{
           console.log(Response.respuestaProceso);
+          this.loading(false);
           this.showModal(Response.respuestaProceso.mensaje);
         }
       },
@@ -70,21 +93,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-  loading(){
-      Swal.fire({
-        html: "<div class='row'>"+
-                  "<div class='col-2'>"+
-                      "<div class='spinner-border'></div>"+
-                  '</div>'+
-                  "<div class='col-10'>"+
-                      "<p class='text-dark'>Procesando, espere por favor...</p>"+
-                  '</div>'+
-               "</div>",    
-        showCancelButton: false,
-        showConfirmButton: false,
-        width: '380px',
-      });
-  }
-
 }

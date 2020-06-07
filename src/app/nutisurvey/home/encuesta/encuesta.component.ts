@@ -3,14 +3,14 @@ import * as jQuery from 'jquery';
 import { CrearEncuesta } from 'src/app/models/crearEncuesta';
 import { Usuario } from 'src/app/models/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CrearEncuestaService } from 'src/app/servicios/crearEncuesta.service';
+import { EncuestaService } from 'src/app/servicios/encuesta.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-encuesta',
   templateUrl: './encuesta.component.html',
   styleUrls: ['./encuesta.component.css'],
-  providers:[CrearEncuestaService]
+  providers:[EncuestaService]
 })
 export class EncuestaComponent implements OnInit {
   public crearEncuesta:CrearEncuesta;
@@ -21,7 +21,7 @@ export class EncuestaComponent implements OnInit {
   constructor(
     private _route:ActivatedRoute,
     private _router:Router,
-    private _crearEncuestaService:CrearEncuestaService
+    private _encuestaService:EncuestaService
   ) {
     this.nombre="";
     this.crearEncuesta=new CrearEncuesta(" "," "," "," "," "," ",0," "," "," "," ",0);
@@ -107,7 +107,7 @@ export class EncuestaComponent implements OnInit {
     this.crearEncuesta.unidadNegocio=this.usuario.unidadNegocio;
     console.log(this.crearEncuesta);
     
-    this._crearEncuestaService.postCrearEncuesta(this.crearEncuesta).subscribe( Response=>{
+    this._encuestaService.postCrearEncuesta(this.crearEncuesta).subscribe( Response=>{
       console.log(Response);
       if(Response.codigo==200){
         console.log(Response.causa);
