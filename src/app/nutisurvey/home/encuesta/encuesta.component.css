@@ -1,4 +1,4 @@
-.principal{
+.container-fluid{
     margin:0;
     padding:0; 
     font-family: 'Open Sans', sans-serif !important;
@@ -10,8 +10,6 @@
 .step-process{
     position: absolute;
     width: 95%;
-    margin-left: -17px;    
-    padding-top: -200px;
 }
 
 .step-process ul{
@@ -26,7 +24,6 @@
     position: relative;
     padding: 30px 0;
     border-left: 1px solid #bec3d2;
-    margin-left: 100px;
     padding-left: 50px;
     border-left: 1px solid #bec3d2;
 }
@@ -223,7 +220,7 @@ input[type=date]:focus{
     text-align: left;
 }
 
-.side p{
+p{
     margin-left: 25px;
     color: #ee9052;
     font-size: 16px;
@@ -231,54 +228,34 @@ input[type=date]:focus{
     border: none !important;
 }
 
-.side #left{
-    float: left;
-    width: 50%;
-    height: 100%;
-}
-
-.side #right{
-    float: left;
-    width: 50%;
-    height: 100%;
-}
-
 input{
     color: #515558;
 }
 
-#left input[type=date]{
+input[type=date]{
     width: 92%;
-    height: 15%;
+    height: 40px;
     background: #fcfcfc;
     border: 1px solid #e7e7e7;
     border-radius: 4px;
-    margin-bottom: 15px;
     padding-left: 75px;
     background-image: url("../../../../assets/img/ico-calendar.png");
     background-repeat: no-repeat;
     background-position-x: 450px;
 }
 
-#left #txt-fecha-inicio{
+#txt-fecha-inicio{
     position: absolute;
-    margin-top: -45px;
+    margin-top: 7px;
     color:#bebebe;
 }
 
-#left #txt-fecha-fin{
+#txt-fecha-fin{
     position: absolute;
-    margin-top: -45px;
+    margin-top: -32px;
     color:#bebebe;
 }
 
-#right input[type=radio]{
-    display: none;
-}
-
-#right input[type=radio]:checked + label{
-    border:1px solid #ea792d;
-}
 
 #right label{
     font-weight:normal;
@@ -293,7 +270,7 @@ input{
     color: #c3c3c3;
 }
 
-#right input[type=submit]{
+input[type=submit]{
     text-decoration: none;
      outline: none;
      border-radius: 4px;
@@ -305,44 +282,27 @@ input{
     margin-top: 50px;
 }
 
-#right input[type=submit]:hover{
+input[type=submit]:hover{
     box-shadow: 0 0 5px 0 #EA792D;
 }
 
-#right input[type=submit]:disabled{
+input[type=submit]:disabled{
     background-color: #f8d6c0;
     color: #fef9f7;
     border: none;
 }
 
-#right #lbl-negocio{
+#lbl-negocio{
     background-image: url("../../../../assets/img/ico-negocio.png");
     background-repeat: no-repeat;
     background-position: center;
     margin-left: 0px !important;
 }
 
-#right #lbl-estracto{
+#lbl-estracto{
     background-image: url("../../../../assets/img/ico-estracto.png");
     background-repeat: no-repeat;
     background-position: center;
-}
-
-#modelo{
-    position: absolute;
-    display: none;
-    width: 100%;
-    height: 130%;
-    top: 0px;
-    background: rgba(0,0,0,.4);
-}
-
-#modelo #cuerpo{
-    border-radius: 5px;
-    background-color: white;
-    margin: 23% auto;
-    padding: 10px;
-    width: 20%;
 }
 
 #texto{
@@ -351,9 +311,7 @@ input{
     float: left;
 }
 
-.spinner-border{
-    padding: 0px;
-    margin-left:230px !important;
-    text-align: center;
-    margin: 5px;
+#fecha-validez{
+    margin-top: -20px;
 }
+

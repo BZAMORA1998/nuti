@@ -1,10 +1,10 @@
 <div class="container-fluid p-0">
-    <div class="row" id="header">
-      <div class="col-6 offset-3 text-center pt-2 pl-12">
+    <div class="row" id="header" >
+      <div class="col-6 offset-3 text-center pt-2 pl-12" >
           <img class="img-fluid" src="../../assets/img/name-notisurvey.png">
       </div>
 
-      <div class="col-2 p-0 pt-2 text-right text">
+      <div class="col-2 p-0 pt-2 text-right text" >
         <p class="text-white">{{usuario.correo}}</p>
       </div>
 
@@ -13,32 +13,35 @@
     </div>
   </div>
 
-    <div class="row pt-2" id="description">
-      <div class="col-11 offset-1 p-0">
-        <p class="font-weight-light ml-6 w-50 mt-2 h5">Nombre de la encuesta que esta realizando...</p>
+    <div class="row pt-2" id="description" >
+      <div class="col-10 offset-1 p-0">
+        <p class="font-weight-light ml-6 w-75 mt-2 h5" >Nombre de la encuesta que esta realizando...</p>
       </div>
     </div>
 
     <div class="row p-0" class="navbar">
-        <div class="col-10 p-0">
-            <ul class="nav ml-5 pl-1 w-75">
-                <li class="nav-item">
+        <div class="col-12  p-0" >
+            <ul class="nav pl-5 pl-1 w-100 text-center">
+                <li class="nav-item col-sm-2 w-100">
                   <a class="nav-link" [routerLink]="'diseño-encuesta'" [routerLinkActive]="['active']">Diseño de Encuesta</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item col-sm-2">
                   <a class="nav-link" [routerLink]="'secciones'" [routerLinkActive]="['active']">Secciones</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item col-sm-2">
                   <a class="nav-link" [routerLink]="'preguntas'" [routerLinkActive]="['active']">Preguntas</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item col-sm-2">
                     <a class="nav-link" [routerLink]="'resultado-final'" [routerLinkActive]="['active']">Resultado Final</a>
-                  </li>
+                </li>
+                <li class="nav-item col-sm-4 text-right">
+                  <button type="button" class="btn btn-primary " class="btn-guardar">Guardar</button>
+                </li>
               </ul>
         </div>
-        <div class="col-1 w-25 mr-4">
-          <button type="button" class="btn btn-primary" class="btn-guardar">Guardar</button>
-        </div>
+        <!-- <div class="w-25 mr-4 col-sm-12">
+         
+        </div> -->
     </div>
 </div>
 
