@@ -157,6 +157,7 @@ input[type=button]{
     position: relative;
     float: right;
     color: #ea792d; 
+    border: none !important;
     background-color: #ffffff;
     background-image: url("../../../../assets/img/ico-agregar.png");
     background-repeat: no-repeat;
@@ -166,11 +167,32 @@ input[type=button]{
     outline: none;
     border-radius: 4px;
     height: 35px;
-    width: 11%;
+    width: 12%;
     margin-top: -50px;
     margin-right: 70px;
     
 }
 
+input[type=submit]{
+    text-decoration: none;
+    border: none;
+     outline: none;
+     border-radius: 4px;
+     width: 130px;
+     height: 35px;
+     background-color: #ea792d;
+     color: white; 
+    float: right;
+    margin-top: 50px;
+}
 
+input[type=submit]:hover{
+    box-shadow: 0 0 5px 0 #EA792D;
+}
+
+input[type=submit]:disabled{
+    background-color: #f8d6c0;
+    color: #fef9f7;
+    border: none;
+}
 

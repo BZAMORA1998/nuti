@@ -66,7 +66,7 @@ export class SeccionesComponent implements OnInit {
       for (var i = 0; i < nombres.length; i++) {
         this.crearSeccion=new ListaSecciones("","",0,new SesSeccionPK(0,0,0));
         // this.crearSeccion.sesSeccionPK.idEncuesta=47;
-        // this.crearSeccion.sesSeccionPK.idIndice=1;
+        this.crearSeccion.sesSeccionPK.idIndice=0;
         // this.crearSeccion.sesSeccionPK.idSeccion=47;
         this.crearSeccion.descripcion=(descripcion[i]as HTMLInputElement).value;
         this.crearSeccion.titulo=(nombres[i]as HTMLInputElement).value;
@@ -82,9 +82,10 @@ export class SeccionesComponent implements OnInit {
       this._seccionService.postCrearSeccion(this.crearS).subscribe(
         Response=>{
               if(Response.codigo==200){
-                console.log(Response.causa);
+                console.log(Response);
                 this.mostrarModalConfirmacion(Response.mensaje);
               }else{
+                console.log(Response);
                 this.showModal(Response.mensaje);
               }
         },

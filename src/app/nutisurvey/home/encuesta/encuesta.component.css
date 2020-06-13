@@ -139,6 +139,8 @@
     color: white;
 }
 
+
+
 .nombre input[type=text]:focus{
     outline:none !important;
     outline-width: 0 !important;
@@ -149,6 +151,17 @@
 
 .nombre input[type=text]::placeholder{
     color: white;
+}
+
+input[type=date]:focus{
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;  
+    -webkit-appearance: none; 
+    outline: none;
+    border: 1px solid #ee9052;
 }
 
 .descripcion{
