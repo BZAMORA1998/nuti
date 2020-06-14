@@ -22,13 +22,14 @@ export class SeccionesComponent implements OnInit {
   public seccionesId:ListaSecciones[];
   public seccionesSinId:ListaSecciones[];
   public idEncuesta:number;
+  public estado:string="A"
 
   constructor(private _seccionService:SeccionService) {
-    this.crearSeccion=new ListaSecciones("","",0,0,new SesSeccionPK(0,0,0));
-    this.list=[new ListaSecciones("","",0,0,new SesSeccionPK(0,0,0))];
-    this.crearSeccionListAux=[new ListaSecciones("","",0,0,new SesSeccionPK(0,0,0))];
+    this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
+    this.list=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"")];
+    this.crearSeccionListAux=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"")];
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
-    this.idEncuesta=JSON.parse(localStorage.getItem("idEncuesta"));
+    this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     console.log(this.crearSeccionList);
 
    }
@@ -38,7 +39,8 @@ export class SeccionesComponent implements OnInit {
     // $("#btn-agregarSeccion").click(function(){
     //   $('#li-clonar').clone().removeAttr("id").insertAfter('.ul-step li:last').find('.campo').val("");
     // });  
-    this.getSeccion(0); 
+    console.log(this.idEncuesta);
+    this.getSeccion(this.idEncuesta); 
   }
 
   mostrarModalConfirmacion(message){
@@ -98,7 +100,7 @@ export class SeccionesComponent implements OnInit {
           console.log("Comparacion: "+element.idAux,idAux,auxBool)
           if(element.idAux==idAux && auxBool){
               element.sesSeccionPK.idIndice=1;
-              element.sesSeccionPK.idSeccion=idAux;
+              element.idAux=idAux;
               element.titulo=titulo;
               element.sesSeccionPK.idEncuesta=this.idEncuesta;
               console.log("Titulo con IdAux:"+element);
@@ -166,7 +168,7 @@ export class SeccionesComponent implements OnInit {
           console.log("Comparacion: "+element.idAux,idAux,auxBool)
           if(element.idAux==idAux && auxBool){
               element.sesSeccionPK.idIndice=1;
-              element.sesSeccionPK.idSeccion=idAux;
+              element.idAux=idAux;
               element.descripcion=descripcion;
               element.sesSeccionPK.idEncuesta=this.idEncuesta;
               console.log("TextArea con IdAux:"+element);
@@ -210,10 +212,10 @@ export class SeccionesComponent implements OnInit {
   }
 
   agregarSeccion(){
-    this.crearSeccion=new ListaSecciones("","",0,0,new SesSeccionPK(0,0,0));
+    this.crearSeccion=new ListaSecciones("","A",0,0,new SesSeccionPK(0,0,0),"");
     this.crearSeccionList.push(this.crearSeccion);
     localStorage.removeItem('crearSeccionLista');
-    localStorage.setItem("crearSeccionLista",JSON.stringify(this.listarSecciones));
+    localStorage.setItem("crearSeccionLista",JSON.stringify( this.crearSeccionList));
   }
 
   getSeccion(idEncuesta):any{
@@ -248,21 +250,20 @@ export class SeccionesComponent implements OnInit {
       this.crearS= new CrearSeccion(this.crearSeccionList);
 
       console.log(this.crearS);
-      // this._seccionService.postCrearSeccion(this.crearS).subscribe(
-      //   Response=>{
-      //         if(Response.codigo==200){
-      //           console.log(Response);
-      //           this.getSeccion(this.idEncuesta);
-      //           this.mostrarModalConfirmacion(Response.mensaje);
+      this._seccionService.postCrearSeccion(this.crearS).subscribe(
+        Response=>{
+              if(Response.codigo==200){
+                console.log(Response);
+                this.mostrarModalConfirmacion(Response.mensaje);
 
-      //         }else{
-      //           console.log(Response);
-      //           this.showModal(Response.mensaje);
-      //         }
-      //   },
-      //   error=>{
-      //       console.log(<any>error);
-      //   }
-      // );
+              }else{
+                console.log(Response);
+                this.showModal(Response.mensaje);
+              }
+        },
+        error=>{
+            console.log(<any>error);
+        }
+      );
   }
 }

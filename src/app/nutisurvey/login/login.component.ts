@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   public crearEncuesta: CrearEncuesta;
   public crearSeccion:ListaSecciones[]=[
-    new ListaSecciones(""," ",0, new SesSeccionPK(0,0,0)) 
+    new ListaSecciones("","A",0,0, new SesSeccionPK(0,0,0)," ") 
   ]; 
 
   constructor(

@@ -16,12 +16,12 @@ export class SeccionService{
 
 	postCrearSeccion(seccion):Observable<any>{
 		var listaSecciones=JSON.stringify(seccion);
-		console.log(listaSecciones);
+		console.log("JSON"+listaSecciones);
 		var headers = new HttpHeaders({'Content-Type':'application/json'});
 		return this._http.post(this.url+'seccion/crearListaSeccion',listaSecciones,{headers: headers});
 	}
 	
 	getListaSecciones(id):Observable<any>{
-		return this._http.get(this.url+`seccion/obtenerSeccionPorIdEncuesta?idEncuesta=${70}`);
+		return this._http.get(this.url+`seccion/obtenerSeccionPorIdEncuesta?idEncuesta=${id}`);
 	}
 }
