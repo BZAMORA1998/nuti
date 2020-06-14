@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
+declare var require: any
+var $ = require('jquery');
 import 'jquery-ui-dist/jquery-ui';
+
 
 @Component({
   selector: 'app-resultados',
@@ -9,10 +11,12 @@ import 'jquery-ui-dist/jquery-ui';
 })
 export class ResultadosComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
-    // $("#accordion").accordion();
+      $('#accordion').accordion();
   }
 
 }
