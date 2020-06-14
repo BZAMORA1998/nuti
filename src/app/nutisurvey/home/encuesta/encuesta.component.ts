@@ -95,7 +95,7 @@ export class EncuestaComponent implements OnInit {
 
   crearencuesta(){
 
-    console.log(this.crearEncuesta);
+    console.log("Actualizar"+this.crearEncuesta);
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
 
     let logo = (document.getElementById("btn_enviarfile") as HTMLInputElement).value;
