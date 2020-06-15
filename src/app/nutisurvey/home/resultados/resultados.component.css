@@ -1,0 +1,41 @@
+.principal{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+#box-acordeon{
+    width: 84%;
+    margin-left: 8%;
+    outline: none;
+}
+
+#box-acordeon #acordeon h3{
+    outline: none;
+    border: none;
+    height: 45px;
+    padding-top: 15px; 
+}
+
+h1{
+    color: #4f5456;
+    font-size: 16px;
+    margin-left: 8%;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    padding-left: 3%;
+    width: 50%;
+    text-decoration:none;
+}
+
+h3{
+    padding-left: 40px !important;
+}
+
+
+
+
+
+
+

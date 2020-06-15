@@ -15,19 +15,13 @@ import { element } from 'protractor';
 export class SeccionesComponent implements OnInit {
   public crearSeccion:ListaSecciones;
   public crearSeccionList:ListaSecciones[];
-  public crearSeccionListAux:ListaSecciones[];
-  public list:ListaSecciones[];
   public crearS:CrearSeccion;
-  public prueba:ListaSecciones[];
-  public seccionesId:ListaSecciones[];
-  public seccionesSinId:ListaSecciones[];
   public idEncuesta:number;
   public estado:string="A"
 
   constructor(private _seccionService:SeccionService) {
     this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
-    this.list=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"")];
-    this.crearSeccionListAux=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"")];
+    this.crearSeccionList=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"")];
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     console.log(this.crearSeccionList);
@@ -35,12 +29,14 @@ export class SeccionesComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
-    // $("#btn-agregarSeccion").click(function(){
-    //   $('#li-clonar').clone().removeAttr("id").insertAfter('.ul-step li:last').find('.campo').val("");
-    // });  
     console.log(this.idEncuesta);
-    this.getSeccion(this.idEncuesta); 
+    this.getSeccion(this.idEncuesta);
+
+    console.log("Longitud: "+this.crearSeccionList.length);
+
+    if(this.crearSeccionList.length==0){
+      this.agregarSeccion(); 
+    }
   }
 
   mostrarModalConfirmacion(message){
@@ -122,16 +118,6 @@ export class SeccionesComponent implements OnInit {
                 element.titulo=titulo;
                 element.sesSeccionPK.idEncuesta=this.idEncuesta;
                 console.log("Titulo sin idAux:"+element);
-
-                // var nombres= document.getElementsByName("nombres");
-                // var descripciones = document.getElementsByName("descripcion"); 
- 
-
-                // for(var i=0;nombres.length;i++){
-                //     (descripciones[i]as HTMLInputElement).value;
-                //     (nombres[i]as HTMLInputElement).value;
-                // }
-                
                 localStorage.removeItem('crearSeccionLista');
                 localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
                 console.log("Final sin id: "+this.crearSeccionList);

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as jQuery from 'jquery';
+declare var require: any
+var $ = require('jquery');
+import 'jquery-ui-dist/jquery-ui';
 import { CrearEncuesta } from 'src/app/models/crearEncuesta';
 import { Usuario } from 'src/app/models/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -48,6 +50,7 @@ export class EncuestaComponent implements OnInit {
           $("#img_logo").css("display","none");
           $("#txt_value").css("display","none");
     });
+
   }
 
   public url:any;
