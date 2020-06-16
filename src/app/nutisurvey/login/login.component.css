@@ -192,10 +192,10 @@ img{
     margin-left: 100px;
 }
 
-#show-hide-passwd{
+.fa{
     position: absolute;
-    margin-top: 435px;
-    margin-left: 290px;
+    margin-top: -55px;
+    margin-left: 300px;
     border: none;
     background-color: transparent;
 }

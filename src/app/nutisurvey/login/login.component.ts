@@ -30,26 +30,19 @@ export class LoginComponent implements OnInit {
     this.usuario=new Usuario("","","","","",0);
   }
 
+  typeInputF="password";
+showPF:boolean=true;
+mostrarPassword(){
+
+  if(this.typeInputF=="text"){
+    this.showPF=true;
+    this.typeInputF="password";
+  }else{
+    this.showPF=false;
+    this.typeInputF="text";
+  }
+}
   ngOnInit(): void {
-
-     //funcionalidad del ojito de contraseña
-     $('#show-hide-passwd').on('click',function(e){
-      e.preventDefault();
-
-      var current=$(this).attr('action');
-              
-      if(current=='hide'){
-          $(this).prev().attr('type','text');
-          $(this).removeClass('glyphicon glyphicon-eye-open').addClass('glyphicon glyphicon-eye-close').attr('action','show');
-      }
-
-      if(current=='show'){
-           $(this).prev().attr('type','password');
-           $(this).removeClass('glyphicon glyphicon-eye-close').addClass('glyphicon glyphicon-eye-open').attr('action','hide');
-      }
-    });
-
-
 
     localStorage.clear();
     this.crearEncuesta=new CrearEncuesta("","","","","","",0,"","","","",0);
@@ -93,6 +86,8 @@ export class LoginComponent implements OnInit {
       Swal.close();
     }
 }
+
+
 
   autenticacion(){
     this.loading(true);
