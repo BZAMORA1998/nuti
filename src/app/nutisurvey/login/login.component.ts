@@ -6,6 +6,8 @@ import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
 import {Router, ActivatedRoute} from '@angular/router';
 import { LoginService } from 'src/app/servicios/login.service';
 import { Usuario } from 'src/app/models/usuario';
+declare var require: any
+var $ = require('jquery');
 
 @Component({
   selector: 'app-login',
@@ -29,6 +31,26 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+     //funcionalidad del ojito de contraseña
+     $('#show-hide-passwd').on('click',function(e){
+      e.preventDefault();
+
+      var current=$(this).attr('action');
+              
+      if(current=='hide'){
+          $(this).prev().attr('type','text');
+          $(this).removeClass('glyphicon glyphicon-eye-open').addClass('glyphicon glyphicon-eye-close').attr('action','show');
+      }
+
+      if(current=='show'){
+           $(this).prev().attr('type','password');
+           $(this).removeClass('glyphicon glyphicon-eye-close').addClass('glyphicon glyphicon-eye-open').attr('action','hide');
+      }
+    });
+
+
+
     localStorage.clear();
     this.crearEncuesta=new CrearEncuesta("","","","","","",0,"","","","",0);
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));

@@ -4,7 +4,6 @@ import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
 import { SeccionService } from 'src/app/servicios/seccion.service';
 import { CrearSeccion } from 'src/app/models/crearSeccion';
 import Swal from 'sweetalert2';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-secciones',
@@ -176,16 +175,6 @@ export class SeccionesComponent implements OnInit {
                 element.descripcion=descripcion;
                 element.sesSeccionPK.idEncuesta=this.idEncuesta;
                 console.log("TextArea sin idAux:"+element);
-
-                // var nombres= document.getElementsByName("nombres");
-                // var descripciones = document.getElementsByName("descripcion"); 
- 
-
-                // for(var i=0;nombres.length;i++){
-                //     (descripciones[i]as HTMLInputElement).value;
-                //     (nombres[i]as HTMLInputElement).value;
-                // }
-                
                 localStorage.removeItem('crearSeccionLista');
                 localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
                 console.log("Final sin id: "+this.crearSeccionList);
