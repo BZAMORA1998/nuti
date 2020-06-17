@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class SeccionesComponent implements OnInit {
   public crearSeccion:ListaSecciones;
-  public crearSeccionList:ListaSecciones[];
+  public crearSeccionList:ListaSecciones[]=[];
   public crearS:CrearSeccion;
   public idEncuesta:number;
   public estado:string="A"
@@ -82,12 +82,12 @@ export class SeccionesComponent implements OnInit {
             if(element.sesSeccionPK.idSeccion==idSeccion){
               element.sesSeccionPK.idIndice=1;
               element.sesSeccionPK.idSeccion=idSeccion;
+              console.log("Titulo: ",titulo);
               element.titulo=titulo;
               element.sesSeccionPK.idEncuesta=this.idEncuesta;
-              console.log("Input"+this.crearSeccion);
               localStorage.removeItem('crearSeccionLista');
               localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
-              console.log(this.crearSeccionList);
+              console.log("Lista de Seccion: "+this.crearSeccionList);
           }
         });
       }else{
@@ -98,30 +98,25 @@ export class SeccionesComponent implements OnInit {
               element.idAux=idAux;
               element.titulo=titulo;
               element.sesSeccionPK.idEncuesta=this.idEncuesta;
-              console.log("Titulo con IdAux:"+element);
               localStorage.removeItem('crearSeccionLista');
               localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
               console.log(this.crearSeccionList);
               auxBool=false;
-              console.log("bool if"+auxBool);
+              console.log("Lista de Seccion: "+this.crearSeccionList);
           }
         });
-        console.log(" bool SinId: "+auxBool)
         if(auxBool){
-          console.log(" Entro SinId: "+idAux)
           this.crearSeccionList.forEach(element => {
-            console.log(" Entro SinId: "+element.idAux,idAux,auxBool)
             if(element.idAux==0 && auxBool){
                 element.sesSeccionPK.idIndice=1;
                 element.idAux=idAux;
                 element.titulo=titulo;
                 element.sesSeccionPK.idEncuesta=this.idEncuesta;
-                console.log("Titulo sin idAux:"+element);
                 localStorage.removeItem('crearSeccionLista');
                 localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
                 console.log("Final sin id: "+this.crearSeccionList);
                 auxBool=false;
-                console.log("bool sin id: "+this.crearSeccionList);
+                console.log("Lista de Seccion: "+this.crearSeccionList);
             }
           });
         }
@@ -135,51 +130,60 @@ export class SeccionesComponent implements OnInit {
     console.log("IdAux: ",idAux);
 
       if(idSeccion!=0){
+        console.log("Idseccion es diferente a 0: ", idSeccion);
         this.crearSeccionList.forEach(element => {
+            console.log("Si ",element.sesSeccionPK.idSeccion,"=",idSeccion);
             if(element.sesSeccionPK.idSeccion==idSeccion){
-              console.log("Comparacion: "+element.sesSeccionPK.idSeccion,idSeccion)
+                console.log("Entro");
                 element.sesSeccionPK.idIndice=1;
                 element.sesSeccionPK.idSeccion=idSeccion;
                 element.descripcion=descripcion;
                 element.sesSeccionPK.idEncuesta=this.idEncuesta;
-                console.log("TextArea con idSeccion:"+element);
                 localStorage.removeItem('crearSeccionLista');
                 localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
                 console.log(this.crearSeccionList);
+                console.log("Lista de Seccion: "+this.crearSeccionList);
             }
           });
       }else{
+        console.log("Idseccion es igual a 0 ", idSeccion);
         this.crearSeccionList.forEach(element => {
-          console.log("Comparacion: "+element.idAux,idAux,auxBool)
+          console.log("Si ",element.sesSeccionPK.idSeccion,"=",idSeccion ,"&&" ,auxBool);
+
+          console.log(element);
+
           if(element.idAux==idAux && auxBool){
+              console.log("Entro");
               element.sesSeccionPK.idIndice=1;
               element.idAux=idAux;
               element.descripcion=descripcion;
               element.sesSeccionPK.idEncuesta=this.idEncuesta;
-              console.log("TextArea con IdAux:"+element);
+              console.log("Descripcion : ",element.descripcion);
+              console.log("Lista de Seccion: "+this.crearSeccionList);    
               localStorage.removeItem('crearSeccionLista');
               localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
-              console.log(this.crearSeccionList);
+              console.log(element);
               auxBool=false;
-              console.log("bool if"+auxBool);
           }
         });
-        console.log(" bool SinId: "+auxBool)
         if(auxBool){
-          console.log(" Entro SinId: "+idAux)
-          this.crearSeccionList.forEach(element => {
-            console.log(" Entro SinId: "+element.idAux,idAux,auxBool)
-            if(element.idAux==0 && auxBool){
-                element.sesSeccionPK.idIndice=1;
-                element.idAux=idAux;
-                element.descripcion=descripcion;
-                element.sesSeccionPK.idEncuesta=this.idEncuesta;
-                console.log("TextArea sin idAux:"+element);
+          console.log(" Entro SinId");
+          this.crearSeccionList.forEach(elementr => {
+            console.log("Si ",elementr.idAux,"=","0","&&" ,auxBool);
+
+           console.log("El id es",elementr.idAux );
+            if(elementr.idAux==0 && auxBool){
+                console.log("Entro");
+                elementr.sesSeccionPK.idIndice=1;
+                elementr.idAux=idAux;
+                elementr.descripcion=descripcion;
+                console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)
+                elementr.sesSeccionPK.idEncuesta=this.idEncuesta;
+                console.log("Lista de Seccion: "+this.crearSeccionList);    
                 localStorage.removeItem('crearSeccionLista');
                 localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
-                console.log("Final sin id: "+this.crearSeccionList);
+                console.log(this.crearSeccionList);
                 auxBool=false;
-                console.log("bool sin id: "+this.crearSeccionList);
             }
           });
         }
@@ -224,7 +228,7 @@ export class SeccionesComponent implements OnInit {
 
       this.crearS= new CrearSeccion(this.crearSeccionList);
 
-      console.log(this.crearS);
+      console.log("Crear seccion",this.crearS);
       this._seccionService.postCrearSeccion(this.crearS).subscribe(
         Response=>{
               if(Response.codigo==200){
