@@ -1,1 +1,74 @@
-<p>crear-usuario works!</p>
+<div class="principal">
+    <div class="box-pregunta">
+        <img class="img-login" src="../../../assets/img/logo-notisurvey.png">
+        <div id="form-pregunta1">
+            <form>
+            <label for="">a. ¿Cuál es tu nombre? <span style="color: red;">*</span></label>
+                <p>Lo usaremos en todas las comunicaciones futuras.</p>
+                <input autocomplete="off" type="text" name="nombre" #nombre="ngModel" [(ngModel)]="crearUsuario.nombre" required  placeholder="Escribe aquí tu respuesta..." autofocus/>
+                <input type="button" class="btn-right" [disabled]="!nombre.valid" id="pregunta1Siguiente" value="Siguiente"/>
+            </form>
+            <p class="contador">1 de 6</p>
+        </div>
+
+        <div id="form-pregunta2">
+            <form>
+                <label for="">b. ¿Cuál es tu apellido, {{crearUsuario.nombre}}? <span style="color: red;">*</span></label>
+                <input autocomplete="off" type="text" name="apellido" #apellido="ngModel" [(ngModel)]="crearUsuario.apellido" required placeholder="Escribe aquí tu respuesta..." autofocus/>
+                <input [disabled]="!apellido.valid" class="btn-right" id="pregunta2Siguiente" type="button" value="Siguiente"/>
+                <input id="pregunta2Anterior"  class="btn-left" type="button" value="Anterior"/>
+            </form>
+            <p class="contador">2 de 6</p>
+        </div>
+
+        <div id="form-pregunta3">
+            <form>
+            <label for="">c. ¿Cuál es el nombre de tu Empresa?</label>
+                <input autocomplete="off" type="text" name="empresa" #empresa="ngModel" [(ngModel)]="crearUsuario.empresa" placeholder="Escribe aquí tu respuesta..." autofocus/>
+                <input id="pregunta3Siguiente" class="btn-right" type="button" value="Siguiente"/>
+                <input id="pregunta3Anterior" class="btn-left" type="button" value="Anterior"/>
+            </form>
+            <p class="contador">3 de 6</p>
+        </div>
+
+        <div id="form-pregunta4">
+            <form>
+            <label for="">d. ¿Cuál es tu email?</label>
+                <input autocomplete="off" type="text" name="correo" #correo="ngModel" [(ngModel)]="crearUsuario.correo" placeholder="Escribe aquí tu respuesta..." autofocus/>
+                <input id="pregunta4Siguiente" class="btn-right" type="button" value="Siguiente"/>
+                <input id="pregunta4Anterior" class="btn-left" type="button" value="Anterior"/>
+            </form>
+            <p class="contador">4 de 6</p>
+        </div>
+
+        <div id="form-pregunta5">
+            <form>
+                <label for="">e. Ingrese un nombre de usuario. Ejemplo: BLOPEZ</label>
+                <input autocomplete="off" type="text" name="nick" #nick="ngModel" [(ngModel)]="crearUsuario.nick" placeholder="Escribe aquí tu respuesta..."/>
+                <input id="pregunta5Siguiente" class="btn-right" type="button" value="Siguiente"/>
+                <input id="pregunta5Anterior" class="btn-left" type="button" value="Anterior"/>
+            </form>
+            <p class="contador">5 de 6</p>
+        </div>
+
+        <div id="form-pregunta6">
+            <form>
+                <label for="">f. Ingrese su contraseña</label>
+                <div id="password-left">
+                    <input autocomplete="off" type="password" name="contrasena1" #contrasena1="ngModel" [(ngModel)]="contrasenaleft" />
+                    <span id="show-hide-passwd1" action="hide" class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
+                </div>
+       
+                <div id="password-right">
+                    <input autocomplete="off" type="password"  name="contrasena2" #contrasena2="ngModel" [(ngModel)]="contrasenaright"/>
+                    <span id="show-hide-passwd2" action="hide" class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
+                </div>
+                <br><span class="validacion" *ngIf="contrasena2.touched && !contrasena2.valid || !contrasenaigual() ">Las contraseñas deben ser iguales</span>
+                <input id="pregunta6Anterior" class="btn-left" type="button" value="Anterior"/>
+                <input class="btn-right" (click)=" crearusuario()" [disabled]="contrasena2.value=='' || !contrasena2.valid || !contrasenaigual()"type="button" value="Guardar"/>
+                <input class="btn-cancelar" (click)="redirigirLogin()" type="button" value="Cancelar"/>
+            </form>
+            <p class="contador">6 de 6</p>
+        </div>
+    </div>
+

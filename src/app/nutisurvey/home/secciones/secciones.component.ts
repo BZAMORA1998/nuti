@@ -177,6 +177,7 @@ export class SeccionesComponent implements OnInit {
                 elementr.sesSeccionPK.idIndice=1;
                 elementr.idAux=idAux;
                 elementr.descripcion=descripcion;
+                elementr.sesSeccionPK.idEncuesta=this.idEncuesta;
                 console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)
                 elementr.sesSeccionPK.idEncuesta=this.idEncuesta;
                 console.log("Lista de Seccion: "+this.crearSeccionList);    
