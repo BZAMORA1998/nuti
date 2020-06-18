@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row" id="header" >
+    <div class="row ml-0 mr-0" id="header" >
       <div class="col-6 offset-3 text-center pt-2 pl-12" >
           <img class="img-fluid" src="../../assets/img/name-notisurvey.png">
       </div>
@@ -13,8 +13,8 @@
     </div>
   </div>
 
-    <div class="row pt-2" id="description" >
-      <div class="col-10 offset-1 p-0">
+    <div class="row pt-2 m-0" id="description" >
+      <div class="col-11 offset-1 p-0">
         <p class="font-weight-light ml-6 w-100 mt-2 h5" >Nombre de la encuesta que esta realizando...</p>
       </div>
     </div>
@@ -34,15 +34,15 @@
           <li class="nav-item">
             <a class="nav-link" [routerLink]="'preguntas'" [routerLinkActive]="['active']">Preguntas</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" style="border-right: none;">
             <a class="nav-link" [routerLink]="'resultado-final'" [routerLinkActive]="['active']">Resultado Final</a>
           </li>
-          <li class="nav-item">
-            <button type="button" class="btn btn-primary " class="btn-guardar">Guardar</button>
+          <li class="nav-item" style="border: none;">
+            <button type="button" class="btn btn-primary btn-guardar" >Guardar</button>
           </li>
         </ul>
       </div>
     </nav>
 </div>
 
-<router-outlet class="w-100"></router-outlet>
+<router-outlet></router-outlet>

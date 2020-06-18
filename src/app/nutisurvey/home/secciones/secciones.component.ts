@@ -19,6 +19,11 @@ export class SeccionesComponent implements OnInit {
   public estado:string="A"
 
   constructor(private _seccionService:SeccionService) {
+
+    if(this.crearSeccionList.length==0){
+      this.agregarSeccion(); 
+    }
+
     this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
     this.crearSeccionList=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"")];
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
@@ -32,10 +37,6 @@ export class SeccionesComponent implements OnInit {
     this.getSeccion(this.idEncuesta);
 
     console.log("Longitud: "+this.crearSeccionList.length);
-
-    if(this.crearSeccionList.length==0){
-      this.agregarSeccion(); 
-    }
   }
 
   mostrarModalConfirmacion(message){

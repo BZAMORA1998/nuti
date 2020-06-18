@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row w-100">
     <div class="col-12 pl-5 pr-2">
         <nav class="step-process">
             <ul>
@@ -26,7 +26,7 @@
                 </li>
                 <li class="step">
                   <p id="fecha-validez">Fecha de validez</p>
-                  <div class="row">
+                  <div class="row w-100">
                     <div class="col-12 col-sm-6  mt-3">
                       <p id="txt-fecha-inicio">Inicio:</p>
                       <input type="date" autocomplete="off" id="fecha-inicio" name="fechaInicio"  #fechaInicio="ngModel" [(ngModel)]="crearEncuesta.fechaInicio"/>
@@ -36,8 +36,8 @@
                         <p id="txt-fecha-fin">Fin:</p>
                     </div>
                   </div>
-                    <div class="row">
-                      <div class="col-11">
+                    <div class="row w-100">
+                      <div class="col-12 pt-1">
                           <input type="submit" (click)="crearencuesta()" [disabled]="fechaInicio.value=='' 
                                                                                     || !fechaInicio.valid
                                                                                     || fechaFin.value=='' 

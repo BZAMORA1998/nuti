@@ -21,30 +21,42 @@
             width: 103% !important;
         }
 
-        a{
+        .nav-item{
+            padding: 0px;
             border: none !important;
         }
 
+        .btn-guardar{
+            margin-left: 0px !important;
+        }
+
+        .navbar{
+            padding-left: 10px !important;
+            width: 103% !important;
+            border: 1px solid red;
+         }
 }
 
 a{
-    border-right: 1px solid #bebebe;
     text-decoration: none;
     cursor:pointer;
     color:  #bebebe;
     margin-top: 4px;
 }
 
-.nav-link :last-child{
+.nav-item :last-child{
     border-right:none !important;
 }
 
 .active{
-    color: #ea792d;
+    color: #ea792d !important;
 }
 
 .nav-item{
     height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-right: 1px solid #bebebe;
 }
 
 .navbar{
@@ -52,6 +64,7 @@ a{
    background-color: #f7f7f7;
    color: #b8b8b8;
    width: 100%;
+   padding-left: 70px;
 }
 
 .btn-guardar{
@@ -61,6 +74,8 @@ a{
     height:30px;
     border-radius: 4px;
     margin-top: 10px;
+    padding-top: 1px;
+    margin-left: 465px;
 }
 
 
