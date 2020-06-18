@@ -1,4 +1,4 @@
-<div class="container-fluid p-0">
+<div class="container-fluid">
     <div class="row" id="header" >
       <div class="col-6 offset-3 text-center pt-2 pl-12" >
           <img class="img-fluid" src="../../assets/img/name-notisurvey.png">
@@ -15,31 +15,34 @@
 
     <div class="row pt-2" id="description" >
       <div class="col-10 offset-1 p-0">
-        <p class="font-weight-light ml-6 w-75 mt-2 h5" >Nombre de la encuesta que esta realizando...</p>
+        <p class="font-weight-light ml-6 w-100 mt-2 h5" >Nombre de la encuesta que esta realizando...</p>
       </div>
     </div>
 
-    <div class="row p-0" class="navbar">
-        <div class="col-12  p-0" >
-            <ul class="nav pl-5 pl-1 w-100 text-center">
-                <li class="nav-item col-sm-2 w-100">
-                  <a class="nav-link" [routerLink]="'diseño-encuesta'" [routerLinkActive]="['active']">Diseño de Encuesta</a>
-                </li>
-                <li class="nav-item col-sm-2">
-                  <a class="nav-link" [routerLink]="'secciones'" [routerLinkActive]="['active']">Secciones</a>
-                </li>
-                <li class="nav-item col-sm-2">
-                  <a class="nav-link" [routerLink]="'preguntas'" [routerLinkActive]="['active']">Preguntas</a>
-                </li>
-                <li class="nav-item col-sm-2">
-                    <a class="nav-link" [routerLink]="'resultado-final'" [routerLinkActive]="['active']">Resultado Final</a>
-                </li>
-                <li class="nav-item col-sm-4 text-right">
-                  <button type="button" class="btn btn-primary " class="btn-guardar">Guardar</button>
-                </li>
-              </ul>
-        </div>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="'diseño-encuesta'" [routerLinkActive]="['active']">Diseño de Encuesta</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="'secciones'" [routerLinkActive]="['active']">Secciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="'preguntas'" [routerLinkActive]="['active']">Preguntas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="'resultado-final'" [routerLinkActive]="['active']">Resultado Final</a>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="btn btn-primary " class="btn-guardar">Guardar</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet class="w-100"></router-outlet>

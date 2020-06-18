@@ -46,7 +46,7 @@ mostrarPassword(){
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
     localStorage.setItem("idEncuesta",JSON.stringify(0));
   }
-  public usuario:Usuario;
+   public usuario:Usuario;
    public nick:String;
    public password:String;
 
