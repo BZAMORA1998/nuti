@@ -26,7 +26,7 @@ export class EncuestaComponent implements OnInit {
     private _encuestaService:EncuestaService
   ) {
     this.nombre="";
-    this.crearEncuesta=new CrearEncuesta(" "," "," "," "," "," ",0," "," "," "," ",0);
+    this.crearEncuesta=new CrearEncuesta(""," "," "," "," "," ",0," "," "," ","",0);
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
     this.crearEncuesta=JSON.parse(localStorage.getItem("crearEncuesta"));
    }

@@ -1,10 +1,10 @@
 
  <div class="d-flex justify-content-center mt-5">
     <ngb-pagination #pagination [collectionSize]="totalDatos" [pageSize]="datosPorpagina"  [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="onPageChange(page)">
-        <ng-template ngbPaginationFirst> <img src="assets/images/icons/first.svg" alt="firstIcon"> </ng-template>
-        <ng-template ngbPaginationLast>  <img src="assets/images/icons/last.svg" alt="lastIcon">  </ng-template>
-        <ng-template ngbPaginationPrevious> <img src="assets/images/icons/previus.svg" alt="previusIcon"> </ng-template>
-        <ng-template ngbPaginationNext> <img src="assets/images/icons/next.svg" alt="nextIcon"> </ng-template>
+        <ng-template ngbPaginationFirst> <img src="../../../assets/img/first.svg" alt="firstIcon"> </ng-template>
+        <ng-template ngbPaginationLast>  <img src="../../../assets/img/last.svg" alt="lastIcon">  </ng-template>
+        <ng-template ngbPaginationPrevious> <img src="../../../assets/img/previus.svg" alt="previusIcon"> </ng-template>
+        <ng-template ngbPaginationNext> <img src="../../../assets/img/next.svg" alt="nextIcon"> </ng-template>
         <ng-template ngbPaginationEllipsis>...</ng-template>
         <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
     </ngb-pagination>

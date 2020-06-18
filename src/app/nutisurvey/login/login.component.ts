@@ -18,9 +18,6 @@ var $ = require('jquery');
 export class LoginComponent implements OnInit {
 
   public crearEncuesta: CrearEncuesta;
-  public crearSeccion:ListaSecciones[]=[
-    new ListaSecciones(" ","A",0,0, new SesSeccionPK(0,0,0)," ") 
-  ]; 
 
   constructor(
     private _route:ActivatedRoute,
@@ -47,7 +44,6 @@ mostrarPassword(){
     localStorage.clear();
     this.crearEncuesta=new CrearEncuesta("","","","","","",0,"","","","",0);
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
-    localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccion));
     localStorage.setItem("idEncuesta",JSON.stringify(0));
   }
   public usuario:Usuario;

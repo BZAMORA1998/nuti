@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { OlvideContrasenaComponent } from './olvide-contrasena/olvide-contrasena.component';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
   imports: [
     CommonModule,
     NutisurveyRoutingModule,
-    FormsModule
+    FormsModule, 
+    SharedModule
   ]
 })
 export class NutisurveyModule { }
