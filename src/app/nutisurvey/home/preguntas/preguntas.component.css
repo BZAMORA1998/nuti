@@ -193,7 +193,7 @@ input[type=button]{
   outline: none;
   border-radius: 4px;
   height: 35px;
-  width: 13.5%;
+  width: 160px;
   margin-right: 40px;  
 }
 
@@ -222,6 +222,54 @@ input[type=button]{
 .modal-dialog{
   max-width: 60%;
 }
+
+#sortable { 
+  list-style-type: none; 
+  margin: 0; 
+  padding: 0; 
+  width: 60%; 
+}
+
+#sortable li { 
+  margin: 0 3px 3px 3px; 
+  padding: 0.4em; 
+  padding-left: 1.5em; 
+  font-size: 1.4em; 
+  height: 18px; 
+}
+
+#sortable li span { 
+  position: absolute; 
+  margin-left: -1.3em; 
+}
+
+.ui-state-default{
+  list-style: none;
+  background-color: #fcfcfc;
+  margin-bottom: 10px;
+  height: 40px;
+  border-radius: 8px;
+  color: #9c9c9c !important;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.modal-footer .btn-primary{
+  background-color: #EA792D;
+  border: none;
+}
+
+.modal-footer .btn-primary:active{
+  background-color: #EA792D !important;
+  color: white !important;
+}
+
+
+.modal-footer  .btn-primary:hover{
+  box-shadow: 0 0 5px 0 #EA792D;
+}
+
+
 
 
 

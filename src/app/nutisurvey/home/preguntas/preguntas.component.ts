@@ -29,11 +29,14 @@ export class PreguntasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $('#accordion').accordion();
-    var ac=$('#collapse-0');
-    ac.removeClass('collapse');
-    ac.addClass('collapse show');
+    // var ac=$('#collapse-0');
+    // ac.removeClass('collapse');
+    // ac.addClass('collapse show');
+  }
 
+  sorteable(i){
+      $( "#sortable-"+i ).sortable();
+      $( "#sortable-"+i ).disableSelection();
   }
 
 }

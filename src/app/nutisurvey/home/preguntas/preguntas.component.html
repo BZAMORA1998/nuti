@@ -24,7 +24,7 @@
                                   <input id="{{i}}_rd-abierta" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-abierta">Abierta</label>
                                   <input id="{{i}}_rd-cerrada" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-cerrada" >Cerrada</label>
                                   <input id="{{i}}_rd-multiple" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-multiple" >Multiple</label>
-                                  <input id="{{i}}_rd-multipleRespuesta" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#Modal-'+i">Multiple Respuesta</label>
+                                  <input id="{{i}}_rd-multipleRespuesta" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#Modal-'+i" (click)="sorteable(i)">Multiple Respuesta</label>
                                   <input id="{{i}}_rd-obligatoria" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-obligatoria">Obligatoria</label>
                                   <input id="{{i}}_rd-tabulada" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-tabulada">Tabulada</label>
                               </div>  
@@ -46,20 +46,47 @@
       <div class="modal-dialog"  role="document">
         <div class="modal-content" >
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModal3Label">Tipo de pregunta: Multiple respuestas</h5>
+            <h5 class="modal-title pl-4" id="exampleModal3Label" style="color: #EA792D;">Tipo de pregunta: <b>Multiple respuestas</b></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            ...
+            <div class="row" style="background-color: #f7f7f7;">
+              <div class="col-12 pt-3 pl-5">
+                  <p>Personaliza tu pregunta:<span style="color: #EA792D;"> ¿Porque debemos renovar año a año el reglamento interno?</span> </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 pt-3 pl-5">
+                  <p>1. Agregue una etiqueta</p>
+              </div>
+              <div class="col-6 pt-3">
+                <p>2. Agregue un valor</p>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-12 pt-3 pl-5">
+                  <p>3. Arrastre las respuesta en el orden deseado</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 pt-3 pl-5">
+                  <ul id="{{'sortable-'+i}}">
+                    <li class="ui-state-default">Item 1</li>
+                    <li class="ui-state-default">Item 2</li>
+                    <li class="ui-state-default">Item 3</li>
+                    <li class="ui-state-default">Item 4</li>
+                  </ul>
+              </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" style="display: none;" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Aceptar</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
