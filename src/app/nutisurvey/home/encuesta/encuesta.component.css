@@ -320,3 +320,16 @@ input[type=submit]:hover{
     margin-top: -20px;
 }
 
+
+/deep/ .loading{
+    height: 10px !important;
+    padding: 0px !important;
+}
+
+/deep/ .spinner-border{
+    margin-top:-15px !important;
+}
+
+/deep/ .text-dark{
+    margin-top:-10px !important;
+}

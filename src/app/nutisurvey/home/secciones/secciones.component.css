@@ -199,5 +199,18 @@ input[type=submit]:disabled{
     box-shadow:none !important
 }
 
+/deep/ .loading{
+    height: 10px !important;
+    padding: 0px !important;
+}
+
+/deep/ .spinner-border{
+    margin-top:-15px !important;
+}
+
+/deep/ .text-dark{
+    margin-top:-10px !important;
+}
+
 
 

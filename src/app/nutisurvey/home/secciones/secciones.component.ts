@@ -37,10 +37,14 @@ export class SeccionesComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.idEncuesta);
     this.getSeccion(this.idEncuesta);
-    this.deshabilitarAgregarSeccion(); 
-  }
+    console.log("Longitud"+this.crearSeccionList.length);
+    if(this.crearSeccionList[0].titulo=='' && this.crearSeccionList[0].descripcion==''){
 
-  deshabilitarAgregarSeccion(){
+          this.deshabilitarAgregarSeccion(); 
+    }
+  }
+  
+deshabilitarAgregarSeccion(){
 
     var cont=0;
     var auxBool=true;
@@ -78,7 +82,31 @@ export class SeccionesComponent implements OnInit {
       title: message,
       confirmButtonColor:'#ea792d',
       showConfirmButton: true,
+    }).then((result) => {
+      if (result.value) {
+        this.refresh();;
+      }
+     });
+  }
+
+  loading(activar){
+    Swal.fire({
+      html: "<div class='row loading'>"+
+                "<div class='col-2'>"+
+                    "<div class='spinner-border'></div>"+
+                '</div>'+
+                "<div class='col-10'>"+
+                    "<p class='text-dark'>Procesando, espere por favor...</p>"+
+                '</div>'+
+            "</div>",    
+      showCancelButton: false,
+      showConfirmButton: false,
+      width: '380px',
     });
+
+    if(!activar){
+      Swal.close();
+    }
   }
 
   showModal(message){
@@ -87,7 +115,7 @@ export class SeccionesComponent implements OnInit {
       title: 'Oops...',
       text: message,
       confirmButtonColor:'#ea792d',
-    })
+     })
   }
 
   public listarSecciones:any[]=[
@@ -265,7 +293,7 @@ export class SeccionesComponent implements OnInit {
   }
 
   CrearSeccion(){
-
+      this.loading(true);
       this.crearS= new CrearSeccion(this.crearSeccionList);
 
       console.log("Crear seccion",this.crearS);
@@ -273,10 +301,13 @@ export class SeccionesComponent implements OnInit {
         Response=>{
               if(Response.codigo==200){
                 console.log(Response);
+                this.loading(false);
+                this.getSeccion(this.idEncuesta);
                 this.mostrarModalConfirmacion(Response.mensaje);
-
               }else{
                 console.log(Response);
+                this.loading(true);
+                this.getSeccion(this.idEncuesta);
                 this.showModal(Response.mensaje);
               }
         },
@@ -284,5 +315,11 @@ export class SeccionesComponent implements OnInit {
             console.log(<any>error);
         }
       );
+  }
+
+  refresh():void{
+    setTimeout(()=>{
+      window.location.reload();
+    });
   }
 }

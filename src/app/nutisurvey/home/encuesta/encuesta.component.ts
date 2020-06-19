@@ -96,8 +96,28 @@ export class EncuestaComponent implements OnInit {
     });
   }
 
-  crearencuesta(){
+  loading(activar){
+    Swal.fire({
+      html: "<div class='row loading'>"+
+                "<div class='col-2'>"+
+                    "<div class='spinner-border'></div>"+
+                '</div>'+
+                "<div class='col-10'>"+
+                    "<p class='text-dark'>Procesando, espere por favor...</p>"+
+                '</div>'+
+            "</div>",    
+      showCancelButton: false,
+      showConfirmButton: false,
+      width: '380px',
+    });
 
+    if(!activar){
+      Swal.close();
+    }
+  }
+
+  crearencuesta(){
+    this.loading(true);
     console.log("Actualizar"+this.crearEncuesta);
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
 
@@ -116,8 +136,10 @@ export class EncuestaComponent implements OnInit {
         console.log(Response.causa);
         localStorage.setItem("idEncuesta",JSON.stringify(Response.causa));
         console.log(this.usuario);
+        this.loading(false);
         this.mostrarModalConfirmacion(Response.mensaje);
       }else{
+        this.loading(false);
         this.showModal(Response.mensaje);
       }
     },
