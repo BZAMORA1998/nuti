@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { NutisurveyComponent } from './nutisurvey.component';
 import { OlvideContrasenaComponent } from './olvide-contrasena/olvide-contrasena.component';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
+import { RegistroEncuestaComponent } from './registro-encuesta/registro-encuesta.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,9 @@ const routes: Routes = [
       },
       { 
         path: 'crear-usuario',  component: CrearUsuarioComponent 
+      },
+      { 
+        path: 'registro-encuesta',  component: RegistroEncuestaComponent 
       },
       {
         path: 'home' , loadChildren:()=> import('./home/home.module').then(m => m.HomeModule)

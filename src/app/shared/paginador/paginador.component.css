@@ -28,11 +28,17 @@ div{
 /deep/ .page-item.active .page-link {
     border-radius: 50px !important;
     background-color: white;
-    color: #007bff;
-    border-color: #007bff !important;
+    color: #ea792d;
+    border-color: #ea792d !important;
 }
 
 
 /deep/ .page-item.disabled .page-link span{
     font-size: 50px;;
+}
+
+/deep/ .page-link:focus {
+    z-index: 3;
+    outline: 0;
+    box-shadow: none !important;
 }

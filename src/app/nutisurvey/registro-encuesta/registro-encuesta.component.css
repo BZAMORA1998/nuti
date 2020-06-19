@@ -1,0 +1,97 @@
+.principal{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    width: 100%;
+}
+
+#header{
+    background: #ea792d;
+}
+
+.box-left{
+    margin-top: 20px;
+    width: 80%;
+    text-align: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    height: 650px;
+    float: left;
+}
+
+.box-left #btn-editar{
+    background-image:url("../../../assets/img/ico-editar.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    background-color: white;
+}
+
+.btn-crear{
+    margin-top: 20px;
+    float: left;
+    height: 40px;
+    width: 150px;
+    border-radius: 4px;
+    background-color:#ea792d;
+    border: 2px solid #EA792D;
+    color:  white;
+    box-sizing: border-box;
+    border-color: .15s;
+    outline:none;
+    margin-top: 30px;
+}
+
+.btn-crear:hover{
+    box-shadow: 0 0 5px 0 #EA792D;
+}
+
+
+.box-left img{
+    margin-top: 50px;
+    height: 100px;
+    margin-left: 100px;
+}
+
+.box-right{
+    width: 20%;
+    height: 650px;
+    float: left;
+}
+
+.box-right .box{
+    width: 80%;
+    height: 15%;
+    margin-top: 20px;
+    margin-left: 25px;
+    background-color: #fcfcfc;
+    border: 2px solid #e7e7e7;
+    border-radius: 4px;
+}
+
+.box-right .btn-crear{
+    margin-top: 20px;
+    float: left;
+    height: 40px;
+    width: 150px;
+    border-radius: 4px;
+    background-color:#ea792d;
+    border: 2px solid #EA792D;
+    color:  white;
+    box-sizing: border-box;
+    border-color: .15s;
+    outline:none;
+    margin-top: 30px;
+    margin-left: 25px;
+}
+
+.table {
+    text-align: justify;
+}
+
+.table .thead-dark th {
+    background-color: #ea792d;
+    border-color: #ea792d;
+    font-weight:normal;
+}

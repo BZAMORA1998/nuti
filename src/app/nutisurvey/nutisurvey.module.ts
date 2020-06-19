@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { OlvideContrasenaComponent } from './olvide-contrasena/olvide-contrasena.component';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
 import { SharedModule } from '../shared/shared.module';
+import { RegistroEncuestaComponent } from './registro-encuesta/registro-encuesta.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, HomeComponent, OlvideContrasenaComponent, CrearUsuarioComponent],
+  declarations: [LoginComponent, HomeComponent, OlvideContrasenaComponent, CrearUsuarioComponent, RegistroEncuestaComponent],
   imports: [
     CommonModule,
     NutisurveyRoutingModule,
