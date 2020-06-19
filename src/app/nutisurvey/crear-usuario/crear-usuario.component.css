@@ -1,4 +1,4 @@
-.principal{
+.container-fluid{
     margin: 0px;
     padding: 0px;
     width: 100%;
@@ -7,181 +7,63 @@
     
 }
 
-@media screen and (min-width: 700px){
+@media screen and (min-width: 320px) and (max-width:619px){
     .box-pregunta{
-        height: 60%;
-        min-width:40%;
-        margin:8% 32%;
-        padding: 15px;
-        position: absolute;
+        margin:15% 0px !important;
     }
 
     img{
-        height: 100px;
-        margin-left: 33%;
+        margin-top: 70px !important;
+        margin-left: 90px !important;
     }
 
-    #show-hide-passwd1{
-        position: absolute;
-        margin-top: 183px;
-        margin-left: 215px;
-        border: none;
-        background-color: transparent;
+    .fa{
+        margin-top: -50px !important;
+        margin-left: 125px !important;
     }
+
+    .hide{
+        margin-left: 130px !important;
+    }
+
+    .validacion{
+        width: 60% !important;
+        margin-top: 9% !important;
+        margin-left: -214px !important;
+    }
+
     
-    #show-hide-passwd2{
-        position: absolute;
-        margin-top: 183px;
-        margin-left: 220px;;
-        border: none;
-        background-color: transparent;
-    }
-    #modelo{
-        position: absolute;
-        display: none;
-        width: 100%;
-        height:100%;
-        background: rgba(0,0,0,.4);
-    }
-    
-    #modelo #cuerpo{
-        border-radius: 5px;
-        background-color: white;
-        margin: 25% auto !important;
-        padding: 10px;
-        width: 20% !important;
-    }
-    
-    #texto{
-        font-size: 15px;
-        margin-top: -27px;
-        float: left;
-    }
-    
-    .spinner-border{
-        padding: 0px;
-        margin-left:230px !important;
-        text-align: center;
-        margin: 5px;
-    }
 }
 
-@media screen and (min-width: 320px) and (max-width:559px){
+@media screen and (min-width: 630px) and (max-width:1200px){
     .box-pregunta{
-        height: 60%;
-        min-width:40%;
-        margin:25% 6%;
-        padding: 15px;
-        position: absolute;
+        margin: 80px 110px !important;
     }
 
-    img{
-        height: 100px;
-        margin-left: 60px;
+    .fa{
+        margin-top: -50px !important;
+        margin-left: 155px !important;
     }
 
-    #show-hide-passwd1{
-        position: absolute;
-        margin:182px 99px;
-        border: none;
-        background-color: transparent;
+    .hide{
+        margin-left: 160px !important;
     }
-    
-    #show-hide-passwd2{
-        position: absolute;
-        margin:182px 105px;
-        border: none;
-        background-color: transparent;
-    }
-
-    #modelo{
-        position: absolute;
-        display: none;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,.4);
-    }
-    
-    #modelo #cuerpo{
-        border-radius: 5px;
-        background-color: white;
-        margin: 80% auto !important;
-        padding: 10px;
-        width: 74% !important;
-    }
-    
-    #texto{
-        font-size: 15px;
-        margin-top: -27px;
-        float: left;
-    }
-    
-    .spinner-border{
-        padding: 0px;
-        margin-left:230px !important;
-        text-align: center;
-        margin: 5px;
-    }
-
 }
 
-@media screen and (min-width: 600px) and (max-width:700px){
-    .box-pregunta{
-        height: 60%;
-        min-width:40%;
-        margin:10px 150px;
-        padding: 15px;
-        position: absolute;
-    }
-
-    img{
-        height: 100px;
-        margin-left: 60px;
-    }
-
-    #show-hide-passwd1{
-        position: absolute;
-        margin:183px 134px;
-        border: none;
-        background-color: transparent;
-    }
-    
-    #show-hide-passwd2{
-        position: absolute;
-        margin:183px 140px;
-        border: none;
-        background-color: transparent;
-    }
-
-    #modelo{
-        position: absolute;
-        display: none;
-        width: 100%;
-        height: 600px;
-        background: rgba(0,0,0,.4);
-    }
-    
-    #modelo #cuerpo{
-        border-radius: 5px;
-        background-color: white;
-        margin: 25% auto !important;
-        padding: 10px;
-        width: 40% !important;
-    }
-    
-    #texto{
-        font-size: 15px;
-        margin-top: -27px;
-        float: left;
-    }
-    
-    .spinner-border{
-        padding: 0px;
-        margin-left:230px !important;
-        text-align: center;
-        margin: 5px;
-    }
+.box-pregunta{
+    height: 60%;
+    min-width:40%;
+    margin:80px 450px;
+    padding: 15px;
+    position: absolute;
 }
+
+img{
+    height: 100px;
+    margin-left: 150px;
+}
+
+   
 
 label{
     margin-top: 20px;
@@ -198,7 +80,7 @@ label{
     margin-top: 70px;
 }
 
-form input[type=text]{
+form .texto{
     margin-top: 20px;
     width: 100%;
     height: 40px;
@@ -227,7 +109,7 @@ form input[type="button"]{
     border-color: .15s;
 }
 
-form input[type=text]:click{
+.texto:click{
     box-shadow: 0 0 5px 0 #EA792D;
 }
 
@@ -235,11 +117,11 @@ form input[type=button]:hover{
     box-shadow: 0 0 5px 0 #EA792D;
 }
 
-form input[type=text]:focus{
+.texto:focus{
     box-shadow: 0 0 5px 0 #EA792D;
 }
 
-form input[type=password]{
+.password{
     width: 100%;
     height: 40px;
     border: 1px solid #EA792D;
@@ -252,7 +134,7 @@ form input[type=password]{
 
 }
 
-form input[type=password]:focus{
+.password:focus{
     box-shadow: 0 0 5px 0 #ea792d;
 }
 
@@ -335,7 +217,34 @@ form input[type="button"]:disabled{
     font-size: small;
     width: 43%;
     text-align: right;
-    margin-top: 6%;
+    margin-top: 5%;
     margin-left: -240px;
     margin: 1px solid red;
+}
+
+.fa{
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 215px;
+    border: none;
+    background-color: transparent;
+}
+
+.hide{
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 220px;
+}
+
+/deep/ .loading{
+    height: 10px !important;
+    padding: 0px !important;
+}
+
+/deep/ .spinner-border{
+    margin-top:-15px !important;
+}
+
+/deep/ .text-dark{
+    margin-top:-10px !important;
 }

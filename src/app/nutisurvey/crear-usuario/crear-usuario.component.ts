@@ -150,12 +150,15 @@ export class CrearUsuarioComponent implements OnInit {
 
   crearusuario(){
     console.log(this.crearUsuario);
+    this.loading(true);
     this._crearUsuarioService.postCrearUsuario(this.crearUsuario).subscribe(
       Response=>{
         console.log(Response);
         if(Response.codigo==200){
+          this.loading(false);
           this.mostrarModalConfirmacion(Response.mensaje);
         }else{
+          this.loading(false);
           this.showModal(Response.mensaje);
         }
       },
@@ -163,6 +166,52 @@ export class CrearUsuarioComponent implements OnInit {
         console.log(<any>error);
       }
     );
+  }
+
+  typeInputF1="password";
+  showPF1:boolean=true;
+  mostrarPassword1(){
+
+    if(this.typeInputF1=="text"){
+      this.showPF1=true;
+      this.typeInputF1="password";
+    }else{
+      this.showPF1=false;
+      this.typeInputF1="text";
+    }
+  }
+
+  loading(activar){
+    Swal.fire({
+      html: "<div class='row loading'>"+
+                "<div class='col-2'>"+
+                    "<div class='spinner-border'></div>"+
+                '</div>'+
+                "<div class='col-10'>"+
+                    "<p class='text-dark'>Procesando, espere por favor...</p>"+
+                '</div>'+
+            "</div>",    
+      showCancelButton: false,
+      showConfirmButton: false,
+      width: '380px',
+    });
+
+    if(!activar){
+      Swal.close();
+    }
+  }
+
+  typeInputF2="password";
+  showPF2:boolean=true;
+  mostrarPassword2(){
+
+    if(this.typeInputF2=="text"){
+      this.showPF2=true;
+      this.typeInputF2="password";
+    }else{
+      this.showPF2=false;
+      this.typeInputF2="text";
+    }
   }
 
 }

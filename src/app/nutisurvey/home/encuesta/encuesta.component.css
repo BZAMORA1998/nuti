@@ -272,6 +272,7 @@ input[type=date]{
 
 input[type=submit]{
     text-decoration: none;
+    border: none;
      outline: none;
      border-radius: 4px;
      width: 130px;
@@ -291,6 +292,10 @@ input[type=submit]:disabled{
     color: #fef9f7;
     border: none;
 }
+input[type=submit]:hover{
+    box-shadow: 0 0 5px 0 #EA792D;
+}
+
 
 #lbl-negocio{
     background-image: url("../../../../assets/img/ico-negocio.png");

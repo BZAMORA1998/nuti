@@ -349,6 +349,19 @@ margin-right: 40px;
 }
 
 
+.btn-primary{
+  min-width: 150px !important;
+}
+
+.btn-primary:active{
+  background-color: white !important;
+  color: #EA792D !important;
+}
+
+.btn-primary:focus{
+  box-shadow:none !important
+}
+
 
 
 

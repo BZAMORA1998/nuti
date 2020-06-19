@@ -162,7 +162,6 @@ input[type=button]{
     
 }
 
-
 input[type=submit]{
     text-decoration: none;
     border: none;
@@ -190,4 +189,15 @@ input[type=submit]:disabled{
 .btn-primary{
     min-width: 150px !important;
 }
+
+.btn-primary:active{
+    background-color: white !important;
+    color: #EA792D !important;
+}
+
+.btn-primary:focus{
+    box-shadow:none !important
+}
+
+
 

@@ -28,19 +28,19 @@ export class LoginComponent implements OnInit {
   }
 
   typeInputF="password";
-showPF:boolean=true;
-mostrarPassword(){
+  showPF:boolean=true;
+  mostrarPassword(){
 
-  if(this.typeInputF=="text"){
-    this.showPF=true;
-    this.typeInputF="password";
-  }else{
-    this.showPF=false;
-    this.typeInputF="text";
+    if(this.typeInputF=="text"){
+      this.showPF=true;
+      this.typeInputF="password";
+    }else{
+      this.showPF=false;
+      this.typeInputF="text";
+    }
   }
-}
+  
   ngOnInit(): void {
-
     localStorage.clear();
     this.crearEncuesta=new CrearEncuesta("","","","","","",0,"","","","",0);
     localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
@@ -62,28 +62,26 @@ mostrarPassword(){
       confirmButtonColor:'#ea792d',
     })
   }
-
-  loading(active){
+  
+  loading(activar){
     Swal.fire({
-      html: "<div class='row'>"+
+      html: "<div class='row loading'>"+
                 "<div class='col-2'>"+
                     "<div class='spinner-border'></div>"+
                 '</div>'+
                 "<div class='col-10'>"+
                     "<p class='text-dark'>Procesando, espere por favor...</p>"+
                 '</div>'+
-             "</div>",    
+            "</div>",    
       showCancelButton: false,
       showConfirmButton: false,
       width: '380px',
     });
 
-    if(!active){
+    if(!activar){
       Swal.close();
     }
-}
-
-
+  }
 
   autenticacion(){
     this.loading(true);

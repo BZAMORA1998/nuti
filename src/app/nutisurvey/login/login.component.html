@@ -7,10 +7,10 @@
             <p id="inicio">Iniciar Sesión</p>
             <form #formLogin="ngForm" (ngSubmit)="autenticacion()" class="form">
                 <label>Usuario o Correo Electrónico</label>
-                <input autocomplete="off" type="text" name="usuario"  #usuario="ngModel" [(ngModel)]="nick" autofocus required/>
+                <input autocomplete="off" class="password" type="text" name="usuario"  #usuario="ngModel" [(ngModel)]="nick" autofocus required/>
                 <br><span class="validacion"  *ngIf="usuario.touched && !usuario.valid"> Debe ingresar un usuario</span>
                 <label>Constraseña</label>
-                <input autocomplete="off"  [type]="typeInputF" type="password" name="contrasena" #contrasena="ngModel" [(ngModel)]="password" required/>
+                <input autocomplete="off" class="password" [type]="typeInputF" type="password" name="contrasena" #contrasena="ngModel" [(ngModel)]="password" required/>
                 <label *ngIf="showPF" (click)="mostrarPassword()" type="button" class="button"><i class="fa fa-eye showPass" aria-hidden="true"></i></label>
                 <label *ngIf="!showPF" (click)="mostrarPassword()" type="button" class="button"><i class="fa fa-eye-slash showPass" aria-hidden="true"></i></label>
                 <br><span class="validacion" *ngIf="contrasena.touched && !contrasena.valid">Debe ingresar una contraseña</span>
@@ -25,12 +25,5 @@
     <div class="box-right">
         <img src="../../assets/img/notisurvey-portada.jpg">
     </div>
-</div>
-
-<div id="modelo">
-    <div id="cuerpo">
-        <div class="spinner-border"></div>
-        <p id="texto">Procesando, espere por favor...</p>
-    </div>  
 </div>
 

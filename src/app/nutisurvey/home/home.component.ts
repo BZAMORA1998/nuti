@@ -8,10 +8,17 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class HomeComponent implements OnInit {
   public usuario:Usuario;
-  constructor() { }
+  public nombreEncuesta:String;
+  constructor() { 
+    this.usuario=JSON.parse(localStorage.getItem("nombreEncuesta"));
+  }
 
   ngOnInit(): void {
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
+
+    if(this.nombreEncuesta==null){
+      this.nombreEncuesta="Nombre de la encuesta que esta realizando...";
+    }
   }
 
 }

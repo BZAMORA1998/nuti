@@ -19,13 +19,13 @@
         </div>
         <div class="row">
           <div class="col-12 text-right">
-                <input type="button" id="btn-agregarSeccion" (click)="agregarSeccion()" class="btn btn-primary mt-2" value="Agregar Sección"/>
+                <input type="button" id="btn-agregarSeccion" (click)="agregarSeccion()" (click)="deshabilitarAgregarSeccion()" class="btn btn-primary mt-2" value="Agregar Sección" disabled />
           </div>
         </div>
         
         <div class="row w-100 text-right">
           <div class="col-12">
-          <input type="submit" value="Continuar"  class="btn btn-primary" (click)=" CrearSeccion()"/>
+          <input type="submit" value="Continuar"  id="btn-aceptar" class="btn btn-primary" (click)=" CrearSeccion()" disabled />
         </div>
       </div>
      </form>

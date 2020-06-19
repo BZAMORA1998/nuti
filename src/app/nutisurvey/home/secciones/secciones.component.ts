@@ -4,6 +4,9 @@ import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
 import { SeccionService } from 'src/app/servicios/seccion.service';
 import { CrearSeccion } from 'src/app/models/crearSeccion';
 import Swal from 'sweetalert2';
+declare var require: any
+var $ = require('jquery');
+import 'jquery-ui-dist/jquery-ui';
 
 @Component({
   selector: 'app-secciones',
@@ -17,26 +20,55 @@ export class SeccionesComponent implements OnInit {
   public crearS:CrearSeccion;
   public idEncuesta:number;
   public estado:string="A"
+  public nombreEncuesta:String="";
 
   constructor(private _seccionService:SeccionService) {
-
-    if(this.crearSeccionList.length==0){
-      this.agregarSeccion(); 
-    }
-
     this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
     this.crearSeccionList=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"")];
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
-    console.log(this.crearSeccionList);
-
+    console.log("Leng"+this.crearSeccionList);
+    if(this.crearSeccionList==null || this.crearSeccionList.length==0){
+      this.crearSeccionList=[];
+      this.agregarSeccion();
+    }
    }
 
   ngOnInit(): void {
     console.log(this.idEncuesta);
     this.getSeccion(this.idEncuesta);
+    this.deshabilitarAgregarSeccion(); 
+  }
 
-    console.log("Longitud: "+this.crearSeccionList.length);
+  deshabilitarAgregarSeccion(){
+
+    var cont=0;
+    var auxBool=true;
+    var nombres= document.getElementsByName("nombres");
+    var descripcion = document.getElementsByName("descripcion"); 
+    console.log("Lenght "+nombres.length);
+    for (var i = 0; i < nombres.length; i++) {
+      var desc=(descripcion[i]as HTMLInputElement).value;
+      var nom=(nombres[i]as HTMLInputElement).value;
+      if(desc=='' || nom==''){
+        console.log("Entro al for"+cont);
+        cont++;
+      }
+      auxBool=false;
+    }
+
+    
+    var agregar = <any> document.getElementById("btn-agregarSeccion");
+    var aceptar = <any> document.getElementById("btn-aceptar");
+    if(cont==0 && auxBool==false){
+      console.log("Entro al if=0 "+cont);
+      agregar.disabled = false;
+      aceptar.disabled = false;
+    }else{
+      console.log("Entro al if!=0 "+cont);
+      agregar.disabled = true;
+      aceptar.disabled = true;
+    }
   }
 
   mostrarModalConfirmacion(message){
@@ -89,6 +121,7 @@ export class SeccionesComponent implements OnInit {
               localStorage.removeItem('crearSeccionLista');
               localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
               console.log("Lista de Seccion: "+this.crearSeccionList);
+              this.deshabilitarAgregarSeccion();
           }
         });
       }else{
@@ -104,6 +137,7 @@ export class SeccionesComponent implements OnInit {
               console.log(this.crearSeccionList);
               auxBool=false;
               console.log("Lista de Seccion: "+this.crearSeccionList);
+              this.deshabilitarAgregarSeccion();
           }
         });
         if(auxBool){
@@ -118,6 +152,7 @@ export class SeccionesComponent implements OnInit {
                 console.log("Final sin id: "+this.crearSeccionList);
                 auxBool=false;
                 console.log("Lista de Seccion: "+this.crearSeccionList);
+                this.deshabilitarAgregarSeccion();
             }
           });
         }
@@ -144,6 +179,7 @@ export class SeccionesComponent implements OnInit {
                 localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
                 console.log(this.crearSeccionList);
                 console.log("Lista de Seccion: "+this.crearSeccionList);
+                this.deshabilitarAgregarSeccion();
             }
           });
       }else{
@@ -165,6 +201,7 @@ export class SeccionesComponent implements OnInit {
               localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
               console.log(element);
               auxBool=false;
+              this.deshabilitarAgregarSeccion();
           }
         });
         if(auxBool){
@@ -186,6 +223,7 @@ export class SeccionesComponent implements OnInit {
                 localStorage.setItem("crearSeccionLista",JSON.stringify(this.crearSeccionList));
                 console.log(this.crearSeccionList);
                 auxBool=false;
+                this.deshabilitarAgregarSeccion();
             }
           });
         }
