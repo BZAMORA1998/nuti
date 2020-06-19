@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       return this._router.navigate(['../notisurvey/home/diseño-encuesta']);
   }
 
-  showModal(message){
+  showModalError(message){
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
         }else{
           console.log(Response.respuestaProceso);
           this.loading(false);
-          this.showModal(Response.respuestaProceso.mensaje);
+          this.showModalError(Response.respuestaProceso.mensaje);
         }
       },
       error=>{

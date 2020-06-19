@@ -76,7 +76,7 @@ export class EncuestaComponent implements OnInit {
     }
   }
 
-  showModal(message){
+  showModalError(message){
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
@@ -86,7 +86,7 @@ export class EncuestaComponent implements OnInit {
   }
 
   
-  mostrarModalConfirmacion(message){
+  showModalConfirmacion(message){
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -137,10 +137,10 @@ export class EncuestaComponent implements OnInit {
         localStorage.setItem("idEncuesta",JSON.stringify(Response.causa));
         console.log(this.usuario);
         this.loading(false);
-        this.mostrarModalConfirmacion(Response.mensaje);
+        this.showModalConfirmacion(Response.mensaje);
       }else{
         this.loading(false);
-        this.showModal(Response.mensaje);
+        this.showModalError(Response.mensaje);
       }
     },
       error=>{

@@ -75,7 +75,7 @@ deshabilitarAgregarSeccion(){
     }
   }
 
-  mostrarModalConfirmacion(message){
+  showModalConfirmacion(message){
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -109,7 +109,7 @@ deshabilitarAgregarSeccion(){
     }
   }
 
-  showModal(message){
+  showModalError(message){
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
@@ -303,12 +303,12 @@ deshabilitarAgregarSeccion(){
                 console.log(Response);
                 this.loading(false);
                 this.getSeccion(this.idEncuesta);
-                this.mostrarModalConfirmacion(Response.mensaje);
+                this.showModalConfirmacion(Response.mensaje);
               }else{
                 console.log(Response);
                 this.loading(true);
                 this.getSeccion(this.idEncuesta);
-                this.showModal(Response.mensaje);
+                this.showModalError(Response.mensaje);
               }
         },
         error=>{

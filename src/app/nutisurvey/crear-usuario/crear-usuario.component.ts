@@ -125,7 +125,7 @@ export class CrearUsuarioComponent implements OnInit {
       return this._router.navigate(['/login']);
   }
 
-  showModal(message){
+  showModalError(message){
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
@@ -134,7 +134,7 @@ export class CrearUsuarioComponent implements OnInit {
     });
   }
 
-  mostrarModalConfirmacion(message){
+  showModalConfirmacion(message){
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -156,10 +156,10 @@ export class CrearUsuarioComponent implements OnInit {
         console.log(Response);
         if(Response.codigo==200){
           this.loading(false);
-          this.mostrarModalConfirmacion(Response.mensaje);
+          this.showModalConfirmacion(Response.mensaje);
         }else{
           this.loading(false);
-          this.showModal(Response.mensaje);
+          this.showModalError(Response.mensaje);
         }
       },
       error=>{
