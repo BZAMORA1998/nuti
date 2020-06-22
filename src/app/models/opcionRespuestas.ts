@@ -1,13 +1,20 @@
 import { SesOpcionesPK } from './sesOpcionesPK';
 
 export class OpcionRespuestas{
-    constructor(
-        public estado:string,
-        public etiquetaOpcion:string,
-        public likert: 0,
-        public orden: 0,
-        public sesOpcionesPK:SesOpcionesPK
-    ){
 
+    public estado:string;
+    public etiquetaOpcion:string;
+    public likert:number;
+    public orden:number;
+    public sesOpcionesPK:SesOpcionesPK;
+
+    constructor(
+      
+    ){
+        this.estado="";
+        this.etiquetaOpcion="";
+        this.likert= 0;
+        this.orden=0;
+        this.sesOpcionesPK=new SesOpcionesPK();
     }
 }

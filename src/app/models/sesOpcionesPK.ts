@@ -1,8 +1,11 @@
 export class SesOpcionesPK{
-    constructor(
-        public idOpcion:0,
-        public idPregunta:0
-    ){
+    public idOpcion:number;
+    public idPregunta:number;
 
+    constructor(
+        
+    ){
+        this.idOpcion=0;
+        this.idPregunta=0;
     }
 }

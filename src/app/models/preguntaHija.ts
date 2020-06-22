@@ -1,14 +1,22 @@
-import { publicDecrypt } from 'crypto'
 import { OpcionRespuestas } from './opcionRespuestas';
 
 export class PreguntaHija{
+
+    public descripcion:String;
+    public esPadre:string;
+    public estado:string;
+    public idPregunta:number;
+    public idSeccion:number;
+    public opcionRespuestas:Array<OpcionRespuestas>;
+
     constructor(
-        public descripcion:string,
-        public esPadre:string,
-        public estado:string,
-        public idPregunta:0,
-        public idSeccion:0,
-        public opcionRespuestas:OpcionRespuestas[]
+       
     ){
+        this.descripcion="";
+        this.esPadre="";
+        this.estado="";
+        this.idPregunta=0;
+        this.idSeccion=0;
+        this.opcionRespuestas= new Array<OpcionRespuestas>();
     }
 }

@@ -22,6 +22,20 @@ export class SeccionesComponent implements OnInit {
   public estado:string="A"
   public nombreEncuesta:String="";
 
+  public listarSecciones:any[]=[
+    {
+      descripcion: "",
+      estado: "",
+      nroSeccion: 0,
+      sesSeccionPK: {
+          idEncuesta: 66,
+          idIndice: 1,
+          idSeccion: 54
+      },
+      titulo:""
+    }
+  ];
+
   constructor(private _seccionService:SeccionService) {
     this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
     this.crearSeccionList=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"")];
@@ -117,20 +131,6 @@ deshabilitarAgregarSeccion(){
       confirmButtonColor:'#ea792d',
      })
   }
-
-  public listarSecciones:any[]=[
-    {
-      descripcion: "",
-      estado: "",
-      nroSeccion: 0,
-      sesSeccionPK: {
-          idEncuesta: 66,
-          idIndice: 1,
-          idSeccion: 54
-      },
-      titulo:""
-    }
-  ];
   
   saveRespuestaInput(titulo,idSeccion,idAux){
     var auxBool=true;

@@ -2,7 +2,9 @@ import { ListaPreguntas } from './listaPreguntas';
 
 export class CrearPreguntas{
     
-    constructor(public listaPreguntas:ListaPreguntas[]){
+    constructor(
+        public listaPreguntas:ListaPreguntas[]
+    ){
       
     }
 }

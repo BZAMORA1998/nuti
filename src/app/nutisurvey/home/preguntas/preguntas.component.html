@@ -21,12 +21,11 @@
                                   <p>. Enunciado</p>
                                   <input autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
                                   <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
-                                  <input id="{{i}}_rd-abierta" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-abierta">Abierta</label>
-                                  <input id="{{i}}_rd-cerrada" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-cerrada" >Cerrada</label>
-                                  <input id="{{i}}_rd-multiple" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-multiple" >Multiple</label>
-                                  <input id="{{i}}_rd-multipleRespuesta" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#Modal-'+i" (click)="sorteable(i)">Multiple Respuesta</label>
-                                  <input id="{{i}}_rd-obligatoria" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-obligatoria">Obligatoria</label>
-                                  <input id="{{i}}_rd-tabulada" name="{{i}}_unidad" type="radio"/><label for="{{i}}_rd-tabulada">Tabulada</label>
+                                  <input id="{{i}}-rd-abierta" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,0,i)" for="{{i}}-rd-abierta">Abierta</label>
+                                  <input id="{{i}}-rd-siOno" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-siOno-label" for="{{i}}-rd-siOno" (click)="saveTipoPregunta($event.target.id,0,i)">Si o No</label>
+                                  <input id="{{i}}-rd-multiple" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-multiple-label" for="{{i}}-rd-multiple" (click)="saveTipoPregunta($event.target.id,0,i)">Multiple</label>
+                                  <input id="{{i}}-rd-multipleRespuesta" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-multipleRespuesta-label" for="{{i}}-rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#Modal-'+i" (click)="sorteable(i)" (click)="saveTipoPregunta($event.target.id,0,i)">Multiple Respuesta</label>
+                                  <input id="{{i}}-rd-file" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-file-label" for="{{i}}-rd-file" (click)="saveTipoPregunta($event.target.id,0,i)">File</label>
                               </div>  
                             </li>
                         </ul>
