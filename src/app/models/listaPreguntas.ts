@@ -4,7 +4,7 @@ import { SesSeccionPK } from './sesSeccionPK';
 import { SesSeccion } from './sesSeccion';
 
 
-export class ListaPreguntass{
+export class ListaPreguntas{
     constructor(
         public descripcion:string,
         public esPadre:String,
