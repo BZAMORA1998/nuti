@@ -3,33 +3,35 @@
     <h1>Selecciona e ingresa las preguntas adecuada para cada sección</h1>
       <div class="row justify-content-center">
         <div id="accordion" class="col-10">
-            <div class="card" *ngFor="let crear of crearSeccionList ; index as i">
+            <div class="card" *ngFor="let seccion of crearSeccionList ; index as i">
               <div class="card-header" id="headingOne">
                 <h5 class="mb-0 ml-5">
                   <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#collapse-'+i" aria-expanded="true" aria-controls="collapseOne">
-                    Sección {{i+1}} - {{crear.titulo}}
+                    Sección {{i+1}} - {{seccion.titulo}}
                   </button>
                 </h5>
               </div>
           
               <div id="{{'collapse-'+i}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                    <nav class="step-process">
+                <div class="card-body" >
+                    <nav class="step-process" >
                         <ul class="ul-stepPregunta">
-                            <li id="li-clonarPregunta">
-                              <div class="seccion">
-                                  <p>. Enunciado</p>
-                                  <input autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
-                                  <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
-                                  <input id="{{i}}-rd-abierta" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,0,i)" for="{{i}}-rd-abierta">Abierta</label>
-                                  <input id="{{i}}-rd-siOno" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-siOno-label" for="{{i}}-rd-siOno" (click)="saveTipoPregunta($event.target.id,0,i)">Si o No</label>
-                                  <input id="{{i}}-rd-multiple" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-multiple-label" for="{{i}}-rd-multiple" (click)="saveTipoPregunta($event.target.id,0,i)">Multiple</label>
-                                  <input id="{{i}}-rd-multipleRespuesta" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-multipleRespuesta-label" for="{{i}}-rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#Modal-'+i" (click)="sorteable(i)" (click)="saveTipoPregunta($event.target.id,0,i)">Multiple Respuesta</label>
-                                  <input id="{{i}}-rd-file" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-file-label" for="{{i}}-rd-file" (click)="saveTipoPregunta($event.target.id,0,i)">File</label>
-                              </div>  
+                            <li *ngFor="let pregunta of crearPreguntasList; index as i">
+                              <div *ngIf="pregunta.sesSeccion.sesSeccionPK.idSeccion==seccion.sesSeccionPK.idSeccion">
+                                  <div class="seccion">
+                                    <p>. Enunciado</p>
+                                    <input value="{{pregunta.descripcion}}" autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
+                                    <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
+                                    <input id="{{i}}-rd-abierta" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,0,i,seccion.sesSeccionPK)" for="{{i}}-rd-abierta">Abierta</label>
+                                    <input id="{{i}}-rd-siOno" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-siOno-label" for="{{i}}-rd-siOno" (click)="saveTipoPregunta($event.target.id,0,i,seccion.sesSeccionPK)">Si o No</label>
+                                    <input id="{{i}}-rd-multiple" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-multiple-label" for="{{i}}-rd-multiple" (click)="saveTipoPregunta($event.target.id,0,i,seccion.sesSeccionPK)">Multiple</label>
+                                    <input id="{{i}}-rd-multipleRespuesta" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-multipleRespuesta-label" for="{{i}}-rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#Modal-'+i" (click)="sorteable(i)" (click)="saveTipoPregunta($event.target.id,0,i,seccion.sesSeccionPK)">Multiple Respuesta</label>
+                                    <input id="{{i}}-rd-file" name="{{i}}_unidad" type="radio"/><label id="{{i}}-rd-file-label" for="{{i}}-rd-file" (click)="saveTipoPregunta($event.target.id,0,i,seccion.sesSeccionPK)">File</label>
+                                  </div>
+                              </div>
                             </li>
                         </ul>
-                        <input type="button" class="btn-primary btn-agregarPregunta" value="Agregar Pregunta"/>
+                        <input type="button" class="btn-primary btn-agregarPregunta" (click)="agregarPreguntaPorSeccion(seccion.sesSeccionPK)" value="Agregar Pregunta"/>
                     </nav>
                 </div>
               </div>

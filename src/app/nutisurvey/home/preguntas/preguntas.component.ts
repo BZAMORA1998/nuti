@@ -45,15 +45,28 @@ export class PreguntasComponent implements OnInit {
 
     if(this.crearPreguntasList==null || this.crearPreguntasList.length==0){
       this.crearPreguntasList=[];
-      this.agregarPregunta();
+      this.agregarPreguntaInicial();
     }
   }
 
-  agregarPregunta(){
+  agregarPreguntaInicial(){
     this.crearPreguntas=new ListaPreguntas();
+    //this.crearPreguntas[0] =this.crearSeccionList[0];
     this.crearPreguntasList.push(this.crearPreguntas);
     localStorage.removeItem('crearPreguntasLista');
-    localStorage.setItem("crearPreguntasLista",JSON.stringify( this.crearPreguntasList));
+    localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+  }
+
+  agregarPreguntaPorSeccion(seccion){
+    this.crearPreguntas=new ListaPreguntas();
+    this.crearPreguntas.sesSeccion.sesSeccionPK=seccion;
+    console.log(this.crearPreguntas.sesSeccion  );
+    this.crearPreguntasList.push(this.crearPreguntas);
+    localStorage.removeItem('crearPreguntasLista');
+    localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+
+    console.log("."+this.crearPreguntas.sesSeccion.sesSeccionPK.idSeccion+"-seccion" );
+    $(".seccion").css("border-left", "1px solid #bec3d2");
   }
 
   ngOnInit(): void {
@@ -114,11 +127,12 @@ export class PreguntasComponent implements OnInit {
     });
   }
 
-  saveTipoPregunta(descripcion,idPregunta,idAux){
+  saveTipoPregunta(descripcion,idPregunta,idAux,idSeccion){
     console.log("descripcion",descripcion);
     console.log("idPregunta",idPregunta);
     console.log("IdAux: ",idAux);
-
+    console.log("idSeccion: ",idSeccion);
+    console.log("Lista Seccion: ",this.crearSeccionList[0]);
     var auxBool=true;
 
     var label = document.getElementById(descripcion);
