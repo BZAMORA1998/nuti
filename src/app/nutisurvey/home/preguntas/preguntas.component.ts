@@ -65,8 +65,7 @@ export class PreguntasComponent implements OnInit {
     localStorage.removeItem('crearPreguntasLista');
     localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
 
-    console.log("."+this.crearPreguntas.sesSeccion.sesSeccionPK.idSeccion+"-seccion" );
-    $(".seccion").css("border-left", "1px solid #bec3d2");
+    $("."+ this.crearPreguntas.sesSeccion.sesSeccionPK.idSeccion+"-seccion").css("border-left", "1px solid #bec3d2");
   }
 
   ngOnInit(): void {

@@ -18,7 +18,7 @@
                         <ul class="ul-stepPregunta">
                             <li *ngFor="let pregunta of crearPreguntasList; index as i">
                               <div *ngIf="pregunta.sesSeccion.sesSeccionPK.idSeccion==seccion.sesSeccionPK.idSeccion">
-                                  <div class="seccion">
+                                  <div class="{{seccion.sesSeccionPK.idSeccion}}-seccion seccion">
                                     <p>. Enunciado</p>
                                     <input value="{{pregunta.descripcion}}" autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
                                     <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
