@@ -20,6 +20,7 @@ export class ListaPreguntas{
     public tabula:string;
     public tipo:string;
     public tipoArea:string;
+    public idAux:0;
 
     constructor(){
         this.descripcion="";
@@ -36,5 +37,6 @@ export class ListaPreguntas{
         this.tabula="";
         this.tipo="";
         this.tipoArea="";
+        this.idAux=0
     }
 }
