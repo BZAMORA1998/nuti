@@ -21,6 +21,7 @@ export class ListaPreguntas{
     public tipo:string;
     public tipoArea:string;
     public idAux:0;
+    public auxBool:boolean;
 
     constructor(){
         this.descripcion="";
@@ -38,5 +39,6 @@ export class ListaPreguntas{
         this.tipo="";
         this.tipoArea="";
         this.idAux=0
+        this.auxBool=true;
     }
 }

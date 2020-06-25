@@ -3,7 +3,7 @@
     <h1>Selecciona e ingresa las preguntas adecuada para cada sección</h1>
       <div class="row justify-content-center">
         <div id="accordion" class="col-10">
-            <div class="card" *ngFor="let seccion of crearSeccionList ; index as j">
+            <div class="card" *ngFor="let seccion of crearSeccionList ; index as j;">
               <div class="card-header" id="headingOne">
                 <h5 class="mb-0 ml-5">
                   <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#collapse-'+j" aria-expanded="true" aria-controls="collapseOne">
@@ -12,14 +12,14 @@
                 </h5>
               </div>
           
-              <div id="{{'collapse-'+j}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body" >
+              <div id="{{'collapse-'+j}}"  [class.isShow]="j==0" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
                     <nav class="step-process" >
                         <ul class="ul-stepPregunta">
                             <li *ngFor="let pregunta of crearPreguntasList; index as i">
-                              <div *ngIf="pregunta.sesSeccion.sesSeccionPK.idSeccion==seccion.sesSeccionPK.idSeccion">
-                                  <div class="{{seccion.sesSeccionPK.idSeccion}}-seccion seccion">
-                                    <p>. Enunciado</p>
+                              <div *ngIf="pregunta.sesSeccion.sesSeccionPK.idSeccion==seccion.sesSeccionPK.idSeccion;" >
+                                  <div  class="seccion-{{seccion.sesSeccionPK.idSeccion}} seccion">
+                                    <p> .Enunciado</p>
                                     <input (change)="savePregunta($event.target.value,0,i+1,seccion.sesSeccionPK)" value="{{pregunta.descripcion}}" autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
                                     <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
                                     <input [checked]="pregunta.tipo=='A' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-abierta" name="{{i}}_unidad" type="radio"/><label  id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,0,i+1,seccion.sesSeccionPK)" for="{{i}}-rd-abierta">Abierta</label>
@@ -48,7 +48,7 @@
 </div>
 
  <!-- Modal -->
- <div *ngFor="let crea of crearSeccionList ; index as i">
+ <div *ngFor="let crea of crearPreguntasList ; index as i">
     <div class="modal fade" id="{{'Modal-'+i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
       <div class="modal-dialog"  role="document">
         <div class="modal-content" >

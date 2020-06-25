@@ -66,16 +66,29 @@ export class PreguntasComponent implements OnInit {
   agregarPreguntaPorSeccion(seccion){
     this.crearPreguntas=new ListaPreguntas();
     this.crearPreguntas.sesSeccion.sesSeccionPK=seccion;
-    console.log(this.crearPreguntas.sesSeccion  );
+    console.log(this.crearPreguntas.sesSeccion);
     this.crearPreguntasList.push(this.crearPreguntas);
     localStorage.removeItem('crearPreguntasLista');
     localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+    $(document).ready(function(){
+      $( ".seccion-"+seccion.idSeccion).css( "border-left", "1px solid #bec3d2" );
+      $( ".seccion-"+seccion.idSeccion).last().css( "border", "none" );
+    });
+    //$("."+ this.crearPreguntas.sesSeccion.sesSeccionPK.idSeccion+"-seccion").css("border-left", "1px solid #bec3d2");
+  }
 
-    $("."+ this.crearPreguntas.sesSeccion.sesSeccionPK.idSeccion+"-seccion").css("border-left", "1px solid #bec3d2");
+
+  stepProcess(){
+    console.log(1);
+    this.crearSeccionList.forEach(step=>{
+      $(document).ready(function(){
+        $( ".seccion-"+step.sesSeccionPK.idSeccion).last().css( "border", "none" );
+      });
+    });
   }
 
   ngOnInit(): void {
-  
+   this.stepProcess();
   }
 
   sorteable(i){
@@ -203,7 +216,7 @@ export class PreguntasComponent implements OnInit {
             //element.idAux=idAux;
             element.tipo=tipo;
             console.log("Descripcion : ",element.descripcion);
-            console.log("Lista de Preguntas: "+this.crearPreguntasList);    
+            console.log("Lista de Preguntas: "+this.crearPreguntasList);   
             localStorage.removeItem('crearPreguntasLista');
             localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
             console.log(element);
