@@ -47,14 +47,15 @@ export class PreguntasComponent implements OnInit {
     console.log(this.crearSeccionList);
     console.log(this.crearPreguntasList);
 
-    if(this.crearPreguntasList==null || this.crearPreguntasList.length==0){
-      this.crearPreguntasList=[];
-      this.agregarPreguntaInicial();
-    }
+    // if(this.crearPreguntasList==null || this.crearPreguntasList.length==0){
+    //   this.crearPreguntasList=[];
+    //   this.agregarPreguntaInicial();
+    // }
   }
 
   agregarPreguntaInicial(){
     this.crearSeccionList.forEach(element=>{
+          console.log("Entro: "+element.sesSeccionPK.idSeccion);
           this.crearPreguntas=new ListaPreguntas();
           this.crearPreguntas.sesSeccion.sesSeccionPK=element.sesSeccionPK;
           this.crearPreguntasList.push(this.crearPreguntas);
@@ -89,6 +90,8 @@ export class PreguntasComponent implements OnInit {
 
   ngOnInit(): void {
    this.stepProcess();
+   this.crearPreguntasList=[];
+   this.agregarPreguntaInicial();
   }
 
   sorteable(i){
