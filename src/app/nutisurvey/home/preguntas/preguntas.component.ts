@@ -67,9 +67,11 @@ export class PreguntasComponent implements OnInit {
     this.crearPreguntasList.push(this.crearPreguntas);
     localStorage.removeItem('crearPreguntasLista');
     localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+
+    console.log("seccion: "+seccion.sesSeccionPK.idSeccion);
     $(document).ready(function(){
-      $( ".seccion-"+seccion.idSeccion).css( "border-left", "1px solid #bec3d2" );
-      $( ".seccion-"+seccion.idSeccion).last().css( "border", "none" );
+      $( ".seccion-"+seccion.sesSeccionPK.idSeccion).css( "border-left", "1px solid #bec3d2" );
+      $( ".seccion-"+seccion.sesSeccionPK.idSeccion).last().css( "border", "none" );
     });
     //$("."+ this.crearPreguntas.sesSeccion.sesSeccionPK.idSeccion+"-seccion").css("border-left", "1px solid #bec3d2");
   }
