@@ -76,6 +76,44 @@ export class PreguntasComponent implements OnInit {
     //$("."+ this.crearPreguntas.sesSeccion.sesSeccionPK.idSeccion+"-seccion").css("border-left", "1px solid #bec3d2");
   }
 
+  deshabilitarAgregarPregunta(){
+
+    var cont=0;
+    var auxBool=true;
+    var preguntas= document.getElementsByName("pregunta");
+
+    console.log("Lenght "+preguntas.length);
+    for (var i = 0; i < preguntas.length; i++) {
+      var pre=(preguntas[i]as HTMLInputElement).value;
+      if(pre==''){
+        console.log("Entro al for"+cont);
+        cont++;
+      }
+      auxBool=false;
+    }
+
+    var aceptar = <any> document.getElementById("btn-aceptar");
+
+    this.crearSeccionList.forEach(element=>{
+        var radioButton = <any> document.getElementsByName(element.sesSeccionPK.idSeccion+"_unidad"); 
+        console.log("Radiobutton: "+radioButton);
+
+        radioButton.forEach(registro=>{
+          if(registro.checked){
+            console.log("Entro registro");
+          }
+        })
+    });
+
+    if(cont==0 && auxBool==false){
+      console.log("Entro al if=0 "+cont);
+      aceptar.disabled = false;
+    }else{
+      console.log("Entro al if!=0 "+cont);
+      aceptar.disabled = true;
+    }
+}
+
 
   stepProcess(){
     console.log(1);
@@ -90,6 +128,10 @@ export class PreguntasComponent implements OnInit {
    this.stepProcess();
    this.crearPreguntasList=[];
    this.agregarPreguntaInicial();
+
+    if(this.crearPreguntasList[0].descripcion=='' /*&& this.crearSeccionList[0].descripcion==''*/){
+      this.deshabilitarAgregarPregunta(); 
+    }
   }
   
   sorteable(i){
@@ -232,7 +274,7 @@ export class PreguntasComponent implements OnInit {
             localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
             console.log(element);
             auxBool=false;
-            //this.deshabilitarAgregarSeccion();
+            this.deshabilitarAgregarPregunta();
         }
       });
       if(auxBool){
@@ -257,7 +299,7 @@ export class PreguntasComponent implements OnInit {
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
               console.log(this.crearPreguntasList);
               auxBool=false;
-              //this.deshabilitarAgregarSeccion();
+              this.deshabilitarAgregarPregunta();
           }
         });
       }
@@ -289,6 +331,7 @@ export class PreguntasComponent implements OnInit {
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
               console.log(this.crearPreguntasList);
               console.log("Lista de Preguntas: "+this.crearPreguntasList);
+              this.deshabilitarAgregarPregunta();
           }
         });
     }else{
@@ -313,7 +356,7 @@ export class PreguntasComponent implements OnInit {
             console.log(element);
             auxBool=false;
             console.log("Lista de Preguntas: "+this.crearPreguntasList);  
-            //this.deshabilitarAgregarSeccion();
+            this.deshabilitarAgregarPregunta()
         }
       });
 
@@ -339,7 +382,7 @@ export class PreguntasComponent implements OnInit {
               console.log(this.crearPreguntasList);
               auxBool=false;
               console.log("Lista de Preguntas: "+this.crearPreguntasList);  
-              //this.deshabilitarAgregarSeccion();
+              this.deshabilitarAgregarPregunta();
           }
         });
       }
