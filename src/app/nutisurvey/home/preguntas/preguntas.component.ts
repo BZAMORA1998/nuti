@@ -38,7 +38,7 @@ export class PreguntasComponent implements OnInit {
     F=File
   */
   
-  constructor() { 
+  constructor(private _preguntaService:PreguntasService) { 
     this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
@@ -47,17 +47,13 @@ export class PreguntasComponent implements OnInit {
     console.log(this.crearSeccionList);
     console.log(this.crearPreguntasList);
 
-    // if(this.crearPreguntasList==null || this.crearPreguntasList.length==0){
-    //   this.crearPreguntasList=[];
-    //   this.agregarPreguntaInicial();
-    // }
   }
 
   agregarPreguntaInicial(){
     this.crearSeccionList.forEach(element=>{
           console.log("Entro: "+element.sesSeccionPK.idSeccion);
           this.crearPreguntas=new ListaPreguntas();
-          this.crearPreguntas.sesSeccion.sesSeccionPK=element.sesSeccionPK;
+          this.crearPreguntas.sesSeccion=element;
           this.crearPreguntasList.push(this.crearPreguntas);
           localStorage.removeItem('crearPreguntasLista');
           localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -66,7 +62,7 @@ export class PreguntasComponent implements OnInit {
 
   agregarPreguntaPorSeccion(seccion){
     this.crearPreguntas=new ListaPreguntas();
-    this.crearPreguntas.sesSeccion.sesSeccionPK=seccion;
+    this.crearPreguntas.sesSeccion=seccion;
     console.log(this.crearPreguntas.sesSeccion);
     this.crearPreguntasList.push(this.crearPreguntas);
     localStorage.removeItem('crearPreguntasLista');
@@ -93,7 +89,7 @@ export class PreguntasComponent implements OnInit {
    this.crearPreguntasList=[];
    this.agregarPreguntaInicial();
   }
-
+  
   sorteable(i){
       $( "#sortable-"+i).sortable();
       $( "#sortable-"+i).disableSelection();
@@ -201,6 +197,11 @@ export class PreguntasComponent implements OnInit {
           if(element.idPregunta==idPregunta && element.sesSeccion.sesSeccionPK.idSeccion==Seccion.idSeccion){
               console.log("Entro");
               element.tipo=tipo;
+              element.regla="N";
+              element.requerida="N";
+              element.tabula="S";
+              element.estado="A"
+              element.tipoArea="DEFAULT";  
               localStorage.removeItem('crearPreguntasLista');
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
               console.log(this.crearPreguntasList);
@@ -218,6 +219,11 @@ export class PreguntasComponent implements OnInit {
             console.log("Entro");
             //element.idAux=idAux;
             element.tipo=tipo;
+            element.regla="N";
+            element.requerida="N";
+            element.tabula="S";
+            element.estado="N"
+            element.tipoArea="DEFAULT";  
             console.log("Descripcion : ",element.descripcion);
             console.log("Lista de Preguntas: "+this.crearPreguntasList);   
             localStorage.removeItem('crearPreguntasLista');
@@ -238,6 +244,11 @@ export class PreguntasComponent implements OnInit {
               console.log("Entro seccion: "+Seccion );
               elementr.idAux=idAux;
               elementr.tipo=tipo;
+              elementr.regla="N";
+              elementr.requerida="N";
+              elementr.tabula="S";
+              elementr.estado="N"
+              elementr.tipoArea="DEFAULT";  
               console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)
               console.log("Lista de preguntas: "+this.crearPreguntasList);    
               localStorage.removeItem('crearPreguntasLista');
@@ -267,6 +278,11 @@ export class PreguntasComponent implements OnInit {
           if(element.idPregunta==idPregunta && element.sesSeccion.sesSeccionPK.idSeccion==Seccion.idSeccion){
               console.log("Entro");
               element.descripcion=descripcion;
+              element.regla="N";
+              element.requerida="N";
+              element.tabula="S";
+              element.estado="A"
+              element.tipoArea="DEFAULT";  
               localStorage.removeItem('crearPreguntasLista');
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
               console.log(this.crearPreguntasList);
@@ -284,7 +300,12 @@ export class PreguntasComponent implements OnInit {
             console.log("Entro");
             element.idAux=idAux;
             console.log("Descripcion : ",element.descripcion);
-            element.descripcion=descripcion;  
+            element.descripcion=descripcion;
+            element.regla="N";
+            element.requerida="N";
+            element.tabula="S";
+            element.estado="A"
+            element.tipoArea="DEFAULT";  
             localStorage.removeItem('crearPreguntasLista');
             localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
             console.log(element);
@@ -305,6 +326,11 @@ export class PreguntasComponent implements OnInit {
               console.log("Entro seccion: "+Seccion );
               elementr.idAux=idAux;
               elementr.descripcion=descripcion;
+              elementr.regla="N";
+              elementr.requerida="N";
+              elementr.tabula="S";
+              elementr.estado="A"
+              elementr.tipoArea="DEFAULT";
               console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)   
               localStorage.removeItem('crearPreguntasLista');
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -320,8 +346,31 @@ export class PreguntasComponent implements OnInit {
   }
 
   CrearPregunta(){
+    this.loading(true);
     this.crearP= new CrearPreguntas(this.crearPreguntasList);
     console.log("Crear Preguntas",this.crearP);
+
+    this._preguntaService.postCrearPreguntas(this.crearP).subscribe(
+      Response=>{
+        if(Response.codigo==200){
+          console.log(Response);
+          this.loading(false);
+          //this.getSeccion(this.idEncuesta);
+          this.showModalConfirmacion(Response.causa);
+        }else{
+          console.log(Response);
+          this.loading(true);
+          //this.getSeccion(this.idEncuesta);
+          this.showModalError(Response.causa);
+        }
+      },
+      error=>{
+          console.log(<any>error);
+      }
+    );
+
+
+
 }
 
 }

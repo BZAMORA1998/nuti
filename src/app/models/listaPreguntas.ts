@@ -39,6 +39,5 @@ export class ListaPreguntas{
         this.tipo="";
         this.tipoArea="";
         this.idAux=0
-        this.auxBool=true;
     }
 }
