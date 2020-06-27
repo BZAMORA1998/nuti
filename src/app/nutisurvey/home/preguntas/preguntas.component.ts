@@ -76,63 +76,85 @@ export class PreguntasComponent implements OnInit {
     //$("."+ this.crearPreguntas.sesSeccion.sesSeccionPK.idSeccion+"-seccion").css("border-left", "1px solid #bec3d2");
   }
 
-  deshabilitarAgregarPregunta(){
-
+deshabilitarAgregarPregunta(id){
     var cont=0;
-    var auxBool=true;
-    var preguntas= document.getElementsByName("pregunta");
+    $(document).ready(function(){
+      var preguntas=$(".descripcion-"+id);
+      console.log(".descripcion-"+preguntas.length);
+      preguntas.each(function() {
+        console.log(".descripcion="+$(this).val());
 
-    console.log("Lenght "+preguntas.length);
-    for (var i = 0; i < preguntas.length; i++) {
-      var pre=(preguntas[i]as HTMLInputElement).value;
-      if(pre==''){
-        console.log("Entro al for"+cont);
-        cont++;
+        if($(this).val()==""){
+          cont=cont+1;
+          console.log("Contador: "+cont);
+        }
+      });
+
+      var seccion=$("#pregunta-"+id);
+      if(cont==0 ){
+          seccion.prop('disabled',false);
+      }else{
+        seccion.prop('disabled',true);
       }
-      auxBool=false;
-    }
-
-    var aceptar = <any> document.getElementById("btn-aceptar");
-
-    this.crearSeccionList.forEach(element=>{
-        var radioButton = <any> document.getElementsByName(element.sesSeccionPK.idSeccion+"_unidad"); 
-        console.log("Radiobutton: "+radioButton);
-
-        radioButton.forEach(registro=>{
-          if(registro.checked){
-            console.log("Entro registro");
-          }
-        })
     });
-
-    if(cont==0 && auxBool==false){
-      console.log("Entro al if=0 "+cont);
-      aceptar.disabled = false;
-    }else{
-      console.log("Entro al if!=0 "+cont);
-      aceptar.disabled = true;
-    }
 }
 
+deshabilitarGuardarPregunta(){
 
-  stepProcess(){
-    console.log(1);
-    this.crearSeccionList.forEach(step=>{
-      $(document).ready(function(){
-        $( ".seccion-"+step.sesSeccionPK.idSeccion).last().css( "border", "none" );
+  var cont=0;
+  var auxBool=true;
+  var preguntas= document.getElementsByName("pregunta");
+
+  console.log("Lenght "+preguntas.length);
+  for (var i = 0; i < preguntas.length; i++) {
+    var pre=(preguntas[i]as HTMLInputElement).value;
+    if(pre==''){
+      console.log("Entro al for"+cont);
+      cont++;
+    }
+    auxBool=false;
+  }
+  var aceptar = <any> document.getElementById("btn-aceptar");
+  if(cont==0 && auxBool==false){
+    console.log("Entro al if=0 "+cont);
+    aceptar.disabled = false;
+  }else{
+    console.log("Entro al if!=0 "+cont);
+    aceptar.disabled = true;
+  }
+}
+
+ngOnInit(): void {
+  this.stepProcess();
+  this.crearPreguntasList=[];
+  this.agregarPreguntaInicial();
+  this.deshabilitarGuardarPregunta();
+  this.validacionDescripcionInicial();
+ }
+
+ validacionDescripcionInicial(){
+  this.crearSeccionList.forEach(element=>{
+    $(document).ready(function(){
+      var preguntas=$(".descripcion-"+element.sesSeccionPK.idSeccion);
+      var seccion=$("#pregunta-"+element.sesSeccionPK.idSeccion);
+      console.log("----",$(this).val());
+      preguntas.each(function() {
+        if($(this).val()==""){
+          seccion.prop('disabled',true);
+        }
       });
     });
-  }
+  });
+ }
 
-  ngOnInit(): void {
-   this.stepProcess();
-   this.crearPreguntasList=[];
-   this.agregarPreguntaInicial();
-
-    if(this.crearPreguntasList[0].descripcion=='' /*&& this.crearSeccionList[0].descripcion==''*/){
-      this.deshabilitarAgregarPregunta(); 
-    }
-  }
+stepProcess(){
+  console.log(1);
+  this.crearSeccionList.forEach(step=>{
+    $(document).ready(function(){
+      $( ".seccion-"+step.sesSeccionPK.idSeccion).last().css( "border", "none" );
+    });
+  });
+}
   
   sorteable(i){
       $( "#sortable-"+i).sortable();
@@ -250,6 +272,8 @@ export class PreguntasComponent implements OnInit {
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
               console.log(this.crearPreguntasList);
               console.log("Lista de Preguntas: "+this.crearPreguntasList);
+              this.deshabilitarAgregarPregunta(Seccion.idSeccion);
+              this.deshabilitarGuardarPregunta();
           }
         });
     }else{
@@ -274,7 +298,8 @@ export class PreguntasComponent implements OnInit {
             localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
             console.log(element);
             auxBool=false;
-            this.deshabilitarAgregarPregunta();
+            this.deshabilitarGuardarPregunta();
+            this.deshabilitarAgregarPregunta(Seccion.idSeccion);
         }
       });
       if(auxBool){
@@ -299,7 +324,8 @@ export class PreguntasComponent implements OnInit {
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
               console.log(this.crearPreguntasList);
               auxBool=false;
-              this.deshabilitarAgregarPregunta();
+              this.deshabilitarGuardarPregunta();
+              this.deshabilitarAgregarPregunta(Seccion.idSeccion);
           }
         });
       }
@@ -331,7 +357,8 @@ export class PreguntasComponent implements OnInit {
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
               console.log(this.crearPreguntasList);
               console.log("Lista de Preguntas: "+this.crearPreguntasList);
-              this.deshabilitarAgregarPregunta();
+              this.deshabilitarGuardarPregunta();
+              this.deshabilitarAgregarPregunta(Seccion.idSeccion);
           }
         });
     }else{
@@ -356,7 +383,8 @@ export class PreguntasComponent implements OnInit {
             console.log(element);
             auxBool=false;
             console.log("Lista de Preguntas: "+this.crearPreguntasList);  
-            this.deshabilitarAgregarPregunta()
+            this.deshabilitarGuardarPregunta();
+            this.deshabilitarAgregarPregunta(Seccion.idSeccion)
         }
       });
 
@@ -381,8 +409,9 @@ export class PreguntasComponent implements OnInit {
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
               console.log(this.crearPreguntasList);
               auxBool=false;
-              console.log("Lista de Preguntas: "+this.crearPreguntasList);  
-              this.deshabilitarAgregarPregunta();
+              console.log("Lista de Preguntas: "+this.crearPreguntasList); 
+              this.deshabilitarGuardarPregunta(); 
+              this.deshabilitarAgregarPregunta(Seccion.idSeccion);
           }
         });
       }
