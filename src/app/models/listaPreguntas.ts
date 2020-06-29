@@ -38,6 +38,6 @@ export class ListaPreguntas{
         this.tabula="";
         this.tipo="";
         this.tipoArea="";
-        this.idAux=0
+        this.idAux=0;
     }
 }

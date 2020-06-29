@@ -6,6 +6,7 @@ export class SesSeccion{
     public nroSeccion:number;
     public sesSeccionPK:SesSeccionPK;
     public titulo:string;
+
     constructor(
     ){
         this.descripcion="";

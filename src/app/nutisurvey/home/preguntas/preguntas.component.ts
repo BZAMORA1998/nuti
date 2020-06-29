@@ -11,8 +11,6 @@ import { PreguntasService } from 'src/app/servicios/preguntas.service';
 import { ListaPreguntas } from 'src/app/models/listaPreguntas';
 import { CrearPreguntas } from 'src/app/models/crearPreguntas';
 import Swal from 'sweetalert2';
-import { element } from 'protractor';
-
 
 @Component({
   selector: 'app-preguntas',
@@ -28,6 +26,7 @@ export class PreguntasComponent implements OnInit {
   public estado:string="A";
   public crearPreguntas:ListaPreguntas;
   public crearPreguntasList:ListaPreguntas[];
+  public listarPreguntas:ListaPreguntas[];
   public crearP:CrearPreguntas;
 
   /* tipo de preguntas
@@ -39,26 +38,68 @@ export class PreguntasComponent implements OnInit {
   */
   
   constructor(private _preguntaService:PreguntasService) { 
-    this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
+    this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"","S");
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     this.crearPreguntasList=JSON.parse(localStorage.getItem("crearPreguntasLista"));
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     console.log(this.crearSeccionList);
     console.log(this.crearPreguntasList);
-
   }
+
+  ngOnInit(): void {
+    this.stepProcess();
+    this.agregarPreguntaInicial();
+    this.deshabilitarGuardarPregunta();
+    this.validacionDescripcionInicial();
+   }
 
   agregarPreguntaInicial(){
-    this.crearSeccionList.forEach(element=>{
-          console.log("Entro: "+element.sesSeccionPK.idSeccion);
-          this.crearPreguntas=new ListaPreguntas();
-          this.crearPreguntas.sesSeccion=element;
-          this.crearPreguntasList.push(this.crearPreguntas);
-          localStorage.removeItem('crearPreguntasLista');
-          localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
-    });
+    this.getPreguntas();
+    console.log("Pregunta: "+this.crearPreguntasList.length);
+        console.log("Seccion auxiliar: ",this.crearSeccionList);
+        this.crearSeccionList.forEach(element=>{
+          console.log("lspregunta: ",element.lsPreguntas);
+          if(element.lsPreguntas=="N"){
+            console.log("Entro: "+element.sesSeccionPK.idSeccion);
+            this.crearPreguntas=new ListaPreguntas();
+            this.crearPreguntas.sesSeccion=element;
+            this.crearPreguntasList.push(this.crearPreguntas);
+            localStorage.removeItem('crearPreguntasLista');
+            localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+          }
+      });
   }
+
+  getPreguntas():any{
+    this.listarPreguntas=[];
+      this.crearSeccionList.forEach(element=>{
+        this._preguntaService.getListaPreguntas(element.sesSeccionPK.idSeccion).subscribe(
+          Response=>{
+                if(Response.respuestaProceso.codigo==200){
+                  console.log(Response);
+                  this.listarPreguntas=Response.listaPreguntas;
+  
+                  if(this.listarPreguntas.length==0){
+                    console.log("Lista de preguntas es igual a null");
+                    console.log("Seccion auxiliar N: ",element.lsPreguntas);
+                    element.lsPreguntas="N";
+                    console.log("Seccion auxiliar N: "+element.lsPreguntas);
+                  }
+                  console.log("Lista de preguntas servicio get: ",this.listarPreguntas);
+                  localStorage.removeItem('crearPreguntasLista');
+                  localStorage.setItem("crearPreguntasLista",JSON.stringify(this.listarPreguntas));
+  
+                }else{
+                  console.log(Response);
+                }
+          },
+          error=>{
+              console.log(<any>error);
+          }
+        );
+      });
+   }
 
   agregarPreguntaPorSeccion(seccion){
     this.crearPreguntas=new ListaPreguntas();
@@ -102,7 +143,7 @@ deshabilitarAgregarPregunta(id){
 deshabilitarGuardarPregunta(){
 
   var cont=0;
-  var auxBool=true;
+  //var auxBool=true;
   var preguntas= document.getElementsByName("pregunta");
 
   console.log("Lenght "+preguntas.length);
@@ -112,10 +153,10 @@ deshabilitarGuardarPregunta(){
       console.log("Entro al for"+cont);
       cont++;
     }
-    auxBool=false;
+   // auxBool=false;
   }
   var aceptar = <any> document.getElementById("btn-aceptar");
-  if(cont==0 && auxBool==false){
+  if(cont==0 /*&& auxBool==false*/){
     console.log("Entro al if=0 "+cont);
     aceptar.disabled = false;
   }else{
@@ -124,13 +165,7 @@ deshabilitarGuardarPregunta(){
   }
 }
 
-ngOnInit(): void {
-  this.stepProcess();
-  this.crearPreguntasList=[];
-  this.agregarPreguntaInicial();
-  this.deshabilitarGuardarPregunta();
-  this.validacionDescripcionInicial();
- }
+
 
  validacionDescripcionInicial(){
   this.crearSeccionList.forEach(element=>{
@@ -266,7 +301,9 @@ stepProcess(){
               element.regla="N";
               element.requerida="N";
               element.tabula="S";
+              element.esPadre="S";
               element.estado="A"
+              element.orientacionOpciones="V";
               element.tipoArea="DEFAULT";  
               localStorage.removeItem('crearPreguntasLista');
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -290,7 +327,9 @@ stepProcess(){
             element.regla="N";
             element.requerida="N";
             element.tabula="S";
-            element.estado="N"
+            element.estado="A"
+            element.esPadre="S";
+            element.orientacionOpciones="V";
             element.tipoArea="DEFAULT";  
             console.log("Descripcion : ",element.descripcion);
             console.log("Lista de Preguntas: "+this.crearPreguntasList);   
@@ -316,7 +355,9 @@ stepProcess(){
               elementr.regla="N";
               elementr.requerida="N";
               elementr.tabula="S";
-              elementr.estado="N"
+              elementr.estado="A"
+              elementr.esPadre="S";
+              elementr.orientacionOpciones="V";
               elementr.tipoArea="DEFAULT";  
               console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)
               console.log("Lista de preguntas: "+this.crearPreguntasList);    
@@ -340,7 +381,6 @@ stepProcess(){
     console.log("idSeccion: ",Seccion);
     console.log("Lista Seccion: ",this.crearSeccionList[0]);
     var auxBool=true;
-
     if(idPregunta!=0){
       console.log("idPregunta es diferente a 0: ", idPregunta);
       this.crearPreguntasList.forEach(element => {
@@ -352,6 +392,8 @@ stepProcess(){
               element.requerida="N";
               element.tabula="S";
               element.estado="A"
+              element.esPadre="S";
+              element.orientacionOpciones="V";
               element.tipoArea="DEFAULT";  
               localStorage.removeItem('crearPreguntasLista');
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -376,7 +418,8 @@ stepProcess(){
             element.regla="N";
             element.requerida="N";
             element.tabula="S";
-            element.estado="A"
+            element.estado="A";
+            element.esPadre="S";
             element.tipoArea="DEFAULT";  
             localStorage.removeItem('crearPreguntasLista');
             localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -402,6 +445,8 @@ stepProcess(){
               elementr.regla="N";
               elementr.requerida="N";
               elementr.tabula="S";
+              elementr.esPadre="S";
+              elementr.orientacionOpciones="V";
               elementr.estado="A"
               elementr.tipoArea="DEFAULT";
               console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)   
@@ -429,12 +474,12 @@ stepProcess(){
         if(Response.codigo==200){
           console.log(Response);
           this.loading(false);
-          //this.getSeccion(this.idEncuesta);
+          this.getPreguntas();
           this.showModalConfirmacion(Response.causa);
         }else{
           console.log(Response);
           this.loading(true);
-          //this.getSeccion(this.idEncuesta);
+          this.getPreguntas();
           this.showModalError(Response.causa);
         }
       },

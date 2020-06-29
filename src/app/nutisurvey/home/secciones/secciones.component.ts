@@ -37,8 +37,8 @@ export class SeccionesComponent implements OnInit {
   ];
 
   constructor(private _seccionService:SeccionService) {
-    this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
-    this.crearSeccionList=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"")];
+    this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"","S");
+    this.crearSeccionList=[new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"","S")];
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     console.log("Leng"+this.crearSeccionList);
@@ -259,7 +259,7 @@ deshabilitarAgregarSeccion(){
   }
 
   agregarSeccion(){
-    this.crearSeccion=new ListaSecciones("","A",0,0,new SesSeccionPK(0,0,0),"");
+    this.crearSeccion=new ListaSecciones("","A",0,0,new SesSeccionPK(0,0,0),"","S");
     this.crearSeccionList.push(this.crearSeccion);
     localStorage.removeItem('crearSeccionLista');
     localStorage.setItem("crearSeccionLista",JSON.stringify( this.crearSeccionList));
