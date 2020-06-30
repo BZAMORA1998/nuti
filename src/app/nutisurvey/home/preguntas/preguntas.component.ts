@@ -95,13 +95,14 @@ export class PreguntasComponent implements OnInit {
   }
 
     getPreguntas():any{
+      this.crearPreguntasList=[];
       this.crearSeccionList.forEach(element=>{
         this._preguntaService.getListaPreguntas(element.sesSeccionPK.idSeccion).subscribe(
           Response=>{
                 if(Response.respuestaProceso.codigo==200){
                   console.log(Response);
                   this.listarPreguntas=Response.listaPreguntas;
-  
+                  //this.crearPreguntasList.push(Response.listaPreguntas);
                   console.log("Lenght: ",this.listarPreguntas.length);
                   if(this.listarPreguntas.length==0){
                     console.log("element.sesSeccionPK: ",element.sesSeccionPK.idSeccion);
