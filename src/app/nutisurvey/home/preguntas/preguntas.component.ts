@@ -60,6 +60,37 @@ export class PreguntasComponent implements OnInit {
     });
   }
 
+  getPreguntas():any{
+    this.listarPreguntas=[];
+      this.crearSeccionList.forEach(element=>{
+        this._preguntaService.getListaPreguntas(element.sesSeccionPK.idSeccion).subscribe(
+          Response=>{
+                if(Response.respuestaProceso.codigo==200){
+                  console.log(Response);
+                  this.listarPreguntas=Response.listaPreguntas;
+  
+                  if(this.listarPreguntas.length==0){
+                    console.log("Lista de preguntas es igual a null");
+                    console.log("Seccion auxiliar N: ",element.lsPreguntas);
+                    element.lsPreguntas="N";
+                    console.log("Seccion auxiliar N: "+element.lsPreguntas);
+                  }
+                  console.log("Lista de preguntas servicio get: ",this.listarPreguntas);
+                  localStorage.removeItem('crearPreguntasLista');
+                  localStorage.setItem("crearPreguntasLista",JSON.stringify(this.listarPreguntas));
+  
+                }else{
+                  console.log(Response);
+                }
+          },
+          error=>{
+              console.log(<any>error);
+          }
+        );
+      });
+   }
+
+
   agregarPreguntaPorSeccion(seccion){
     this.crearPreguntas=new ListaPreguntas();
     this.crearPreguntas.sesSeccion=seccion;
