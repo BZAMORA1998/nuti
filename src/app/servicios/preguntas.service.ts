@@ -21,7 +21,8 @@ export class PreguntasService{
 		return this._http.post(this.url+'pregunta/crearListaPreguntas',listaPreguntas,{headers: headers});
 	}
 	
-	// getListaSecciones(id):Observable<any>{
-	// 	return this._http.get(this.url+`seccion/obtenerSeccionPorIdEncuesta?idEncuesta=${id}`);
-	// }
+	getListaPreguntas(id):Observable<any>{
+		console.log("Id de servicio es",id);
+		return this._http.get(this.url+`pregunta/obtenerPreguntasPorIdSeccion?idSeccion=${id}`);
+	}
 }

@@ -96,7 +96,7 @@ h1{
 .seccion{
     position: relative;
     margin-left: 20px;
-    border-left: 1px solid #bec3d2;
+    /* border-left: 1px solid #bec3d2; */
     width: 101%;
     padding-bottom: 25px;
 }

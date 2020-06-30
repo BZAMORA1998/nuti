@@ -11,7 +11,6 @@ import { PreguntasService } from 'src/app/servicios/preguntas.service';
 import { ListaPreguntas } from 'src/app/models/listaPreguntas';
 import { CrearPreguntas } from 'src/app/models/crearPreguntas';
 import Swal from 'sweetalert2';
-import { element } from 'protractor';
 
 
 @Component({
@@ -29,6 +28,7 @@ export class PreguntasComponent implements OnInit {
   public crearPreguntas:ListaPreguntas;
   public crearPreguntasList:ListaPreguntas[];
   public crearP:CrearPreguntas;
+  public listarPreguntas:ListaPreguntas[];
 
   /* tipo de preguntas
     M= Multiple
@@ -39,6 +39,7 @@ export class PreguntasComponent implements OnInit {
   */
   
   constructor(private _preguntaService:PreguntasService) { 
+    this.crearPreguntasList=new Array<ListaPreguntas>();
     this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
@@ -46,7 +47,6 @@ export class PreguntasComponent implements OnInit {
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     console.log(this.crearSeccionList);
     console.log(this.crearPreguntasList);
-
   }
 
   agregarPreguntaInicial(){
@@ -60,8 +60,41 @@ export class PreguntasComponent implements OnInit {
     });
   }
 
-  getPreguntas():any{
-    this.listarPreguntas=[];
+  agregarPreguntaPorSeccion(seccion){
+    console.log("Entro: "+seccion);
+    this.crearPreguntas=new ListaPreguntas();
+    this.crearPreguntas.regla="N";
+    this.crearPreguntas.requerida="N";
+    this.crearPreguntas.tabula="S";
+    this.crearPreguntas.estado="A";
+    this.crearPreguntas.esPadre="S";
+    this.crearPreguntas.tipoArea="DEFAULT";  
+    this.crearPreguntas.sesSeccion=seccion;
+    console.log("Entro: ", this.crearPreguntasList);
+    this.crearPreguntasList.push(this.crearPreguntas);
+    localStorage.removeItem('crearPreguntasLista');
+    localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+    console.log(".seccion-",seccion.sesSeccionPK.idEncuesta);
+
+    $(document).ready(function(){
+      $(".seccion-"+seccion.sesSeccionPK.idSeccion).css( "border-left", "1px solid #bec3d2" );
+      $(".seccion-"+seccion.sesSeccionPK.idSeccion).last().css( "border", "none" );
+    });
+    console.log(".seccionstep-"+seccion.sesSeccionPK.idSeccion);
+ }
+
+  stepProcess(){
+    console.log(1);
+    this.crearSeccionList.forEach(step=>{
+      $(document).ready(function(){
+        $(".seccion-"+step.sesSeccionPK.idSeccion).css( "border-left", "1px solid #bec3d2" );
+        $(".seccion-"+step.sesSeccionPK.idSeccion).last().css( "border", "none" );
+      });
+      console.log(".seccionstep-"+step.sesSeccionPK.idSeccion);
+    });
+  }
+
+    getPreguntas():any{
       this.crearSeccionList.forEach(element=>{
         this._preguntaService.getListaPreguntas(element.sesSeccionPK.idSeccion).subscribe(
           Response=>{
@@ -69,12 +102,15 @@ export class PreguntasComponent implements OnInit {
                   console.log(Response);
                   this.listarPreguntas=Response.listaPreguntas;
   
+                  console.log("Lenght: ",this.listarPreguntas.length);
                   if(this.listarPreguntas.length==0){
-                    console.log("Lista de preguntas es igual a null");
-                    console.log("Seccion auxiliar N: ",element.lsPreguntas);
-                    element.lsPreguntas="N";
-                    console.log("Seccion auxiliar N: "+element.lsPreguntas);
+                    console.log("element.sesSeccionPK: ",element.sesSeccionPK.idSeccion);
+                    this.agregarPreguntaPorSeccion(element);
                   }
+
+                  this.deshabilitarAgregarPregunta(element.sesSeccionPK.idSeccion);
+                  this.deshabilitarGuardarPregunta();
+
                   console.log("Lista de preguntas servicio get: ",this.listarPreguntas);
                   localStorage.removeItem('crearPreguntasLista');
                   localStorage.setItem("crearPreguntasLista",JSON.stringify(this.listarPreguntas));
@@ -91,21 +127,7 @@ export class PreguntasComponent implements OnInit {
    }
 
 
-  agregarPreguntaPorSeccion(seccion){
-    this.crearPreguntas=new ListaPreguntas();
-    this.crearPreguntas.sesSeccion=seccion;
-    console.log(this.crearPreguntas.sesSeccion);
-    this.crearPreguntasList.push(this.crearPreguntas);
-    localStorage.removeItem('crearPreguntasLista');
-    localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
-
-    console.log("seccion: "+seccion.sesSeccionPK.idSeccion);
-    $(document).ready(function(){
-      $( ".seccion-"+seccion.sesSeccionPK.idSeccion).css( "border-left", "1px solid #bec3d2" );
-      $( ".seccion-"+seccion.sesSeccionPK.idSeccion).last().css( "border", "none" );
-    });
-    //$("."+ this.crearPreguntas.sesSeccion.sesSeccionPK.idSeccion+"-seccion").css("border-left", "1px solid #bec3d2");
-  }
+ 
 
 deshabilitarAgregarPregunta(id){
     var cont=0;
@@ -156,11 +178,10 @@ deshabilitarGuardarPregunta(){
 }
 
 ngOnInit(): void {
-  this.stepProcess();
-  this.crearPreguntasList=[];
-  this.agregarPreguntaInicial();
+  this.getPreguntas();
   this.deshabilitarGuardarPregunta();
   this.validacionDescripcionInicial();
+  this.stepProcess();
  }
 
  validacionDescripcionInicial(){
@@ -177,15 +198,6 @@ ngOnInit(): void {
     });
   });
  }
-
-stepProcess(){
-  console.log(1);
-  this.crearSeccionList.forEach(step=>{
-    $(document).ready(function(){
-      $( ".seccion-"+step.sesSeccionPK.idSeccion).last().css( "border", "none" );
-    });
-  });
-}
   
   sorteable(i){
       $( "#sortable-"+i).sortable();
@@ -297,7 +309,8 @@ stepProcess(){
               element.regla="N";
               element.requerida="N";
               element.tabula="S";
-              element.estado="A"
+              element.estado="A";
+              element.esPadre="S";
               element.tipoArea="DEFAULT";  
               localStorage.removeItem('crearPreguntasLista');
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -321,7 +334,8 @@ stepProcess(){
             element.regla="N";
             element.requerida="N";
             element.tabula="S";
-            element.estado="N"
+            element.estado="A"
+            element.esPadre="S";
             element.tipoArea="DEFAULT";  
             console.log("Descripcion : ",element.descripcion);
             console.log("Lista de Preguntas: "+this.crearPreguntasList);   
@@ -347,7 +361,8 @@ stepProcess(){
               elementr.regla="N";
               elementr.requerida="N";
               elementr.tabula="S";
-              elementr.estado="N"
+              elementr.estado="A"
+              elementr.esPadre="S";
               elementr.tipoArea="DEFAULT";  
               console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)
               console.log("Lista de preguntas: "+this.crearPreguntasList);    
@@ -383,6 +398,7 @@ stepProcess(){
               element.requerida="N";
               element.tabula="S";
               element.estado="A"
+              element.esPadre="S";
               element.tipoArea="DEFAULT";  
               localStorage.removeItem('crearPreguntasLista');
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -408,6 +424,7 @@ stepProcess(){
             element.requerida="N";
             element.tabula="S";
             element.estado="A"
+            element.esPadre="S";
             element.tipoArea="DEFAULT";  
             localStorage.removeItem('crearPreguntasLista');
             localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -434,6 +451,7 @@ stepProcess(){
               elementr.requerida="N";
               elementr.tabula="S";
               elementr.estado="A"
+              elementr.esPadre="S";
               elementr.tipoArea="DEFAULT";
               console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)   
               localStorage.removeItem('crearPreguntasLista');
@@ -460,12 +478,12 @@ stepProcess(){
         if(Response.codigo==200){
           console.log(Response);
           this.loading(false);
-          //this.getSeccion(this.idEncuesta);
+          this.getPreguntas();
           this.showModalConfirmacion(Response.causa);
         }else{
           console.log(Response);
           this.loading(true);
-          //this.getSeccion(this.idEncuesta);
+          this.getPreguntas();
           this.showModalError(Response.causa);
         }
       },
@@ -473,9 +491,6 @@ stepProcess(){
           console.log(<any>error);
       }
     );
-
-
-
-}
+  }
 
 }
