@@ -7,7 +7,7 @@ export class ListaSecciones{
         public nroSeccion:number,
         public idAux:number,
         public sesSeccionPK:SesSeccionPK,
-        public titulo:string
+        public titulo:string,
         )
         {
 

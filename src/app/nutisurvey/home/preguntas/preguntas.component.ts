@@ -31,7 +31,7 @@ export class PreguntasComponent implements OnInit {
   constructor(private _preguntaService:PreguntasService) { 
     this.crearPreguntasList=new Array<ListaPreguntas>();
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
-    this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
+    this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"",);
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
     this.crearPreguntasList=JSON.parse(localStorage.getItem("crearPreguntasLista"));
@@ -71,6 +71,7 @@ export class PreguntasComponent implements OnInit {
       $(".seccion-"+seccion.sesSeccionPK.idSeccion).last().css( "border", "none" );
     });
     console.log(".seccionstep-"+seccion.sesSeccionPK.idSeccion);
+    this.deshabilitarGuardarPregunta(); 
  }
 
   stepProcess(){
@@ -104,16 +105,30 @@ export class PreguntasComponent implements OnInit {
                   }else{
                     this.crearPreguntasList=Response.listaPreguntas;
                     console.log("Lista de Response.listaPreguntas:",this.crearPreguntasList);
-                    this.crearSeccionList.forEach(element=>{
-                        this.deshabilitarAgregarPregunta(element.sesSeccionPK.idSeccion);
+                    this.crearSeccionList.forEach(elementS=>{
+                      this._preguntaService.getListaPreguntasPorSeccion(elementS.sesSeccionPK.idSeccion).subscribe(
+                        Response=>{
+                              if(Response.respuestaProceso.codigo==200){
+                                console.log("Response.respuestaProceso.codigo",Response);
+                                if(Response.listaPreguntas.length==0){
+                                  this.agregarPreguntaPorSeccion(elementS);
+                                  this.deshabilitarAgregarPregunta(elementS.sesSeccionPK.idSeccion);
+                                }
+                              }else{
+                                console.log(Response);
+                              }
+                        },
+                        error=>{
+                            console.log(<any>error);
+                        }
+                      );
                     });
                   }
                   console.log("Lista de preguntas servicio get: ", this.crearPreguntasList);
                   localStorage.removeItem('crearPreguntasLista');
                   localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+                  this.deshabilitarGuardarPregunta(); 
                   this.stepProcess();
-                  this.deshabilitarGuardarPregunta();
-  
                 }else{
                   console.log(Response);
                 }
@@ -148,41 +163,36 @@ deshabilitarAgregarPregunta(id){
         seccion.prop('disabled',true);
       }
     });
+    this.deshabilitarGuardarPregunta();
 }
 
 deshabilitarGuardarPregunta(){
+  $(document).ready(function(){
+    var cont=0;
+    var auxBool=true;
+    var preguntas=$(".descripcion");
 
-  var cont=0;
-  var auxBool=true;
-  var preguntas= document.getElementsByName("pregunta");
+    preguntas.each(function() {
+      console.log(".descripcion="+$(this).val());
 
-  console.log("Lenght "+preguntas.length);
-  for (var i = 0; i < preguntas.length; i++) {
-    var pre=(preguntas[i]as HTMLInputElement).value;
-    if(pre==''){
-      console.log("Entro al for"+cont);
-      cont++;
+      if($(this).val()==""){
+        cont=cont+1;
+        console.log("Contador: "+cont);
+      }
+      auxBool=false;
+    });
+
+    var aceptar =$("#btn-aceptar");
+
+    if(cont==0 && !auxBool){
+      aceptar.prop('disabled',false);
+    }else{
+      aceptar.prop('disabled',true);
     }
-    auxBool=false;
-  }
-  var aceptar = <any> document.getElementById("btn-aceptar");
-  if(cont==0 && auxBool==false){
-    console.log("Entro al if=0 "+cont);
-    aceptar.disabled = false;
-  }else{
-    console.log("Entro al if!=0 "+cont);
-    aceptar.disabled = true;
-  }
+  });
 }
 
-ngOnInit(): void {
-  this.getPreguntas();
-  this.deshabilitarGuardarPregunta();
-  this.validacionDescripcionInicial();
-  this.stepProcess();
- }
-
- validacionDescripcionInicial(){
+validacionDescripcionInicial(){
   this.crearSeccionList.forEach(element=>{
     $(document).ready(function(){
       var preguntas=$(".descripcion-"+element.sesSeccionPK.idSeccion);
@@ -196,7 +206,12 @@ ngOnInit(): void {
     });
   });
  }
-  
+
+ngOnInit(): void {
+  this.getPreguntas();
+  this.validacionDescripcionInicial();
+ }
+
   sorteable(i){
       $( "#sortable-"+i).sortable();
       $( "#sortable-"+i).disableSelection();

@@ -20,7 +20,7 @@
                               <div *ngIf="pregunta.sesSeccion.sesSeccionPK.idSeccion==seccion.sesSeccionPK.idSeccion;" >
                                   <div  class="seccion-{{seccion.sesSeccionPK.idSeccion}} seccion">
                                     <p> .Enunciado</p>
-                                    <input  class="descripcion-{{seccion.sesSeccionPK.idSeccion}}" (change)="savePregunta($event.target.value,0,i+1,seccion.sesSeccionPK)" name="pregunta" value="{{pregunta.descripcion}}" autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
+                                    <input  class="descripcion descripcion-{{seccion.sesSeccionPK.idSeccion}}" (change)="savePregunta($event.target.value,0,i+1,seccion.sesSeccionPK)" name="pregunta" value="{{pregunta.descripcion}}" autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
                                     <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
                                     <input [checked]="pregunta.tipo=='A' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-abierta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label  id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,0,i+1,seccion.sesSeccionPK)" for="{{i}}-rd-abierta">Abierta</label>
                                     <input [checked]="pregunta.tipo=='SN' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-siOno" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label  id="{{i}}-rd-siOno-label" for="{{i}}-rd-siOno" (click)="saveTipoPregunta($event.target.id,0,i+1,seccion.sesSeccionPK)">Si o No</label>
@@ -31,7 +31,7 @@
                               </div>
                             </li>
                         </ul>
-                        <input type="button" class="btn-primary btn-agregarPregunta" (click)="agregarPreguntaPorSeccion(seccion)"  value="Agregar Pregunta" id="pregunta-{{seccion.sesSeccionPK.idSeccion}}" (click)="deshabilitarAgregarPregunta(seccion.sesSeccionPK.idSeccion)" />
+                        <input type="button" class="btn-primary btn-agregarPregunta" (click)="agregarPreguntaPorSeccion(seccion)"  value="Agregar Pregunta" id="pregunta-{{seccion.sesSeccionPK.idSeccion}}" (click)="deshabilitarAgregarPregunta(seccion.sesSeccionPK.idSeccion)"/>
                     </nav>
                 </div>
               </div>

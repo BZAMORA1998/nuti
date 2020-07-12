@@ -259,7 +259,7 @@ deshabilitarAgregarSeccion(){
   }
 
   agregarSeccion(){
-    this.crearSeccion=new ListaSecciones("","A",0,0,new SesSeccionPK(0,0,0),"");
+    this.crearSeccion=new ListaSecciones("","A",0,0,new SesSeccionPK(0,0,0),"",);
     this.crearSeccionList.push(this.crearSeccion);
     localStorage.removeItem('crearSeccionLista');
     localStorage.setItem("crearSeccionLista",JSON.stringify( this.crearSeccionList));
