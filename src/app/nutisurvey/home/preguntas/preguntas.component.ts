@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 declare var require: any
 var $ = require('jquery');
 import 'jquery-ui-dist/jquery-ui';
-// import { CrearEncuesta } from 'src/app/models/crearEncuesta';
-// import { Usuario } from 'src/app/models/usuario';
 import { ListaSecciones } from 'src/app/models/listaSecciones';
 import { CrearSeccion } from 'src/app/models/crearSeccion';
 import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
@@ -29,24 +27,16 @@ export class PreguntasComponent implements OnInit {
   public crearPreguntasList:ListaPreguntas[];
   public crearP:CrearPreguntas;
   public listarPreguntas:ListaPreguntas[];
-
-  /* tipo de preguntas
-    M= Multiple
-    RM=-Multiple Respuesta 
-    SN=Si o no
-    A= Abierta
-    F=File
-  */
   
   constructor(private _preguntaService:PreguntasService) { 
     this.crearPreguntasList=new Array<ListaPreguntas>();
+    this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"");
+    this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
-    this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     this.crearPreguntasList=JSON.parse(localStorage.getItem("crearPreguntasLista"));
-    this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
-    console.log(this.crearSeccionList);
-    console.log(this.crearPreguntasList);
+    console.log("this.crearSeccionList: ",JSON.stringify(this.crearSeccionList));
+    console.log("this.crearPreguntasList: ",JSON.stringify(this.crearPreguntasList));
   }
 
   agregarPreguntaInicial(){
@@ -61,7 +51,7 @@ export class PreguntasComponent implements OnInit {
   }
 
   agregarPreguntaPorSeccion(seccion){
-    console.log("Entro: "+seccion);
+    console.log("Entro: ",seccion);
     this.crearPreguntas=new ListaPreguntas();
     this.crearPreguntas.regla="N";
     this.crearPreguntas.requerida="N";
@@ -70,7 +60,7 @@ export class PreguntasComponent implements OnInit {
     this.crearPreguntas.esPadre="S";
     this.crearPreguntas.tipoArea="DEFAULT";  
     this.crearPreguntas.sesSeccion=seccion;
-    console.log("Entro: ", this.crearPreguntasList);
+    console.log("Entro getLista: ", this.crearPreguntasList);
     this.crearPreguntasList.push(this.crearPreguntas);
     localStorage.removeItem('crearPreguntasLista');
     localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -94,27 +84,35 @@ export class PreguntasComponent implements OnInit {
     });
   }
 
+   
     getPreguntas():any{
       this.crearPreguntasList=[];
-      this.crearSeccionList.forEach(element=>{
-        this._preguntaService.getListaPreguntas(element.sesSeccionPK.idSeccion).subscribe(
+      
+        this._preguntaService.getListaPreguntas(this.idEncuesta).subscribe(
           Response=>{
                 if(Response.respuestaProceso.codigo==200){
-                  console.log(Response);
-                  this.listarPreguntas=Response.listaPreguntas;
-                  //this.crearPreguntasList.push(Response.listaPreguntas);
-                  console.log("Lenght: ",this.listarPreguntas.length);
-                  if(this.listarPreguntas.length==0){
-                    console.log("element.sesSeccionPK: ",element.sesSeccionPK.idSeccion);
-                    this.agregarPreguntaPorSeccion(element);
+                  console.log("Lista de preguntas: ....",Response);
+                  console.log("Lista de preguntas lenght: ....",Response.listaPreguntas.length);
+                  console.log("this.crearPreguntasList get: ",JSON.stringify(Response.listaPreguntas));
+                  if(Response.listaPreguntas.length==0){
+                    this.crearSeccionList.forEach(element=>{
+                      console.log("If ....",);
+                        console.log("element.sesSeccionPK: ",element.sesSeccionPK.idSeccion);
+                        this.agregarPreguntaPorSeccion(element);
+                        this.deshabilitarAgregarPregunta(element.sesSeccionPK.idSeccion);
+                    });
+                  }else{
+                    this.crearPreguntasList=Response.listaPreguntas;
+                    console.log("Lista de Response.listaPreguntas:",this.crearPreguntasList);
+                    this.crearSeccionList.forEach(element=>{
+                        this.deshabilitarAgregarPregunta(element.sesSeccionPK.idSeccion);
+                    });
                   }
-
-                  this.deshabilitarAgregarPregunta(element.sesSeccionPK.idSeccion);
-                  this.deshabilitarGuardarPregunta();
-
-                  console.log("Lista de preguntas servicio get: ",this.listarPreguntas);
+                  console.log("Lista de preguntas servicio get: ", this.crearPreguntasList);
                   localStorage.removeItem('crearPreguntasLista');
-                  localStorage.setItem("crearPreguntasLista",JSON.stringify(this.listarPreguntas));
+                  localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+                  this.stepProcess();
+                  this.deshabilitarGuardarPregunta();
   
                 }else{
                   console.log(Response);
@@ -124,7 +122,6 @@ export class PreguntasComponent implements OnInit {
               console.log(<any>error);
           }
         );
-      });
    }
 
 
@@ -253,15 +250,6 @@ ngOnInit(): void {
       window.location.reload();
     });
   }
-
-
-  /* tipo de preguntas
-    M= Multiple
-    RM=-Multiple Respuesta 
-    SN=Si o no
-    A= Abierta
-    F=File
-  */
 
   public tipoPreguntas={M:"Multiple",RM:"Multiple Respuesta",SN:"Si o No",A:"Abierta",F:"File"};
   saveTipoPregunta(descripcion,idPregunta,idAux,Seccion){

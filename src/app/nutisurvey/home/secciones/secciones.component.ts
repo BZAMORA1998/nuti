@@ -48,7 +48,7 @@ export class SeccionesComponent implements OnInit {
     }
    }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
     console.log(this.idEncuesta);
     this.getSeccion(this.idEncuesta);
     console.log("Longitud"+this.crearSeccionList.length);
