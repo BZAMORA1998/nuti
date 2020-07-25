@@ -42,9 +42,6 @@ export class LoginComponent implements OnInit {
   
   ngOnInit(): void {
     localStorage.clear();
-    this.crearEncuesta=new CrearEncuesta("","","","","","",0,"","","","",0);
-    localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
-    localStorage.setItem("idEncuesta",JSON.stringify(0));
   }
    public usuario:Usuario;
    public nick:String;

@@ -33,7 +33,6 @@ export class PreguntasComponent implements OnInit {
   constructor(private _preguntaService:PreguntasService,private _seccionService:SeccionService) { 
     this.crearPreguntasList=new Array<ListaPreguntas>();
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
-    this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"",);
   }
 
   agregarPreguntaInicial(){
@@ -272,29 +271,22 @@ ngOnInit(): void {
     var auxBool=true;
 
     var label = document.getElementById(descripcion);
-    console.log(label.innerHTML);
+    console.log("kjdnjdhnkj",label.innerHTML);
 
       if(label.innerHTML==this.tipoPreguntas.M){
         tipo="M";
         console.log("Entro al tipo de pregunta ",this.tipoPreguntas.M,tipo);
-      }
-      if(label.innerHTML==this.tipoPreguntas.RM){
-        tipo="RM";
-        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.RM,tipo);
-      }
-
-      if(label.innerHTML==this.tipoPreguntas.SN){
+      }else if(label.innerHTML==this.tipoPreguntas.SN){
         tipo="SN";
         console.log("Entro al tipo de pregunta ",this.tipoPreguntas.RM,tipo);
-      }
-
-      if(label.innerHTML==this.tipoPreguntas.A){
+      }else if(label.innerHTML==this.tipoPreguntas.A){
         tipo="A";
         console.log("Entro al tipo de pregunta ",this.tipoPreguntas.RM,tipo);
-      }
-
-      if(label.innerHTML==this.tipoPreguntas.F){
+      }else if(label.innerHTML==this.tipoPreguntas.F){
         tipo="F";
+        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.RM,tipo);
+      }else{
+        tipo="RM";
         console.log("Entro al tipo de pregunta ",this.tipoPreguntas.RM,tipo);
       }
 
@@ -531,6 +523,7 @@ ngOnInit(): void {
               console.log("Entro");
               this.opcionRespuestas.estado='S';
               this.opcionRespuestas.etiquetaOpcion=etiqueta;
+              this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
               element.opcionRespuestas.push(this.opcionRespuestas);
               localStorage.removeItem('crearPreguntasLista');
               localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -552,6 +545,7 @@ ngOnInit(): void {
             element.idAux=idAux;
             this.opcionRespuestas.estado='S';
             this.opcionRespuestas.etiquetaOpcion=etiqueta;
+            this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
             element.opcionRespuestas.push(this.opcionRespuestas); 
             localStorage.removeItem('crearPreguntasLista');
             localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
@@ -575,6 +569,7 @@ ngOnInit(): void {
               elementr.idAux=idAux;
               this.opcionRespuestas.estado='S';
               this.opcionRespuestas.etiquetaOpcion=etiqueta;
+              this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
               elementr.opcionRespuestas.push(this.opcionRespuestas);
 
               console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)   

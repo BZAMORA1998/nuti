@@ -11,7 +11,7 @@ export class SesSeccion{
         this.descripcion="";
         this.estado="";
         this.nroSeccion=0;
-        this.sesSeccionPK=new SesSeccionPK(0,0,0);
+        this.sesSeccionPK=new SesSeccionPK();
         this.titulo="";
     }
 }
