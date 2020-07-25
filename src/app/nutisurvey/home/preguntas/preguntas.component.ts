@@ -207,6 +207,7 @@ ngOnInit(): void {
  }
 
   sorteable(tipo,idPregunta,idAux,seccion){
+    console.log("#sortable"+tipo+"-"+seccion.idSeccion+"-"+idAux);
       $("#sortable"+tipo+"-"+seccion.idSeccion+"-"+idAux).sortable();
       $("#sortable"+tipo+"-"+seccion.idSeccion+"-"+idAux).disableSelection();
   }

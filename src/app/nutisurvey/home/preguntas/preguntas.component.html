@@ -52,7 +52,12 @@
                                             </div>
                                             <div class="row">
                                               <div class="col-12 pt-3 pl-5">
+                                                 <!-- <ul *ngFor="let etiqueta of pregunta.opcionRespuestas; index as cont" id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+i}}">
+                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" value="{{etiqueta.etiquetaOpcion}}"  (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                  </ul> -->
                                                   <ul id="{{'sortableRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
+                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
                                                     <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
                                                   </ul>
                                               </div>
@@ -89,13 +94,13 @@
                                             </div>
                                             <div class="row">
                                               <div class="col-12 pt-3 pl-5">
-                                                  <!-- <ul *ngFor="let etiqueta of pregunta.opcionRespuestas; index as cont" id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+i}}">
+                                                 <!-- <ul *ngFor="let etiqueta of pregunta.opcionRespuestas; index as cont" id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+i}}">
                                                     <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" value="{{etiqueta.etiquetaOpcion}}"  (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
                                                   </ul> -->
-                                                  <ul id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+i}}">
-                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
-                                                    <li (mouseup)="hola('segundo')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
-                                                    <li (mouseup)="hola('tercero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                  <ul id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
+                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
                                                   </ul>
                                               </div>
                                             </div>
@@ -106,8 +111,8 @@
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                              </div>
+                                    </div>                             
+                                  </div>
                             </li>
                         </ul>
                         <input type="button" class="btn-primary btn-agregarPregunta" (click)="agregarPreguntaPorSeccion(seccion)"  value="Agregar Pregunta" id="pregunta-{{seccion.sesSeccionPK.idSeccion}}" (click)="deshabilitarAgregarPregunta(seccion.sesSeccionPK.idSeccion)"/>
