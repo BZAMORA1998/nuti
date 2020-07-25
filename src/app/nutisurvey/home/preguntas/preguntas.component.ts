@@ -9,13 +9,15 @@ import { PreguntasService } from 'src/app/servicios/preguntas.service';
 import { ListaPreguntas } from 'src/app/models/listaPreguntas';
 import { CrearPreguntas } from 'src/app/models/crearPreguntas';
 import Swal from 'sweetalert2';
+import { SeccionService } from 'src/app/servicios/seccion.service';
+import { OpcionRespuestas } from 'src/app/models/opcionRespuestas';
 
 
 @Component({
   selector: 'app-preguntas',
   templateUrl: './preguntas.component.html',
   styleUrls: ['./preguntas.component.css'],
-  providers:[PreguntasService]
+  providers:[PreguntasService,SeccionService]
 })
 export class PreguntasComponent implements OnInit {
   public crearSeccion:ListaSecciones;
@@ -28,15 +30,10 @@ export class PreguntasComponent implements OnInit {
   public crearP:CrearPreguntas;
   public listarPreguntas:ListaPreguntas[];
   
-  constructor(private _preguntaService:PreguntasService) { 
+  constructor(private _preguntaService:PreguntasService,private _seccionService:SeccionService) { 
     this.crearPreguntasList=new Array<ListaPreguntas>();
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     this.crearSeccion=new ListaSecciones("", this.estado,0,0,new SesSeccionPK(0,0,0),"",);
-    this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
-    this.crearSeccionList=JSON.parse(localStorage.getItem("crearSeccionLista"));
-    this.crearPreguntasList=JSON.parse(localStorage.getItem("crearPreguntasLista"));
-    console.log("this.crearSeccionList: ",JSON.stringify(this.crearSeccionList));
-    console.log("this.crearPreguntasList: ",JSON.stringify(this.crearPreguntasList));
   }
 
   agregarPreguntaInicial(){
@@ -139,9 +136,6 @@ export class PreguntasComponent implements OnInit {
         );
    }
 
-
- 
-
 deshabilitarAgregarPregunta(id){
     var cont=0;
     $(document).ready(function(){
@@ -193,6 +187,7 @@ deshabilitarGuardarPregunta(){
 }
 
 validacionDescripcionInicial(){
+  console.log("validacionDescripcionInicial...",this.crearSeccionList);
   this.crearSeccionList.forEach(element=>{
     $(document).ready(function(){
       var preguntas=$(".descripcion-"+element.sesSeccionPK.idSeccion);
@@ -208,13 +203,13 @@ validacionDescripcionInicial(){
  }
 
 ngOnInit(): void {
+  this.getSeccion();
   this.getPreguntas();
-  this.validacionDescripcionInicial();
  }
 
-  sorteable(i){
-      $( "#sortable-"+i).sortable();
-      $( "#sortable-"+i).disableSelection();
+  sorteable(tipo,idPregunta,idAux,seccion){
+      $("#sortable"+tipo+"-"+seccion.idSeccion+"-"+idAux).sortable();
+      $("#sortable"+tipo+"-"+seccion.idSeccion+"-"+idAux).disableSelection();
   }
 
   showModalConfirmacion(message){
@@ -333,7 +328,6 @@ ngOnInit(): void {
 
         if(element.idAux==idAux && element.sesSeccion.sesSeccionPK.idSeccion==Seccion.idSeccion && auxBool){
             console.log("Entro");
-            //element.idAux=idAux;
             element.tipo=tipo;
             element.regla="N";
             element.requerida="N";
@@ -496,5 +490,107 @@ ngOnInit(): void {
       }
     );
   }
+
+  getSeccion(){
+    this._seccionService.getListaSecciones(this.idEncuesta).subscribe(
+      Response=>{
+        if(Response.respuestaProceso.codigo==200){
+          this.crearSeccionList=Response.listarSecciones;
+        }else{
+          console.log(Response);
+        }
+      },
+      error=>{
+          console.log(<any>error);
+      }
+    );
+  }
+
+  hola(e){
+    console.log("Hola ",e);
+  }
+
+  guardarEtiqueta(id){
+    console.log("Hola ",id);
+  }
+
+  public opcionRespuestas:OpcionRespuestas;
+  saveEtiqueta(etiqueta,idPregunta,idAux,Seccion){
+    console.log("etiqueta",etiqueta);
+    console.log("idPregunta",idPregunta);
+    console.log("IdAux: ",idAux);
+    console.log("idSeccion: ",Seccion);
+
+    var auxBool=true;
+    this.opcionRespuestas= new OpcionRespuestas();
+    if(idPregunta!=0){
+      console.log("idPregunta es diferente a 0: ", idPregunta);
+      this.crearPreguntasList.forEach(element => {
+          console.log("Si ",element.idPregunta,"=",idPregunta,"=",idPregunta );
+          if(element.idPregunta==idPregunta && element.sesSeccion.sesSeccionPK.idSeccion==Seccion.idSeccion){
+              console.log("Entro");
+              this.opcionRespuestas.estado='S';
+              this.opcionRespuestas.etiquetaOpcion=etiqueta;
+              element.opcionRespuestas.push(this.opcionRespuestas);
+              localStorage.removeItem('crearPreguntasLista');
+              localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+              console.log(this.crearPreguntasList);
+              console.log("Lista de Preguntas: "+this.crearPreguntasList);
+              this.deshabilitarGuardarPregunta();
+              this.deshabilitarAgregarPregunta(Seccion.idSeccion);
+          }
+        });
+    }else{
+      console.log("IdPregunta es igual a 0 ", idPregunta);
+      this.crearPreguntasList.forEach(element => {
+        console.log("Si ",element.idPregunta,"=",idPregunta ,"&&" ,auxBool);
+
+        console.log(element);
+
+        if(element.idAux==idAux && element.sesSeccion.sesSeccionPK.idSeccion==Seccion.idSeccion && auxBool){
+            console.log("Entro");
+            element.idAux=idAux;
+            this.opcionRespuestas.estado='S';
+            this.opcionRespuestas.etiquetaOpcion=etiqueta;
+            element.opcionRespuestas.push(this.opcionRespuestas); 
+            localStorage.removeItem('crearPreguntasLista');
+            localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+            console.log(element);
+            auxBool=false;
+            console.log("Lista de Preguntas: ",this.crearPreguntasList);  
+            this.deshabilitarGuardarPregunta();
+            this.deshabilitarAgregarPregunta(Seccion.idSeccion)
+        }
+      });
+
+      if(auxBool){
+        console.log(" Entro SinId");
+        this.crearPreguntasList.forEach(elementr => {
+          console.log("Si ",elementr.idAux,"=","0","&&",elementr.sesSeccion.sesSeccionPK.idSeccion,"==",Seccion.idSeccion,"&&",auxBool);
+
+         console.log("El id es",elementr.idAux );
+
+          if(elementr.idAux==0 && elementr.sesSeccion.sesSeccionPK.idSeccion==Seccion.idSeccion && auxBool){
+              console.log("Entro seccion: "+Seccion );
+              elementr.idAux=idAux;
+              this.opcionRespuestas.estado='S';
+              this.opcionRespuestas.etiquetaOpcion=etiqueta;
+              elementr.opcionRespuestas.push(this.opcionRespuestas);
+
+              console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion)   
+              localStorage.removeItem('crearPreguntasLista');
+              localStorage.setItem("crearPreguntasLista",JSON.stringify(this.crearPreguntasList));
+              console.log(this.crearPreguntasList);
+              auxBool=false;
+              console.log("Lista de Preguntas: "+this.crearPreguntasList); 
+              this.deshabilitarGuardarPregunta(); 
+              this.deshabilitarAgregarPregunta(Seccion.idSeccion);
+          }
+        });
+      }
+    }
+
+  }
+
 
 }

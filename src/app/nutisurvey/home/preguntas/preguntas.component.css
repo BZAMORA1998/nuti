@@ -270,13 +270,20 @@ input[type=button]:disabled{
 
 .ui-state-default{
   list-style: none;
-  background-color: #fcfcfc;
+  background-color: white;
+  /* border: none !important; */
   margin-bottom: 10px;
   height: 40px;
   border-radius: 8px;
   color: #9c9c9c !important;
-  padding-top: 5px;
-  padding-left: 10px;
+  padding-left: 5px;
+}
+
+.text-etiqueta{
+  padding: 0px;
+  margin: 0px;
+  height: 100% !important;
+  width: 80% !important;
 }
 
 .modal-footer .btn-primary{

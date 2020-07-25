@@ -20,14 +20,90 @@
                               <div *ngIf="pregunta.sesSeccion.sesSeccionPK.idSeccion==seccion.sesSeccionPK.idSeccion;" >
                                   <div  class="seccion-{{seccion.sesSeccionPK.idSeccion}} seccion">
                                     <p> .Enunciado</p>
-                                    <input  class="descripcion descripcion-{{seccion.sesSeccionPK.idSeccion}}" (change)="savePregunta($event.target.value,0,i+1,seccion.sesSeccionPK)" name="pregunta" value="{{pregunta.descripcion}}" autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
+                                    <input  class="descripcion descripcion-{{seccion.sesSeccionPK.idSeccion}}" (change)="savePregunta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" name="pregunta" value="{{pregunta.descripcion}}" autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
                                     <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
-                                    <input [checked]="pregunta.tipo=='A' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-abierta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label  id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,0,i+1,seccion.sesSeccionPK)" for="{{i}}-rd-abierta">Abierta</label>
-                                    <input [checked]="pregunta.tipo=='SN' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-siOno" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label  id="{{i}}-rd-siOno-label" for="{{i}}-rd-siOno" (click)="saveTipoPregunta($event.target.id,0,i+1,seccion.sesSeccionPK)">Si o No</label>
-                                    <input [checked]="pregunta.tipo=='M'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multiple" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label   id="{{i}}-rd-multiple-label" for="{{i}}-rd-multiple" (click)="saveTipoPregunta($event.target.id,0,i+1,seccion.sesSeccionPK)">Multiple</label>
-                                    <input [checked]="pregunta.tipo=='RM'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multipleRespuesta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label   id="{{i}}-rd-multipleRespuesta-label" for="{{i}}-rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#Modal-'+i" (click)="sorteable(i)" (click)="saveTipoPregunta($event.target.id,0,i,seccion.sesSeccionPK)">Multiple Respuesta</label>
-                                    <input [checked]="pregunta.tipo=='F'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-file" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label id="{{i}}-rd-file-label" for="{{i}}-rd-file" (click)="saveTipoPregunta($event.target.id,0,i+1,seccion.sesSeccionPK)">File</label>
+                                    <input [checked]="pregunta.tipo=='A' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-abierta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label  id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" for="{{i}}-rd-abierta">Abierta</label>
+                                    <input [checked]="pregunta.tipo=='SN' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-siOno" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label  id="{{i}}-rd-siOno-label" for="{{i}}-rd-siOno" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Si o No</label>
+                                    <input [checked]="pregunta.tipo=='M'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multiple" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label   id="{{i}}-rd-multiple-label" for="{{i}}-rd-multiple"  data-toggle="modal" [attr.data-target]="'#ModalM-'+i" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" (click)="sorteable('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Multiple</label>
+                                    <input [checked]="pregunta.tipo=='RM'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multipleRespuesta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label   id="{{i}}-rd-multipleRespuesta-label" for="{{i}}-rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#ModalRM-'+i" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i,seccion.sesSeccionPK)" (click)="sorteable('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Multiple Respuesta</label>
+                                    <input [checked]="pregunta.tipo=='F'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-file" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label id="{{i}}-rd-file-label" for="{{i}}-rd-file" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)">File</label>
                                   </div>
+
+                                   <!-- Modal Respuesta multiple-->
+                                    <div class="modal fade" id="{{'ModalRM-'+i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+                                      <div class="modal-dialog"  role="document">
+                                        <div class="modal-content" >
+                                          <div class="modal-header">
+                                            <h5 class="modal-title pl-4" id="exampleModal3Label" style="color: #EA792D;">Tipo de pregunta: <b>Multiple respuestas</b></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="row" style="background-color: #f7f7f7;">
+                                              <div class="col-12 pt-3 pl-5">
+                                                  <p>Personaliza tu pregunta:<span style="color: #EA792D;"> ¿Porque debemos renovar año a año el reglamento interno?</span> </p>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-12 pt-3 pl-5">
+                                                  <p>3. Arrastre las respuesta en el orden deseado</p>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-12 pt-3 pl-5">
+                                                  <ul id="{{'sortableRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
+                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                    <li (mouseup)="hola('segundo')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"class="form-control text-etiqueta"  placeholder="Etiqueta"></li>
+                                                  </ul>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" style="display: none;" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Aceptar</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="{{'ModalM-'+i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+                                      <div class="modal-dialog"  role="document">
+                                        <div class="modal-content" >
+                                          <div class="modal-header">
+                                            <h5 class="modal-title pl-4" id="exampleModal3Label" style="color: #EA792D;">Tipo de pregunta: <b>Multiple</b></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="row" style="background-color: #f7f7f7;">
+                                              <div class="col-12 pt-3 pl-5">
+                                                  <p>Personaliza tu pregunta:<span style="color: #EA792D;"> ¿Porque debemos renovar año a año el reglamento interno?</span> </p>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-12 pt-3 pl-5">
+                                                  <p>3. Arrastre las respuesta en el orden deseado</p>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-12 pt-3 pl-5">
+                                                  <ul id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+i}}">
+                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="guardarEtiqueta(pregunta.sesSeccion.sesSeccionPK.idSeccion)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                    <li (mouseup)="hola('segundo')"  class="ui-state-default"><input type="text" (change)="guardarEtiqueta(pregunta.sesSeccion.sesSeccionPK.idSeccion)"class="form-control text-etiqueta"  placeholder="Etiqueta"></li>
+                                                  </ul>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" style="display: none;" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Aceptar</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
                               </div>
                             </li>
                         </ul>
@@ -48,7 +124,7 @@
 </div>
 
  <!-- Modal -->
- <div *ngFor="let crea of crearPreguntasList ; index as i">
+ <!-- <div *ngFor="let pregunta of crearPreguntasList ; index as i">
     <div class="modal fade" id="{{'Modal-'+i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
       <div class="modal-dialog"  role="document">
         <div class="modal-content" >
@@ -65,14 +141,6 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-6 pt-3 pl-5">
-                  <p>1. Agregue una etiqueta</p>
-              </div>
-              <div class="col-6 pt-3">
-                <p>2. Agregue un valor</p>
-            </div>
-            </div>
-            <div class="row">
               <div class="col-12 pt-3 pl-5">
                   <p>3. Arrastre las respuesta en el orden deseado</p>
               </div>
@@ -80,10 +148,8 @@
             <div class="row">
               <div class="col-12 pt-3 pl-5">
                   <ul id="{{'sortable-'+i}}">
-                    <li class="ui-state-default">Item 1</li>
-                    <li class="ui-state-default">Item 2</li>
-                    <li class="ui-state-default">Item 3</li>
-                    <li class="ui-state-default">Item 4</li>
+                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="guardarEtiqueta(pregunta.sesSeccion.sesSeccionPK.idSeccion)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
+                    <li (mouseup)="hola('segundo')"  class="ui-state-default"><input type="text" (change)="guardarEtiqueta(pregunta.sesSeccion.sesSeccionPK.idSeccion)"class="form-control text-etiqueta"  placeholder="Etiqueta"></li>
                   </ul>
               </div>
           </div>
@@ -94,6 +160,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
