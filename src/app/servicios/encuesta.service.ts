@@ -17,6 +17,12 @@ export class EncuestaService{
       return this._http.get(this.url+`encuesta/obtenerEncuestasPorUsuario?correo=${correo}&size=${size}&pagina=${pagina}`);
     } 
 
+    getEncuestaXId(idEncuesta):Observable<any>{
+      console.log(idEncuesta);
+      return this._http.get(this.url+`formulario/obtenerFormulario?idSurvey=${idEncuesta}`);
+
+    }
+
     postCrearEncuesta(encuesta):Observable<any>{
       let body = new HttpParams()
          .set('correo',encuesta.correo)

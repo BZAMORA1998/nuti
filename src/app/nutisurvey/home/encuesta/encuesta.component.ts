@@ -26,7 +26,13 @@ export class EncuestaComponent implements OnInit {
   ) {
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
     this.crearEncuesta=new CrearEncuesta();
-    this.crearEncuesta=JSON.parse(localStorage.getItem("crearEncuesta"));
+    this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
+    console.log("idEncuesta",this.idEncuesta);
+
+    if(this.idEncuesta!=0){
+      this.getEncuestaXId(this.idEncuesta);
+    }
+
     if(this.crearEncuesta==null){
       this.crearEncuesta=new CrearEncuesta();
     }
@@ -116,6 +122,27 @@ export class EncuestaComponent implements OnInit {
     if(!activar){
       Swal.close();
     }
+  }
+
+  getEncuestaXId(idEncuesta){
+    this._encuestaService.getEncuestaXId(idEncuesta).subscribe( Response=>{
+      console.log(Response);
+      if(Response.respuetaProceso.codigo==0){
+        console.log(Response);
+        this.crearEncuesta=Response.encuesta;
+        console.log(this.crearEncuesta);
+        // localStorage.setItem("idEncuesta",JSON.stringify(Response.causa));
+        // console.log(this.usuario);
+        // this.loading(false);
+        // this.showModalConfirmacion(Response.mensaje);
+      }else{
+       
+      }
+    },
+      error=>{
+        console.log(<any>error);
+      }
+    );
   }
 
   crearencuesta(){

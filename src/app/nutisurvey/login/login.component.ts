@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
    public password:String;
 
    redidirigirRegistroEncuesta(){
-      return this._router.navigate(['../notisurvey/home/diseño-encuesta']);
+      return this._router.navigate(['../notisurvey/registro-encuesta']);
   }
 
   showModalError(message){

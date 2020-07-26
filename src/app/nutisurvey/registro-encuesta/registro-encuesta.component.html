@@ -29,12 +29,11 @@
                <td>{{lista.titulo}}</td>
                <td>{{lista.fechaInicio}}</td>
                <td>{{lista.mensaje}}</td>
-               <td><input id="btn-editar" type="button" /></td>
+               <td><input id="btn-editar" (click)="getIdEncuesta(lista.sesEncuestaPK.idEncuesta)" type="button" /></td>
              </tr>
            </tbody>
          </table>
-          <app-paginador *ngIf="paginas!=0"  [totalDatos]="130"  [datosPorpagina]="size"  (paginaSeleccionada)="getpaginacion($event)"  ></app-paginador>
-         <input type="button" class="btn-crear" (click)="redidirigirPrincipal()" value="Crear Encuesta"/>
+          <app-paginador *ngIf="totalEncuesta!=0"  [totalDatos]="totalEncuesta"  [datosPorpagina]="size"  (paginaSeleccionada)="getpaginacion($event)"  ></app-paginador>
    </div>
    <div class="box-right">
        <div class="box" id="box-up">

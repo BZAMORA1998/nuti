@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RegistroEncuestaComponent implements OnInit {
 
   public listaEncuesta:ListaEncuesta[];
-  public paginas:number;
+  public totalEncuesta:number;
   public size:number=5;
   public pagina:number;
   public totpaginate:number;
@@ -36,7 +36,7 @@ export class RegistroEncuestaComponent implements OnInit {
     this._encuestaService.getListaEcuesta(this.usuario.correo,this.size,pagina).subscribe(
       Response=>{
         if(Response.respuestaProceso.codigo==200){
-          this.paginas=Response.paginas;
+          this.totalEncuesta=130;//Response.paginas;
           this.listaEncuesta=Response.listarEncuesta;
           for(var i in this.listaEncuesta){
             if(this.listaEncuesta[i].mensaje.length>100){
@@ -64,7 +64,13 @@ export class RegistroEncuestaComponent implements OnInit {
     setTimeout(()=>{
       window.location.reload();
     }, 100);
-    return this._router.navigate(['/principal']);
+    return this._router.navigate(['../notisurvey/home']);
+  }
+
+  getIdEncuesta(idEncuesta){
+    console.log("idEncuesta es: ",idEncuesta);
+    localStorage.setItem("idEncuesta",JSON.stringify(idEncuesta));
+    this._router.navigate(['../notisurvey/home']);
   }
 
 }
