@@ -59,6 +59,9 @@ export class PreguntasComponent implements OnInit {
     this.crearPreguntas.esPadre="S";
     this.crearPreguntas.tipoArea="DEFAULT";  
     this.crearPreguntas.sesSeccion=seccion;
+    this.opcionRespuestas=new OpcionRespuestas();
+    this.opcionRespuestas.estado='S';
+    this.crearPreguntas.opcionRespuestas.push(this.opcionRespuestas);
     console.log("Entro getLista: ", this.crearPreguntasList);
     this.crearPreguntasList.push(this.crearPreguntas);
     localStorage.removeItem('crearPreguntasLista');
@@ -104,6 +107,16 @@ export class PreguntasComponent implements OnInit {
                   }else{
                     this.crearPreguntasList=Response.listaPreguntas;
                     console.log("Lista de Response.listaPreguntas:",this.crearPreguntasList);
+
+                    this.crearPreguntasList.forEach(element => {
+                      if(element.opcionRespuestas.length==0){
+                        this.opcionRespuestas=new OpcionRespuestas();
+                        this.opcionRespuestas.estado='S';
+                        element.opcionRespuestas.push(this.opcionRespuestas);
+                        console.log("Lista de Response opcion:",element);
+                      }
+                    });
+                    
                     this.crearSeccionList.forEach(elementS=>{
                       this._preguntaService.getListaPreguntasPorSeccion(elementS.sesSeccionPK.idSeccion).subscribe(
                         Response=>{
