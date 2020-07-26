@@ -24,8 +24,8 @@
                                     <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
                                     <input [checked]="pregunta.tipo=='A' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-abierta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label  id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" for="{{i}}-rd-abierta">Abierta</label>
                                     <input [checked]="pregunta.tipo=='SN' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-siOno" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label  id="{{i}}-rd-siOno-label" for="{{i}}-rd-siOno" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Si o No</label>
-                                    <input [checked]="pregunta.tipo=='M'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multiple" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label   id="{{i}}-rd-multiple-label" for="{{i}}-rd-multiple"  data-toggle="modal" [attr.data-target]="'#ModalM-'+i" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" (click)="sorteable('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Multiple</label>
-                                    <input [checked]="pregunta.tipo=='RM'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multipleRespuesta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label   id="{{i}}-rd-multipleRespuesta-label" for="{{i}}-rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#ModalRM-'+i" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" (click)="sorteable('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Multiple Respuesta</label>
+                                    <input [checked]="pregunta.tipo=='M'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multiple" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label   id="{{i}}-rd-multiple-label" for="{{i}}-rd-multiple"  data-toggle="modal" [attr.data-target]="'#ModalM-'+i" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" (click)="sorteable('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"(click)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Multiple</label>
+                                    <input [checked]="pregunta.tipo=='RM'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multipleRespuesta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label   id="{{i}}-rd-multipleRespuesta-label" for="{{i}}-rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#ModalRM-'+i" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" (click)="sorteable('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)" (click)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Multiple Respuesta</label>
                                     <input [checked]="pregunta.tipo=='F'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-file" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"  name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label id="{{i}}-rd-file-label" for="{{i}}-rd-file" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)">File</label>
                                   </div>
 
@@ -42,7 +42,7 @@
                                           <div class="modal-body">
                                             <div class="row" style="background-color: #f7f7f7;">
                                               <div class="col-12 pt-3 pl-5">
-                                                  <p>Personaliza tu pregunta:<span style="color: #EA792D;"> ¿Porque debemos renovar año a año el reglamento interno?</span> </p>
+                                                  <p>Personaliza tu pregunta:<span style="color: #EA792D;"> {{pregunta.descripcion}}</span> </p>
                                               </div>
                                             </div>
                                             <div class="row">
@@ -53,9 +53,9 @@
                                             <div class="row">
                                               <div class="col-12 pt-3 pl-5">
                                                 <ul id="{{'sortableRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
-                                                  <li *ngFor="let etiqueta of pregunta.opcionRespuestas"  (mouseup)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="ui-state-default"><input type="text" (change)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta"></li>
-                                               </ul>
-                                               <input type="button" class="btn-primary btn-agregarPregunta" (click)="agregarPreguntaPorSeccion(seccion)"  value="Agregar Etiqueta" id="pregunta-{{seccion.sesSeccionPK.idSeccion}}" (click)="deshabilitarAgregarPregunta(seccion.sesSeccionPK.idSeccion)"/>
+                                                  <li *ngFor="let etiqueta of pregunta.opcionRespuestas"  (mouseup)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="ui-state-default"><img class="ico-sort" src="../../../../assets/img/sort-solid.svg" width="25" height="25"><input type="text" (change)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta"></li>
+                                                </ul>
+                                               <input type="button" class="btn-primary btn-agregarPregunta" id="etiquetaRM-{{pregunta.idPregunta}}" (click)="agregarEtiqueta(pregunta,'RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)" value="Agregar Etiqueta" />
                                               </div>
                                             </div>
                                           </div>
@@ -80,7 +80,7 @@
                                           <div class="modal-body">
                                             <div class="row" style="background-color: #f7f7f7;">
                                               <div class="col-12 pt-3 pl-5">
-                                                  <p>Personaliza tu pregunta:<span style="color: #EA792D;"> ¿Porque debemos renovar año a año el reglamento interno?</span> </p>
+                                                  <p>Personaliza tu pregunta:<span style="color: #EA792D;"> {{pregunta.descripcion}}</span> </p>
                                               </div>
                                             </div>
                                             <div class="row">
@@ -93,7 +93,7 @@
                                                   <ul id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
                                                       <li *ngFor="let etiqueta of pregunta.opcionRespuestas"  (mouseup)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="ui-state-default"><input type="text" (change)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta"></li>
                                                   </ul>
-                                                  <input type="button" class="btn-primary btn-agregarPregunta" (click)="agregarPreguntaPorSeccion(seccion)"  value="Agregar Etiqueta" id="pregunta-{{seccion.sesSeccionPK.idSeccion}}" (click)="deshabilitarAgregarPregunta(seccion.sesSeccionPK.idSeccion)"/>
+                                                  <input type="button" class="btn-primary btn-agregarPregunta" id="etiquetaM-{{pregunta.idPregunta}}"  (click)="agregarEtiqueta(pregunta,'M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="Agregar Etiqueta"/>
                                               </div>
                                             </div>
                                           </div>

@@ -12,8 +12,9 @@ export class EncuestaService{
       this.url = environment.apiUrl;
     }
     
-    getListaEcuesta(correo):Observable<any>{
-      return this._http.get(this.url+`encuesta/obtenerEncuestasPorUsuario?correo=${correo}`);
+    getListaEcuesta(correo,size,pagina):Observable<any>{
+      console.log(correo,size,pagina);
+      return this._http.get(this.url+`encuesta/obtenerEncuestasPorUsuario?correo=${correo}&size=${size}&pagina=${pagina}`);
     } 
 
     postCrearEncuesta(encuesta):Observable<any>{

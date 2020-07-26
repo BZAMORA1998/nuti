@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { CrearEncuesta } from 'src/app/models/crearEncuesta';
-import { ListaSecciones } from 'src/app/models/listaSecciones';
-import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
 import {Router, ActivatedRoute} from '@angular/router';
 import { LoginService } from 'src/app/servicios/login.service';
 import { Usuario } from 'src/app/models/usuario';

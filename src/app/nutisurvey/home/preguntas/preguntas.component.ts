@@ -4,13 +4,13 @@ var $ = require('jquery');
 import 'jquery-ui-dist/jquery-ui';
 import { ListaSecciones } from 'src/app/models/listaSecciones';
 import { CrearSeccion } from 'src/app/models/crearSeccion';
-import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
 import { PreguntasService } from 'src/app/servicios/preguntas.service';
 import { ListaPreguntas } from 'src/app/models/listaPreguntas';
 import { CrearPreguntas } from 'src/app/models/crearPreguntas';
 import Swal from 'sweetalert2';
 import { SeccionService } from 'src/app/servicios/seccion.service';
 import { OpcionRespuestas } from 'src/app/models/opcionRespuestas';
+import { element } from 'protractor';
 
 
 @Component({
@@ -74,6 +74,15 @@ export class PreguntasComponent implements OnInit {
     });
     console.log(".seccionstep-"+seccion.sesSeccionPK.idSeccion);
     this.deshabilitarGuardarPregunta(); 
+ }
+
+ agregarEtiqueta(pregunta,tipo,idPregunta,i,seccion){
+    console.log("Etiqueta: ",seccion);
+    this.opcionRespuestas=new OpcionRespuestas();
+    this.opcionRespuestas.estado='S';
+    pregunta.opcionRespuestas.push(this.opcionRespuestas);
+    console.log("Etiqueta: ",pregunta);
+    this.deshabilitarAgregarEtiqueta(tipo,idPregunta,i,seccion);
  }
 
   stepProcess(){
@@ -151,6 +160,36 @@ export class PreguntasComponent implements OnInit {
         );
    }
 
+deshabilitarAgregarEtiqueta(tipo,idPregunta,i,seccion){
+  var cont=0;
+
+  console.log(";lkldkclksmdfklmdsakl",seccion);
+
+  console.log(".ordenar"+tipo+"-"+seccion.idSeccion+"-"+i);
+  $(document).ready(function(){
+    var preguntas=$(".ordenar"+tipo+"-"+seccion.idSeccion+"-"+i);
+    console.log("longitud ",preguntas.length);
+    preguntas.each(function() {
+      console.log(".etiqueta="+$(this).val());
+
+        if($(this).val()==""){
+          cont=cont+1;
+          console.log("Contador: "+cont);
+        }
+    });
+    console.log("#etiqueta"+tipo+"-"+idPregunta);
+    var etiqueta=$("#etiqueta"+tipo+"-"+idPregunta);
+    console.log("longitud ",etiqueta.length);
+    if(cont==0 ){
+      console.log("Entro etiqueta.prop('disabled',false)");
+      etiqueta.prop('disabled',false);
+    }else{
+      console.log("Entro etiqueta.prop('disabled',true)");
+      etiqueta.prop('disabled',true);
+    }
+  });
+}
+
 deshabilitarAgregarPregunta(id){
     var cont=0;
     $(document).ready(function(){
@@ -180,7 +219,6 @@ deshabilitarGuardarPregunta(){
     var cont=0;
     var auxBool=true;
     var preguntas=$(".descripcion");
-
     preguntas.each(function() {
       console.log(".descripcion="+$(this).val());
 
@@ -547,6 +585,7 @@ ngOnInit(): void {
               console.log("Lista de Preguntas: "+this.crearPreguntasList);
               this.deshabilitarGuardarPregunta();
               this.deshabilitarAgregarPregunta(seccion.idSeccion);
+              this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
           }
         });
     }else{
@@ -576,7 +615,8 @@ ngOnInit(): void {
             auxBool=false;
             console.log("Lista de Preguntas: ",this.crearPreguntasList);  
             this.deshabilitarGuardarPregunta();
-            this.deshabilitarAgregarPregunta(seccion.idSeccion)
+            this.deshabilitarAgregarPregunta(seccion.idSeccion);
+            this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
         }
       });
 
@@ -611,11 +651,12 @@ ngOnInit(): void {
               console.log("Lista de Preguntas: "+this.crearPreguntasList); 
               this.deshabilitarGuardarPregunta(); 
               this.deshabilitarAgregarPregunta(seccion.idSeccion);
+              this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
           }
         });
       }
     }
-
+    this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
   }
 
 }

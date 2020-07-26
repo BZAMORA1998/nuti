@@ -271,8 +271,9 @@ input[type=button]:disabled{
 .ui-state-default{
   list-style: none;
   background-color: white;
-  /* border: none !important; */
+  border: none !important;
   margin-bottom: 10px;
+  width: 80%;
   height: 40px;
   border-radius: 8px;
   color: #9c9c9c !important;
@@ -283,7 +284,7 @@ input[type=button]:disabled{
   padding: 0px;
   margin: 0px;
   height: 100% !important;
-  width: 80% !important;
+  width: 90% !important;
 }
 
 .modal-footer .btn-primary{
@@ -301,7 +302,11 @@ input[type=button]:disabled{
   box-shadow: 0 0 5px 0 #EA792D;
 }
 
-
+.ico-sort{
+  position: absolute;
+  width: 20px;
+  margin-top: 8px;
+}
 
 /deep/ .loading{
     height: 10px !important;

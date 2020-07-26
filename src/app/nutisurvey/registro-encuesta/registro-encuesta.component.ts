@@ -13,8 +13,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RegistroEncuestaComponent implements OnInit {
 
   public listaEncuesta:ListaEncuesta[];
-  public numTotUsers:number=20;
-  public perpage:number=16;
+  public paginas:number;
+  public size:number=5;
+  public pagina:number;
   public totpaginate:number;
   public usuario:Usuario;
   constructor(
@@ -23,18 +24,19 @@ export class RegistroEncuestaComponent implements OnInit {
     private _router:Router
   ) { 
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
-    this.getListaEncuesta();
+    this.pagina=1;
   }
 
   ngOnInit(): void {
-
+    this.getListaEncuesta(this.pagina);
   }
 
 
-  getListaEncuesta(){
-    this._encuestaService.getListaEcuesta(this.usuario.correo).subscribe(
+  getListaEncuesta(pagina){
+    this._encuestaService.getListaEcuesta(this.usuario.correo,this.size,pagina).subscribe(
       Response=>{
         if(Response.respuestaProceso.codigo==200){
+          this.paginas=Response.paginas;
           this.listaEncuesta=Response.listarEncuesta;
           for(var i in this.listaEncuesta){
             if(this.listaEncuesta[i].mensaje.length>100){
@@ -53,8 +55,9 @@ export class RegistroEncuestaComponent implements OnInit {
     );
   }
 
-  getpaginacion(numpage){
-
+  getpaginacion(pagina){
+    console.log("La pagina es ",pagina);
+    this.getListaEncuesta(pagina);
   }
 
   redidirigirPrincipal(){

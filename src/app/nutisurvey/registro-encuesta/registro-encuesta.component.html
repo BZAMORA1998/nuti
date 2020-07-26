@@ -33,8 +33,7 @@
              </tr>
            </tbody>
          </table>
-          <!-- <app-paginador *ngIf="totpaginate!=0"  [totalDatos]="numTotUsers"  [datosPorpagina]="perpage"  (paginaSeleccionada)="getpaginacion($event)"  ></app-paginador> -->
-        <app-paginador *ngIf="totpaginate!=0"  [totalDatos]="numTotUsers"  [datosPorpagina]="perpage"  (paginaSeleccionada)="getpaginacion($event)" ></app-paginador>
+          <app-paginador *ngIf="paginas!=0"  [totalDatos]="130"  [datosPorpagina]="size"  (paginaSeleccionada)="getpaginacion($event)"  ></app-paginador>
          <input type="button" class="btn-crear" (click)="redidirigirPrincipal()" value="Crear Encuesta"/>
    </div>
    <div class="box-right">
