@@ -17,7 +17,6 @@ import Swal from 'sweetalert2';
 export class EncuestaComponent implements OnInit {
   public crearEncuesta:CrearEncuesta;
   public usuario:Usuario;
-  public nombre:String;
   public idEncuesta:number;
 
   constructor(
@@ -25,10 +24,13 @@ export class EncuestaComponent implements OnInit {
     private _router:Router,
     private _encuestaService:EncuestaService
   ) {
-    this.nombre="";
-    this.crearEncuesta=new CrearEncuesta();
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
+    this.crearEncuesta=new CrearEncuesta();
     this.crearEncuesta=JSON.parse(localStorage.getItem("crearEncuesta"));
+    if(this.crearEncuesta==null){
+      this.crearEncuesta=new CrearEncuesta();
+    }
+    console.log("Respuedta :", this.crearEncuesta);
    }
 
   ngOnInit(): void {
@@ -123,7 +125,7 @@ export class EncuestaComponent implements OnInit {
 
     let logo = (document.getElementById("btn_enviarfile") as HTMLInputElement).value;
 
-    this.idEncuesta=JSON.parse(localStorage.getItem("idEncuesta"));
+    this.idEncuesta=(JSON.parse(localStorage.getItem("idEncuesta")))==null?0:JSON.parse(localStorage.getItem("idEncuesta"));
     this.crearEncuesta.idEncuesta=this.idEncuesta;
     this.crearEncuesta.imagenCab=logo.split( '\\' ).pop();;
     this.crearEncuesta.correo=this.usuario.correo;

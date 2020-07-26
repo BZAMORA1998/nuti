@@ -56,10 +56,10 @@
                                                     <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" value="{{etiqueta.etiquetaOpcion}}"  (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
                                                   </ul> -->
                                                   <ul id="{{'sortableRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
-                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
-                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
-                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
-                                                  </ul>
+                                                    <li (mouseup)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)" (change)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="ui-state-default"><input type="text"  class="{{'ordenarRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                    <li (mouseup)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  (change)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="ui-state-default"><input type="text"  class="{{'ordenarRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                    <li (mouseup)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  (change)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="ui-state-default"><input type="text"   class="{{'ordenarRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                 </ul>
                                               </div>
                                             </div>
                                           </div>
@@ -94,13 +94,8 @@
                                             </div>
                                             <div class="row">
                                               <div class="col-12 pt-3 pl-5">
-                                                 <!-- <ul *ngFor="let etiqueta of pregunta.opcionRespuestas; index as cont" id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+i}}">
-                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" value="{{etiqueta.etiquetaOpcion}}"  (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="form-control text-etiqueta" placeholder="Etiqueta"></li>
-                                                  </ul> -->
                                                   <ul id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
-                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
-                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
-                                                    <li (mouseup)="hola('primero')"  class="ui-state-default"><input type="text" (change)="saveEtiqueta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="form-control text-etiqueta" placeholder="Etiqueta"></li>
+                                                      <li *ngFor="let etiqueta of pregunta.opcionRespuestas"  (mouseup)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="ui-state-default"><input type="text" (change)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta"></li>
                                                   </ul>
                                               </div>
                                             </div>
