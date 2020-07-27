@@ -124,7 +124,7 @@ h1{
 .step-process ul li p::before{
     position: absolute;
     content: counter(step1);
-    margin-left: -10px;
+    margin-left: -20px;
 }
 
 
@@ -209,7 +209,6 @@ input[type=submit]{
    background-color: #ea792d;
    color: white; 
   float: right;
-  margin-top: 50px;
   margin-right: 2%;
 }
 
@@ -306,6 +305,18 @@ input[type=button]:disabled{
   position: absolute;
   width: 20px;
   margin-top: 8px;
+}
+
+.text-dark::before{
+  content: none !important;
+}
+.text-dark{
+  padding-left: 20px !important;
+  color: #b2b2b2;
+}
+
+.modal-title{
+  padding-left: 75px !important;
 }
 
 /deep/ .loading{

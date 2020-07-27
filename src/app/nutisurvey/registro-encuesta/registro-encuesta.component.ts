@@ -28,6 +28,8 @@ export class RegistroEncuestaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.setItem("idEncuesta",JSON.stringify(0));
+    localStorage.removeItem("nombreEncuesta");
     this.getListaEncuesta(this.pagina);
   }
 

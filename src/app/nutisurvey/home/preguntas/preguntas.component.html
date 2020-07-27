@@ -19,7 +19,7 @@
                             <li *ngFor="let pregunta of crearPreguntasList; index as i">
                               <div *ngIf="pregunta.sesSeccion.sesSeccionPK.idSeccion==seccion.sesSeccionPK.idSeccion;" >
                                   <div  class="seccion-{{seccion.sesSeccionPK.idSeccion}} seccion">
-                                    <p> .Enunciado</p>
+                                    <p>.Enunciado</p>
                                     <input  class="descripcion descripcion-{{seccion.sesSeccionPK.idSeccion}}" (change)="savePregunta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" name="pregunta" value="{{pregunta.descripcion}}" autocomplete="off" class="campo" type="text" placeholder="Ingresar pregunta"/>
                                     <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
                                     <input [checked]="pregunta.tipo=='A' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-abierta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"/><label  id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" for="{{i}}-rd-abierta">Abierta</label>
@@ -34,20 +34,20 @@
                                       <div class="modal-dialog"  role="document">
                                         <div class="modal-content" >
                                           <div class="modal-header">
-                                            <h5 class="modal-title pl-4" id="exampleModal3Label" style="color: #EA792D;">Tipo de pregunta: <b>Multiple respuestas</b></h5>
+                                            <h5 class="modal-title" id="exampleModal3Label" style="color: #EA792D;">Tipo de pregunta: <b>Múltiple Respuesta</b></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                           </div>
                                           <div class="modal-body">
                                             <div class="row" style="background-color: #f7f7f7;">
-                                              <div class="col-12 pt-3 pl-5">
-                                                  <p>Personaliza tu pregunta:<span style="color: #EA792D;"> {{pregunta.descripcion}}</span> </p>
+                                              <div class="col-12 pt-3 pl-2">
+                                                  <p class="text-dark">Personaliza tu pregunta:<span style="color: #EA792D;"> {{pregunta.descripcion}}</span> </p>
                                               </div>
                                             </div>
                                             <div class="row">
                                               <div class="col-12 pt-3 pl-5">
-                                                  <p>3. Arrastre las respuesta en el orden deseado</p>
+                                                  <p>Arrastre las respuesta en el orden deseado</p>
                                               </div>
                                             </div>
                                             <div class="row">
@@ -55,7 +55,7 @@
                                                 <ul id="{{'sortableRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
                                                   <li *ngFor="let etiqueta of pregunta.opcionRespuestas"  (mouseup)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="ui-state-default"><img class="ico-sort" src="../../../../assets/img/sort-solid.svg" width="25" height="25"><input type="text" (change)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarRM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta"></li>
                                                 </ul>
-                                               <input type="button" class="btn-primary btn-agregarPregunta" id="etiquetaRM-{{pregunta.idPregunta}}" (click)="agregarEtiqueta(pregunta,'RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)" value="Agregar Etiqueta" />
+                                                  <input type="button" class="btn-primary btn-agregarPregunta" id="etiquetaRM-{{pregunta.idPregunta}}"  (click)="agregarEtiqueta(pregunta,'RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="Agregar Etiqueta"/>
                                               </div>
                                             </div>
                                           </div>
@@ -72,27 +72,27 @@
                                       <div class="modal-dialog"  role="document">
                                         <div class="modal-content" >
                                           <div class="modal-header">
-                                            <h5 class="modal-title pl-4" id="exampleModal3Label" style="color: #EA792D;">Tipo de pregunta: <b>Multiple</b></h5>
+                                            <h5 class="modal-title" id="exampleModal3Label" style="color: #EA792D;">Tipo de pregunta: <b>Múltiple</b></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                           </div>
                                           <div class="modal-body">
                                             <div class="row" style="background-color: #f7f7f7;">
-                                              <div class="col-12 pt-3 pl-5">
-                                                  <p>Personaliza tu pregunta:<span style="color: #EA792D;"> {{pregunta.descripcion}}</span> </p>
+                                              <div class="col-12 pt-3 pl-2">
+                                                  <p class="text-dark">Personaliza tu pregunta:<span style="color: #EA792D;"> {{pregunta.descripcion}}</span> </p>
                                               </div>
                                             </div>
                                             <div class="row">
                                               <div class="col-12 pt-3 pl-5">
-                                                  <p>3. Arrastre las respuesta en el orden deseado</p>
+                                                  <p>Arrastre las respuesta en el orden deseado</p>
                                               </div>
                                             </div>
                                             <div class="row">
                                               <div class="col-12 pt-3 pl-5">
-                                                  <ul id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
-                                                      <li *ngFor="let etiqueta of pregunta.opcionRespuestas"  (mouseup)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="ui-state-default"><input type="text" (change)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta"></li>
-                                                  </ul>
+                                                <ul id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
+                                                  <li *ngFor="let etiqueta of pregunta.opcionRespuestas"  (mouseup)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  class="ui-state-default"><img class="ico-sort" src="../../../../assets/img/sort-solid.svg" width="25" height="25"><input type="text" (change)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta"></li>
+                                                </ul>
                                                   <input type="button" class="btn-primary btn-agregarPregunta" id="etiquetaM-{{pregunta.idPregunta}}"  (click)="agregarEtiqueta(pregunta,'M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"  value="Agregar Etiqueta"/>
                                               </div>
                                             </div>

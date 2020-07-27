@@ -81,6 +81,7 @@ export class EncuestaComponent implements OnInit {
   setIdEncuesta():void{        
     if(this.crearEncuesta.mensaje=="" && this.crearEncuesta.titulo==""){
       localStorage.setItem("idEncuesta",JSON.stringify(0));
+      localStorage.removeItem("nombreEncuesta");
     }
   }
 
@@ -131,10 +132,7 @@ export class EncuestaComponent implements OnInit {
         console.log(Response);
         this.crearEncuesta=Response.encuesta;
         console.log(this.crearEncuesta);
-        // localStorage.setItem("idEncuesta",JSON.stringify(Response.causa));
-        // console.log(this.usuario);
-        // this.loading(false);
-        // this.showModalConfirmacion(Response.mensaje);
+        localStorage.setItem("nombreEncuesta",JSON.stringify(this.crearEncuesta.titulo));
       }else{
        
       }
