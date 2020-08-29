@@ -16,13 +16,11 @@ var $ = require('jquery');
 export class LoginComponent implements OnInit {
 
   public crearEncuesta: CrearEncuesta;
-
   constructor(
     private _route:ActivatedRoute,
     private _router:Router,
     private _loginService:LoginService
   ) { 
-    this.usuario=new Usuario("","","","","",0);
   }
 
   typeInputF="password";

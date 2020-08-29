@@ -1,1 +1,74 @@
-hola mundo
+<div class="container-fluid">
+    <div class="row w-100">
+        <div class="col-12 pl-5 pr-2">
+            <nav class="step-process">
+                <ul>
+                    <p class="text-body"> Personaliza el final de tu encuesta &nbsp;
+                        <select class="custom-select" name="miselect" [(ngModel)]="seleccionado">
+                            <option [value]="item" *ngFor="let item of opcionCierreEncuesta">{{item}}</option>
+                        </select>
+                    </p>
+                    <!--{{seleccionado}}-->
+                    <br>
+                    <form>
+                        <li class="step">
+                            <div class="up-image">
+                                <p id="txt-enviarfile">Imagen Pie</p>
+                                <input (change)="onSelectFile($event)" type="file" id="btn_enviarfile" accept="image/png, image/jpeg" />
+                                <input type="button" id="btn_eliminarfile" value="Eliminar" />
+                                <img id="img_logo" src="" width="50px" height="25px" />
+                                <p id="txt_value"></p>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="descripcion">
+                                <p>Descripción nota Pie</p>
+                                <textarea (change)="setIdEncuesta()" autocomplete="off" placeholder="Ingresar máximo 100 caracteres" name="notaPie" #notaPie="ngModel" [(ngModel)]="crearEncuesta.notaPie"></textarea>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="row w-100">
+                                <div class="col-12 col-sm-6  mt-3">
+                                    <p id="boton-final">Botón final</p>
+
+                                    <div class="row w-100">
+                                        <input class="form-check-input" type="radio" name="accionCerrar" value="accc" ngModel id="accionCerrar" class="margin-left" /><label>Cerrar</label>
+                                        <input class="form-check-input" type="radio" name="accionAceptar" value="acca" ngModel id="accionAceptar" class="margin-left" /><label>Aceptar</label>
+                                        <input class="form-check-input" type="radio" name="accionPersonalizar" value="accp" ngModel id="accionPersonalizar" class="margin-left" /><label>Personalizar</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6  mt-3">
+                                    <p id="boton-final">Acción de Botón</p>
+
+                                    <div class="row w-100">
+                                        <input class="form-check-input" type="radio" name="accionB" value="accB" ngModel id="accionB" />
+                                        <label>Inculir acción</label>
+
+                                        <div class="nombre">
+                                            <input (change)="setIdEncuesta()" class="form-control" name="link" class="nombres" name="link" #link="ngModel" [(ngModel)]="crearEncuesta.link" autocomplete="off" class="campo margin-left" type="text" placeholder="Ingresar el nombre" autofocus id="incluirAcc"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div class="row w-100">
+                                        <input class="form-check-input" type="radio" name="accionB" value="accNB" ngModel id="accionNB" [checked]/><label>No incluir acción</label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row w-100">
+                                <div class="col-12 pt-1">
+                                    <input type="submit" (click)="finalizarInfoEncuesta()" [disabled]="notaPie.value=='' 
+                                                                                      || !notaPie.valid" value="Finalizar" class="margin-left" />
+                                    <input type="button" [disabled]="notaPie.value=='' || !notaPie.valid" value="Visualizar Cierre">
+                                </div>
+                            </div>
+                        </li>
+                    </form>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

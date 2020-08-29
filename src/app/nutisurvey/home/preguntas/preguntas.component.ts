@@ -31,10 +31,12 @@ export class PreguntasComponent implements OnInit {
   public crearP:CrearPreguntas;
   public listarPreguntas:ListaPreguntas[];
   public opcionRespuestaList:OpcionRespuestas[];
+  public opcionRespuestaList2:OpcionRespuestas[];
   
   constructor(private _preguntaService:PreguntasService,private _seccionService:SeccionService) { 
     this.crearPreguntasList=new Array<ListaPreguntas>();
     this.opcionRespuestaList=[];
+    this.opcionRespuestaList2=new Array<OpcionRespuestas>();
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
   }
 
@@ -60,7 +62,7 @@ export class PreguntasComponent implements OnInit {
     this.crearPreguntas.tipoArea="DEFAULT";  
     this.crearPreguntas.sesSeccion=seccion;
     this.opcionRespuestas=new OpcionRespuestas();
-    this.opcionRespuestas.estado='S';
+    this.opcionRespuestas.estado='A';
     this.crearPreguntas.opcionRespuestas.push(this.opcionRespuestas);
     console.log("Entro getLista: ", this.crearPreguntasList);
     this.crearPreguntasList.push(this.crearPreguntas);
@@ -76,10 +78,11 @@ export class PreguntasComponent implements OnInit {
     this.deshabilitarGuardarPregunta(); 
  }
 
+ // agregar etiqueta nueva en caso de que sea nueva
  agregarEtiqueta(pregunta,tipo,idPregunta,i,seccion){
     console.log("Etiqueta: ",seccion);
     this.opcionRespuestas=new OpcionRespuestas();
-    this.opcionRespuestas.estado='S';
+    this.opcionRespuestas.estado='A';
     pregunta.opcionRespuestas.push(this.opcionRespuestas);
     console.log("Etiqueta: ",pregunta);
     this.deshabilitarAgregarEtiqueta(tipo,idPregunta,i,seccion);
@@ -120,7 +123,7 @@ export class PreguntasComponent implements OnInit {
                     this.crearPreguntasList.forEach(element => {
                       if(element.opcionRespuestas.length==0){
                         this.opcionRespuestas=new OpcionRespuestas();
-                        this.opcionRespuestas.estado='S';
+                        this.opcionRespuestas.estado='A';
                         element.opcionRespuestas.push(this.opcionRespuestas);
                         console.log("Lista de Response opcion:",element);
                       }
@@ -516,7 +519,7 @@ ngOnInit(): void {
   CrearPregunta(){
     this.loading(true);
     this.crearP= new CrearPreguntas(this.crearPreguntasList);
-    console.log("Crear Preguntas",this.crearP);
+    console.log("Crear Preguntas--->",this.crearP);
 
     this._preguntaService.postCrearPreguntas(this.crearP).subscribe(
       Response=>{
@@ -553,14 +556,17 @@ ngOnInit(): void {
     );
   }
 
-  ordenarEtiqueta(tipo,idPregunta,idAux,seccion){
+
+  ordenarEtiqueta(tipo,idPregunta,idAux,seccion,idOpcionR){
     this.opcionRespuestaList=[];
     console.log("tipo",tipo);
     console.log("idPregunta",idPregunta);
     console.log("IdAux: ",idAux);
     console.log("idSeccion: ",seccion);
     var orderInput:any[]=[];
-    var auxBool=true;
+    console.log("valor del id Opcion Caputada --->" + idOpcionR);
+
+
     
     var auxBool=true;
     if(idPregunta!=0){
@@ -576,12 +582,14 @@ ngOnInit(): void {
                   var cont=i+1;
                   this.opcionRespuestas=new OpcionRespuestas();
                   this.opcionRespuestas.orden=cont;
-                  this.opcionRespuestas.estado='S';
+                  this.opcionRespuestas.estado='A';
                   this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
                   this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
+                  this.opcionRespuestas.sesOpcionesPK.idOpcion = idOpcionR;
+                  
                   element.opcionRespuestas.push(this.opcionRespuestas);
                 }
-              },1000);
+              },10000);
               console.log("Lista de Preguntas: "+this.crearPreguntasList);
               this.deshabilitarGuardarPregunta();
               this.deshabilitarAgregarPregunta(seccion.idSeccion);
@@ -605,12 +613,12 @@ ngOnInit(): void {
                 var cont=i+1;
                 this.opcionRespuestas=new OpcionRespuestas();
                 this.opcionRespuestas.orden=cont;
-                this.opcionRespuestas.estado='S';
+                this.opcionRespuestas.estado='A';
                 this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
                 this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
                 element.opcionRespuestas.push(this.opcionRespuestas);
               }
-            },1000);
+            },10000);
             console.log(element);
             auxBool=false;
             console.log("Lista de Preguntas: ",this.crearPreguntasList);  
@@ -637,12 +645,13 @@ ngOnInit(): void {
                   var cont=i+1;
                   this.opcionRespuestas=new OpcionRespuestas();
                   this.opcionRespuestas.orden=cont;
-                  this.opcionRespuestas.estado='S';
+                  this.opcionRespuestas.estado='A';
                   this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
                   this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
+                  //this.opcionRespuestas.sesOpcionesPK.idOpcion= idOpcionPregunta
                   elementr.opcionRespuestas.push(this.opcionRespuestas);
                 }
-              },1000);
+              },10000);
               elementr.opcionRespuestas.push(this.opcionRespuestas);
 
               console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion);
@@ -656,7 +665,124 @@ ngOnInit(): void {
         });
       }
     }
+    console.log("Elementos---> ", this.crearPreguntasList);
     this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
   }
 
+
+
+  ordenarEtiquetaV2(tipo,idPregunta,idAux,seccion,aOpciones){
+    this.opcionRespuestaList=[];
+    this.opcionRespuestaList2= aOpciones;
+    console.log("tipo",tipo);
+    console.log("idPregunta",idPregunta);
+    console.log("IdAux: ",idAux);
+    console.log("idSeccion: ",seccion);
+
+
+
+
+    console.log('mivalue', this.opcionRespuestaList2);
+    //console.log('valor xxx ', this.opcionRespuestaList2.find(sesOpcionesPK => sesOpcionesPK.sesOpcionesPK.idOpcion == 2933));
+    console.log('nevoo ', this.opcionRespuestaList2[1].sesOpcionesPK.idOpcion );
+    //////////////////////////////
+    
+    var auxBool=true;
+    if(idPregunta!=0){
+      console.log("idPregunta es diferente a 0: ", idPregunta);
+      this.crearPreguntasList.forEach(element => {
+          console.log("Si ",element.idPregunta,"=",idPregunta,"=",idPregunta );
+
+          if(element.idPregunta==idPregunta && element.sesSeccion.sesSeccionPK.idSeccion==seccion.idSeccion){
+              console.log("Entro");
+ 
+                var order = document.getElementsByClassName("ordenar"+tipo+"-"+seccion.idSeccion+"-"+idAux);
+                element.opcionRespuestas=[];
+                for (let i = 0; i < order.length; i++) {
+                  var cont=i+1;
+                  this.opcionRespuestas=new OpcionRespuestas();
+                  this.opcionRespuestas.orden=cont;
+                  this.opcionRespuestas.estado='A';
+                  this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
+                  this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
+                  this.opcionRespuestas.sesOpcionesPK.idOpcion = this.opcionRespuestaList2[i].sesOpcionesPK.idOpcion;
+                  
+                  element.opcionRespuestas.push(this.opcionRespuestas);
+                }
+              console.log("Lista de Preguntas: "+this.crearPreguntasList);
+              this.deshabilitarGuardarPregunta();
+              this.deshabilitarAgregarPregunta(seccion.idSeccion);
+              this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
+          }
+        });
+    }else{
+      console.log("IdPregunta es igual a 0 ", idPregunta);
+      this.crearPreguntasList.forEach(element => {
+        console.log("Si ",element.idPregunta,"=",idPregunta ,"&&" ,auxBool);
+
+        console.log(element);
+
+        if(element.idAux==idAux && element.sesSeccion.sesSeccionPK.idSeccion==seccion.idSeccion && auxBool){
+            console.log("Entro");
+            element.idAux=idAux;
+              var order = document.getElementsByClassName("ordenar"+tipo+"-"+seccion.idSeccion+"-"+idAux);
+              element.opcionRespuestas=[];
+              for (let i = 0; i < order.length; i++) {
+                var cont=i+1;
+                this.opcionRespuestas=new OpcionRespuestas();
+                this.opcionRespuestas.orden=cont;
+                this.opcionRespuestas.estado='A';
+                this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
+                this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
+                element.opcionRespuestas.push(this.opcionRespuestas);
+              }
+            console.log(element);
+            auxBool=false;
+            console.log("Lista de Preguntas: ",this.crearPreguntasList);  
+            this.deshabilitarGuardarPregunta();
+            this.deshabilitarAgregarPregunta(seccion.idSeccion);
+            this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
+        }
+      });
+
+      if(auxBool){
+        console.log(" Entro SinId");
+        this.crearPreguntasList.forEach(elementr => {
+          console.log("Si ",elementr.idAux,"=","0","&&",elementr.sesSeccion.sesSeccionPK.idSeccion,"==",seccion.idSeccion,"&&",auxBool);
+
+         console.log("El id es",elementr.idAux );
+
+          if(elementr.idAux==0 && elementr.sesSeccion.sesSeccionPK.idSeccion==seccion.idSeccion && auxBool){
+              console.log("Entro seccion: "+seccion );
+              elementr.idAux=idAux;
+                var order = document.getElementsByClassName("ordenar"+tipo+"-"+seccion.idSeccion+"-"+idAux);
+                elementr.opcionRespuestas=[];
+                for (let i = 0; i < order.length; i++) {
+                  var cont=i+1;
+                  this.opcionRespuestas=new OpcionRespuestas();
+                  this.opcionRespuestas.orden=cont;
+                  this.opcionRespuestas.estado='A';
+                  this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
+                  this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
+                  elementr.opcionRespuestas.push(this.opcionRespuestas);
+                }
+              elementr.opcionRespuestas.push(this.opcionRespuestas);
+
+              console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion);
+              console.log(this.crearPreguntasList);
+              auxBool=false;
+              console.log("Lista de Preguntas: "+this.crearPreguntasList); 
+              this.deshabilitarGuardarPregunta(); 
+              this.deshabilitarAgregarPregunta(seccion.idSeccion);
+              this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
+          }
+        });
+      }
+    }
+    console.log("Elementos---> ", this.crearPreguntasList);
+    this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
+  }
+
+
+  
 }

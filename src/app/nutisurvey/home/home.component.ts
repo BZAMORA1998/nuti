@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
+import { LoginService } from '../../servicios/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,20 +11,29 @@ import { Usuario } from 'src/app/models/usuario';
 export class HomeComponent implements OnInit {
   public usuario:Usuario;
   public nombreEncuesta:String;
-  constructor() { 
+  constructor(private auth: LoginService,
+            private router: Router) { 
      
   }
 
   ngOnInit(): void {
 
-      setInterval(() => {
+     // setInterval(() => {
         this.usuario=JSON.parse(localStorage.getItem("usuario"));
         this.nombreEncuesta=JSON.parse(localStorage.getItem("nombreEncuesta"));
   
         if(this.nombreEncuesta==null){
           this.nombreEncuesta="Nombre de la encuesta que esta realizando...";
         }
-      }, 1000);
+      //}, 1000);
     }
 
+    salir(){
+      this.auth.logout();
+      this.router.navigateByUrl('/login');
+    }
+
+    home(){
+      return this.router.navigate(['../notisurvey/registro-encuesta']);
+    }
 }

@@ -3,6 +3,7 @@ import { EncuestaService } from 'src/app/servicios/encuesta.service';
 import { ListaEncuesta } from 'src/app/models/listaEcuesta';
 import { Usuario } from 'src/app/models/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from '../../servicios/login.service';
 
 @Component({
   selector: 'app-registro-encuesta',
@@ -21,7 +22,8 @@ export class RegistroEncuestaComponent implements OnInit {
   constructor(
     private _encuestaService:EncuestaService,
     private _route:ActivatedRoute,
-    private _router:Router
+    private _router:Router,
+    private _auth:LoginService
   ) { 
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
     this.pagina=1;
@@ -30,7 +32,11 @@ export class RegistroEncuestaComponent implements OnInit {
   ngOnInit(): void {
     localStorage.setItem("idEncuesta",JSON.stringify(0));
     localStorage.removeItem("nombreEncuesta");
-    this.getListaEncuesta(this.pagina);
+    if(this.usuario!=null){
+      this.getListaEncuesta(this.pagina);
+    }else{
+      this.salir();
+    }
   }
 
 
@@ -38,7 +44,9 @@ export class RegistroEncuestaComponent implements OnInit {
     this._encuestaService.getListaEcuesta(this.usuario.correo,this.size,pagina).subscribe(
       Response=>{
         if(Response.respuestaProceso.codigo==200){
-          this.totalEncuesta=130;//Response.paginas;
+          this.totalEncuesta=Response.totalEncuestas;//Response.paginas;
+          console.log("Paginas por abrir son " + Response.paginas);
+          
           this.listaEncuesta=Response.listarEncuesta;
           for(var i in this.listaEncuesta){
             if(this.listaEncuesta[i].mensaje.length>100){
@@ -63,10 +71,11 @@ export class RegistroEncuestaComponent implements OnInit {
   }
 
   redidirigirPrincipal(){
-    setTimeout(()=>{
+    /*setTimeout(()=>{
       window.location.reload();
-    }, 100);
-    return this._router.navigate(['../notisurvey/home']);
+    }, 100); //100 */  
+    return this._router.navigate(['../notisurvey/home/diseño-encuesta']);
+    //return this._router.navigate(['../notisurvey/home']);
   }
 
   getIdEncuesta(idEncuesta){
@@ -74,5 +83,12 @@ export class RegistroEncuestaComponent implements OnInit {
     localStorage.setItem("idEncuesta",JSON.stringify(idEncuesta));
     this._router.navigate(['../notisurvey/home']);
   }
+
+
+  salir(){
+    this._auth.logout();
+    this._router.navigateByUrl('/login');
+  }
+
 
 }

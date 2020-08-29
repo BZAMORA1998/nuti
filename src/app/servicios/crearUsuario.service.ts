@@ -25,4 +25,13 @@ export class CrearUsuarioService{
             
       return this._http.post(this.url+'seguridades/crearCuenta',body.toString(),{headers:headers});
     } 
+
+    postRecuperarContrasenia(user):Observable<any>{
+      let body = new HttpParams()
+      .set('correo',user.correo)
+      let headers= new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded');
+
+      return this._http.post(this.url+'seguridades/recupearContrasena',body.toString(),{headers:headers});
+    }
 }

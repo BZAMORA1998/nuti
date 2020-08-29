@@ -1,47 +1,52 @@
 <div class="container-fluid">
-    <div class="row ml-0 mr-0" id="header" >
-      <div class="col-6 offset-3 text-center pt-2 pl-12" >
-          <img class="img-fluid" src="../../assets/img/name-notisurvey.png">
-      </div>
+    <div class="row ml-0 mr-0 " id="header">
+        <nav class="navbar navbar-expand-lg nav-navbar" id="header">
+            <div class="col-6 offset-2 text-center pt-2 pl-12">
+                <img class="img-fluid" src="../../assets/img/name-notisurvey.png" (click)="home()">
+            </div>
 
-      <div class="col-2 p-0 pt-2 text-right text" >
-        <p class="text-white">{{usuario.correo}}</p>
-      </div>
+            <div class="collapse margin-right " id="navbarNavDropdown" class="col-3 margin-left">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink info" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{usuario.correo}}
+                             </a>
+                        <div class="dropdown-menu" id="item-color" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" (click)="home()">Inicio</a>
+                            <a class="dropdown-item">Usuario - "{{usuario.nombre}}"</a>
+                            <a class="dropdown-item" (click)="salir()">Cerrar Sessión</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-    <div class="col-1 p-0 pt-2 pl-2 text-left">
-      <img class="img-fluid" src="../../assets/img/ico-down.png">
     </div>
-  </div>
 
-    <div class="row pt-2 m-0" id="description" >
-      <div class="col-11 offset-1 p-0">
-        <p class="font-weight-light ml-6 w-100 mt-2 h5" >{{nombreEncuesta}}</p>
-      </div>
-    </div>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'diseño-encuesta'" [routerLinkActive]="['active']">Diseño de Encuesta</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'secciones'" [routerLinkActive]="['active']">Secciones</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'preguntas'" [routerLinkActive]="['active']">Preguntas</a>
-          </li>
-          <li class="nav-item" style="border-right: none;">
-            <a class="nav-link" [routerLink]="'resultado-final'" [routerLinkActive]="['active']">Resultado Final</a>
-          </li>
-          <li class="nav-item" style="border: none;">
-            <button type="button" class="btn btn-primary btn-guardar" >Guardar</button>
-          </li>
-        </ul>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item" id="nav-iteme">
+                    <a class="nav-link" [routerLink]="'diseño-encuesta'" [routerLinkActive]="['active']">Diseño de Encuesta</a>
+                </li>
+                <li class="nav-item" id="nav-iteme">
+                    <a class="nav-link" [routerLink]="'secciones'" [routerLinkActive]="['active']">Secciones</a>
+                </li>
+                <li class="nav-item" id="nav-iteme">
+                    <a class="nav-link" [routerLink]="'preguntas'" [routerLinkActive]="['active']">Preguntas</a>
+                </li>
+                <li class="nav-item" style="border-right: none;">
+                    <a class="nav-link" [routerLink]="'resultado-final'" [routerLinkActive]="['active']">Cierre de Encuesta</a>
+                </li>
+                <li class="nav-item" style="border: none;">
+                    <button type="button" class="btn btn-primary btn-guardar">Guardar</button>
+                </li>
+            </ul>
+        </div>
     </nav>
 </div>
 

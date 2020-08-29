@@ -84,6 +84,7 @@ export class EncuestaComponent implements OnInit {
       localStorage.removeItem("nombreEncuesta");
     }
   }
+  
 
   showModalError(message){
     Swal.fire({
@@ -132,6 +133,11 @@ export class EncuestaComponent implements OnInit {
         console.log(Response);
         this.crearEncuesta=Response.encuesta;
         console.log(this.crearEncuesta);
+        
+        //formatear valor de la fecha
+        this.crearEncuesta.fechaInicio=this.crearEncuesta.fechaInicio.substring(0,10);
+        this.crearEncuesta.fechaFin=this.crearEncuesta.fechaFin.substring(0,10);
+
         localStorage.setItem("nombreEncuesta",JSON.stringify(this.crearEncuesta.titulo));
       }else{
        

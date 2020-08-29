@@ -1,18 +1,18 @@
-.container-fluid{
-    margin:0;
-    padding:0; 
+.container-fluid {
+    margin: 0;
+    padding: 0;
     font-family: 'Open Sans', sans-serif !important;
     font-size: 16px;
     width: 100%;
     height: 100%;
 }
 
-.step-process{
+.step-process {
     position: absolute;
     width: 92%;
 }
 
-.step-process ul{
+.step-process ul {
     margin-top: 100px;
     list-style: none;
     position: relative;
@@ -20,7 +20,7 @@
     margin-top: 40px;
 }
 
-.step-process ul li{    
+.step-process ul li {
     position: relative;
     padding: 30px 0;
     border-left: 1px solid #bec3d2;
@@ -28,7 +28,7 @@
     border-left: 1px solid #bec3d2;
 }
 
-.step-process ul li::before{
+.step-process ul li::before {
     position: absolute;
     content: counter(step);
     counter-increment: step;
@@ -39,15 +39,15 @@
     margin-left: -65px;
     width: 30px;
     height: 30px;
-    border-radius:50px;
+    border-radius: 50px;
     border: 1px solid #bec3d2;
 }
 
-.step-process ul li:last-child{
+.step-process ul li:last-child {
     border: none !important;
 }
 
-.up-image{
+.up-image {
     margin-left: -20px;
     margin-top: -40px;
     width: 100%;
@@ -57,11 +57,11 @@
     border-radius: 4px;
 }
 
-.up-image input[type=file]{
+.up-image input[type=file] {
     list-style-type: none;
 }
 
-.up-image #txt-enviarfile{
+.up-image #txt-enviarfile {
     width: 150px;
     height: 100%;
     padding-left: 25px;
@@ -75,7 +75,7 @@
     display: block;
 }
 
-.up-image #btn_enviarfile{
+.up-image #btn_enviarfile {
     position: absolute;
     margin: 0px;
     background-color: #fcfcfc;
@@ -85,7 +85,7 @@
     opacity: 0;
 }
 
-.up-image #btn_eliminarfile{
+.up-image #btn_eliminarfile {
     position: absolute;
     margin-top: 15px;
     margin-left: 1030px;
@@ -95,15 +95,15 @@
     display: none;
 }
 
-.up-image #img_logo{
-    position:absolute;
+.up-image #img_logo {
+    position: absolute;
     margin-top: 10px;
     margin-left: 30px;
     display: none;
 }
 
-.up-image #txt_value{
-    position:absolute;
+.up-image #txt_value {
+    position: absolute;
     margin-top: 12px;
     margin-left: 90px;
     text-align: left;
@@ -111,11 +111,11 @@
     color: #515558;
 }
 
-::placeholder { 
-    color: #bebebe; 
+::placeholder {
+    color: #bebebe;
 }
 
-.nombre{
+.nombre {
     margin-left: -20px;
     margin-top: -40px;
     width: 100%;
@@ -127,7 +127,7 @@
     border: none !important;
 }
 
-.nombre input[type=text]{
+.nombre input[type=text] {
     border: 0;
     width: 100%;
     font-size: 25px;
@@ -136,32 +136,30 @@
     color: white;
 }
 
-
-
-.nombre input[type=text]:focus{
-    outline:none !important;
+.nombre input[type=text]:focus {
+    outline: none !important;
     outline-width: 0 !important;
     box-shadow: none;
     -moz-box-shadow: none;
-    -webkit-box-shadow: none;   
+    -webkit-box-shadow: none;
 }
 
-.nombre input[type=text]::placeholder{
+.nombre input[type=text]::placeholder {
     color: white;
 }
 
-input[type=date]:focus{
-    outline:none !important;
+input[type=date]:focus {
+    outline: none !important;
     outline-width: 0 !important;
     box-shadow: none;
     -moz-box-shadow: none;
-    -webkit-box-shadow: none;  
-    -webkit-appearance: none; 
+    -webkit-box-shadow: none;
+    -webkit-appearance: none;
     outline: none;
     border: 1px solid #ee9052;
 }
 
-.descripcion{
+.descripcion {
     margin-left: -20px;
     margin-top: -30px;
     width: 100%;
@@ -172,7 +170,7 @@ input[type=date]:focus{
     text-align: left;
 }
 
-.descripcion p{
+.descripcion p {
     margin-left: 25px;
     color: #ee9052;
     font-size: 16px;
@@ -180,11 +178,11 @@ input[type=date]:focus{
     border: none !important;
 }
 
-.descripcion p:click{
-    border:none !important;
+.descripcion p:click {
+    border: none !important;
 }
 
-.descripcion div{
+.descripcion div {
     width: 282%;
     height: 50px;
     padding: 5px;
@@ -193,7 +191,7 @@ input[type=date]:focus{
     text-align: left;
 }
 
-.descripcion textarea{
+.descripcion textarea {
     width: 100%;
     height: 90px;
     resize: none;
@@ -204,12 +202,13 @@ input[type=date]:focus{
     border-radius: 4px;
     color: #515558;
 }
-.descripcion textarea:focus{
+
+.descripcion textarea:focus {
     outline: none;
     border: 1px solid #ee9052;
 }
 
-.side{
+.side {
     margin-left: -20px;
     margin-top: -30px;
     width: 100%;
@@ -220,7 +219,7 @@ input[type=date]:focus{
     text-align: left;
 }
 
-p{
+p {
     margin-left: 25px;
     color: #ee9052;
     font-size: 16px;
@@ -228,37 +227,36 @@ p{
     border: none !important;
 }
 
-input{
+input {
     color: #515558;
 }
 
-input[type=date]{
+input[type=date] {
     width: 100%;
     height: 40px;
     background: #fcfcfc;
     border: 1px solid #e7e7e7;
     border-radius: 4px;
     padding-left: 75px;
-    background-image: url("../../../../assets/img/ico-calendar.png");
+    /* background-image: url("../../../../assets/img/ico-calendar.png");*/
     background-repeat: no-repeat;
     background-position-x: 450px;
 }
 
-#txt-fecha-inicio{
+#txt-fecha-inicio {
     position: absolute;
     margin-top: 7px;
-    color:#bebebe;
+    color: #bebebe;
 }
 
-#txt-fecha-fin{
+#txt-fecha-fin {
     position: absolute;
     margin-top: -32px;
-    color:#bebebe;
+    color: #bebebe;
 }
 
-
-#right label{
-    font-weight:normal;
+#right label {
+    font-weight: normal;
     background: #fcfcfc;
     border: 1px solid #e7e7e7;
     border-radius: 4px;
@@ -270,66 +268,65 @@ input[type=date]{
     color: #c3c3c3;
 }
 
-input[type=submit]{
+input[type=submit] {
     text-decoration: none;
     border: none;
-     outline: none;
-     border-radius: 4px;
-     width: 130px;
-     height: 35px;
-     background-color: #ea792d;
-     color: white; 
+    outline: none;
+    border-radius: 4px;
+    width: 130px;
+    height: 35px;
+    background-color: #ea792d;
+    color: white;
     float: right;
     margin-top: 50px;
 }
 
-input[type=submit]:hover{
+input[type=submit]:hover {
     box-shadow: 0 0 5px 0 #EA792D;
 }
 
-input[type=submit]:disabled{
+input[type=submit]:disabled {
     background-color: #f8d6c0;
     color: #fef9f7;
     border: none;
 }
-input[type=submit]:hover{
+
+input[type=submit]:hover {
     box-shadow: 0 0 5px 0 #EA792D;
 }
 
-
-#lbl-negocio{
+#lbl-negocio {
     background-image: url("../../../../assets/img/ico-negocio.png");
     background-repeat: no-repeat;
     background-position: center;
     margin-left: 0px !important;
 }
 
-#lbl-estracto{
+#lbl-estracto {
     background-image: url("../../../../assets/img/ico-estracto.png");
     background-repeat: no-repeat;
     background-position: center;
 }
 
-#texto{
+#texto {
     font-size: 15px;
     margin-top: -27px;
     float: left;
 }
 
-#fecha-validez{
+#fecha-validez {
     margin-top: -20px;
 }
 
-
-/deep/ .loading{
+/deep/ .loading {
     height: 10px !important;
     padding: 0px !important;
 }
 
-/deep/ .spinner-border{
-    margin-top:-15px !important;
+/deep/ .spinner-border {
+    margin-top: -15px !important;
 }
 
-/deep/ .text-dark{
-    margin-top:-10px !important;
+/deep/ .text-dark {
+    margin-top: -10px !important;
 }

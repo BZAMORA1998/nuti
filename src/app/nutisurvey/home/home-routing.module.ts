@@ -5,22 +5,26 @@ import { EncuestaComponent } from './encuesta/encuesta.component';
 import { SeccionesComponent } from './secciones/secciones.component';
 import { PreguntasComponent } from './preguntas/preguntas.component';
 import { ResultadosComponent } from './resultados/resultados.component';
+import { AuthGuard } from '../../guards/auth.guard';
 
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent, children: [
+    path: '', 
+    component: HomeComponent, 
+    canActivate: [ AuthGuard ],
+    children: [
     { 
-      path: 'diseño-encuesta',  component: EncuestaComponent 
+      path: 'diseño-encuesta',  component: EncuestaComponent ,  
     },
     { 
-       path: 'secciones',  component: SeccionesComponent 
+       path: 'secciones',  component: SeccionesComponent,
     },
     { 
-      path: 'preguntas',  component: PreguntasComponent 
+      path: 'preguntas',  component: PreguntasComponent,
     },
     { 
-      path: 'resultado-final',  component: ResultadosComponent 
+      path: 'resultado-final',  component: ResultadosComponent,
     },
     {
       path: '', redirectTo: 'diseño-encuesta', pathMatch: 'full'
