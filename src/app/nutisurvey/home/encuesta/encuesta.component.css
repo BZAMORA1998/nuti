@@ -87,8 +87,8 @@
 
 .up-image #btn_eliminarfile {
     position: absolute;
-    margin-top: 15px;
-    margin-left: 1030px;
+    margin-top: 6px;
+    margin-left: 80%;
     border: none;
     background: #fcfcfc;
     color: #ee9052;
@@ -134,6 +134,23 @@
     background: #ea792d;
     padding-left: 25px;
     color: white;
+}
+
+input[type=button]:hover {
+    box-shadow: 0 0 5px 0 #EA792D;
+}
+
+input[type=button] {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    width: 130px;
+    height: 35px;
+    background-color: #ea792d;
+    color: white;
+    float: right;
+    margin-top: 50px;
 }
 
 .nombre input[type=text]:focus {

@@ -27,8 +27,8 @@
                             </div>
                         </li>
                         <li class="step">
-                            <div class="row w-100">
-                                <div class="col-12 col-sm-6  mt-3">
+                            <p id="boton-final">Acción de Botón</p>
+                            <!--<div class="col-12 col-sm-6  mt-3">
                                     <p id="boton-final">Botón final</p>
 
                                     <div class="row w-100">
@@ -36,28 +36,25 @@
                                         <input class="form-check-input" type="radio" name="accionAceptar" value="acca" ngModel id="accionAceptar" class="margin-left" /><label>Aceptar</label>
                                         <input class="form-check-input" type="radio" name="accionPersonalizar" value="accp" ngModel id="accionPersonalizar" class="margin-left" /><label>Personalizar</label>
                                     </div>
-                                </div>
+                                </div>-->
 
-                                <div class="col-12 col-sm-6  mt-3">
-                                    <p id="boton-final">Acción de Botón</p>
+                            <div class="col-12 col-sm-12  mt-3">
+                                <div class="row w-60">
+                                    <input class="form-check-input" type="radio" name="accionB" value="accB" ngModel id="accionB" />
+                                    <label>Inculir acción</label>
 
-                                    <div class="row w-100">
-                                        <input class="form-check-input" type="radio" name="accionB" value="accB" ngModel id="accionB" />
-                                        <label>Inculir acción</label>
-
-                                        <div class="nombre">
-                                            <input (change)="setIdEncuesta()" class="form-control" name="link" class="nombres" name="link" #link="ngModel" [(ngModel)]="crearEncuesta.link" autocomplete="off" class="campo margin-left" type="text" placeholder="Ingresar el nombre" autofocus id="incluirAcc"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div class="row w-100">
-                                        <input class="form-check-input" type="radio" name="accionB" value="accNB" ngModel id="accionNB" [checked]/><label>No incluir acción</label>
-
+                                    <div class="nombre">
+                                        <input (change)="setIdEncuesta()" class="form-control" name="link" class="nombres" name="link" #link="ngModel" [(ngModel)]="crearEncuesta.link" autocomplete="off" class="campo margin-left" type="text" placeholder="Ingresar el nombre" autofocus id="incluirAcc"
+                                        />
                                     </div>
                                 </div>
 
+                                <div class="row w-100">
+                                    <input class="form-check-input" type="radio" name="accionB" value="accNB" ngModel id="accionNB" [checked]/><label>No incluir acción</label>
+
+                                </div>
                             </div>
+
                             <div class="row w-100">
                                 <div class="col-12 pt-1">
                                     <input type="submit" (click)="finalizarInfoEncuesta()" [disabled]="notaPie.value=='' 

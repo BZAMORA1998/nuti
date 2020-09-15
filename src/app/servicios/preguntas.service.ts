@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from 'src/environments/environment';
 
@@ -30,5 +30,30 @@ export class PreguntasService{
 	getListaPreguntas(id):Observable<any>{
 		console.log("Id de servicio es",id);
 		return this._http.get(this.url+`pregunta/obtenerPreguntasPorIdEncuesta?idEncuesta=${id}`);
+	}
+
+	// Servicios de inhabilitación - Pregunta - Opciones
+	
+	postInactivarPregunta(idPregunta, estado):Observable<any>{
+		let body = new HttpParams()
+			.set('idPregunta',idPregunta)
+			.set('estado',estado)
+
+			let headers = new HttpHeaders()
+			.set('Content-Type','application/x-www-form-urlencoded');
+
+		return this._http.post(this.url+'pregunta/inhabilitarPregunta',body.toString(),{headers:headers})
+	}
+
+	postInactivarOpcionesPregunta(idPregunta,idOpcion, estado):Observable<any>{
+		let body = new HttpParams()
+			.set('idPregunta',idPregunta)
+			.set('idOpcion',idOpcion)
+			.set('estado',estado)
+		
+			let headers = new HttpHeaders()
+			.set('Content-Type','application/x-www-form-urlencoded');
+
+		return this._http.post(this.url+'pregunta/inhabilitarOpcion',body.toString(),{headers:headers});
 	}
 }

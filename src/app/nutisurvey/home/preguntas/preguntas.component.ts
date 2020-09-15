@@ -88,6 +88,9 @@ export class PreguntasComponent implements OnInit {
     this.deshabilitarAgregarEtiqueta(tipo,idPregunta,i,seccion);
  }
 
+
+
+
   stepProcess(){
     console.log(1);
     this.crearSeccionList.forEach(step=>{
@@ -318,7 +321,7 @@ ngOnInit(): void {
     });
   }
 
-  public tipoPreguntas={M:"Multiple",RM:"Multiple Respuesta",SN:"Si o No",A:"Abierta",F:"File"};
+  public tipoPreguntas={M:"Multiple",MR:"Multiple Respuesta",SN:"Si o No",A:"Abierta",F:"File"};
   saveTipoPregunta(descripcion,idPregunta,idAux,Seccion){
     var tipo;
     console.log("descripcion",descripcion);
@@ -336,16 +339,16 @@ ngOnInit(): void {
         console.log("Entro al tipo de pregunta ",this.tipoPreguntas.M,tipo);
       }else if(label.innerHTML==this.tipoPreguntas.SN){
         tipo="SN";
-        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.RM,tipo);
+        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.MR,tipo);
       }else if(label.innerHTML==this.tipoPreguntas.A){
         tipo="A";
-        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.RM,tipo);
+        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.MR,tipo);
       }else if(label.innerHTML==this.tipoPreguntas.F){
         tipo="F";
-        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.RM,tipo);
+        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.MR,tipo);
       }else{
-        tipo="RM";
-        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.RM,tipo);
+        tipo="MR";
+        console.log("Entro al tipo de pregunta ",this.tipoPreguntas.MR,tipo);
       }
 
     if(idPregunta!=0){
@@ -557,15 +560,15 @@ ngOnInit(): void {
   }
 
 
-  ordenarEtiqueta(tipo,idPregunta,idAux,seccion,idOpcionR){
-    this.opcionRespuestaList=[];
+  ordenarEtiquetaV2(tipo,idPregunta,idAux,seccion,aOpciones){
+   // this.opcionRespuestaList=[];
+    this.opcionRespuestaList2= aOpciones;
     console.log("tipo",tipo);
     console.log("idPregunta",idPregunta);
     console.log("IdAux: ",idAux);
     console.log("idSeccion: ",seccion);
-    var orderInput:any[]=[];
-    console.log("valor del id Opcion Caputada --->" + idOpcionR);
 
+    console.log('mivalue', this.opcionRespuestaList2);
 
     
     var auxBool=true;
@@ -573,23 +576,32 @@ ngOnInit(): void {
       console.log("idPregunta es diferente a 0: ", idPregunta);
       this.crearPreguntasList.forEach(element => {
           console.log("Si ",element.idPregunta,"=",idPregunta,"=",idPregunta );
+
           if(element.idPregunta==idPregunta && element.sesSeccion.sesSeccionPK.idSeccion==seccion.idSeccion){
               console.log("Entro");
-              setTimeout(function () {
+
+ 
                 var order = document.getElementsByClassName("ordenar"+tipo+"-"+seccion.idSeccion+"-"+idAux);
+                //console.log("ORDER---> " , order);
+
                 element.opcionRespuestas=[];
                 for (let i = 0; i < order.length; i++) {
                   var cont=i+1;
                   this.opcionRespuestas=new OpcionRespuestas();
                   this.opcionRespuestas.orden=cont;
-                  this.opcionRespuestas.estado='A';
+                  this.opcionRespuestas.estado=this.opcionRespuestaList2[i].estado;
                   this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
+                  console.log("Estado: ",this.opcionRespuestaList2[i].estado);
+
+                  console.log("Etiqueta opcion: ",(<HTMLInputElement> order[i]).value )
                   this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
-                  this.opcionRespuestas.sesOpcionesPK.idOpcion = idOpcionR;
+                  this.opcionRespuestas.sesOpcionesPK.idOpcion = this.opcionRespuestaList2[i].sesOpcionesPK.idOpcion;
                   
                   element.opcionRespuestas.push(this.opcionRespuestas);
+
+                 
+
                 }
-              },10000);
               console.log("Lista de Preguntas: "+this.crearPreguntasList);
               this.deshabilitarGuardarPregunta();
               this.deshabilitarAgregarPregunta(seccion.idSeccion);
@@ -606,7 +618,6 @@ ngOnInit(): void {
         if(element.idAux==idAux && element.sesSeccion.sesSeccionPK.idSeccion==seccion.idSeccion && auxBool){
             console.log("Entro");
             element.idAux=idAux;
-            setTimeout(function () {
               var order = document.getElementsByClassName("ordenar"+tipo+"-"+seccion.idSeccion+"-"+idAux);
               element.opcionRespuestas=[];
               for (let i = 0; i < order.length; i++) {
@@ -616,9 +627,9 @@ ngOnInit(): void {
                 this.opcionRespuestas.estado='A';
                 this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
                 this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
+                this.opcionRespuestas.sesOpcionesPK.idOpcion = this.opcionRespuestaList2[i].sesOpcionesPK.idOpcion;
                 element.opcionRespuestas.push(this.opcionRespuestas);
               }
-            },10000);
             console.log(element);
             auxBool=false;
             console.log("Lista de Preguntas: ",this.crearPreguntasList);  
@@ -638,66 +649,8 @@ ngOnInit(): void {
           if(elementr.idAux==0 && elementr.sesSeccion.sesSeccionPK.idSeccion==seccion.idSeccion && auxBool){
               console.log("Entro seccion: "+seccion );
               elementr.idAux=idAux;
-              setTimeout(function () {
                 var order = document.getElementsByClassName("ordenar"+tipo+"-"+seccion.idSeccion+"-"+idAux);
                 elementr.opcionRespuestas=[];
-                for (let i = 0; i < order.length; i++) {
-                  var cont=i+1;
-                  this.opcionRespuestas=new OpcionRespuestas();
-                  this.opcionRespuestas.orden=cont;
-                  this.opcionRespuestas.estado='A';
-                  this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
-                  this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
-                  //this.opcionRespuestas.sesOpcionesPK.idOpcion= idOpcionPregunta
-                  elementr.opcionRespuestas.push(this.opcionRespuestas);
-                }
-              },10000);
-              elementr.opcionRespuestas.push(this.opcionRespuestas);
-
-              console.log(" El nuevo idAux es "+elementr.idAux, "y la descripcion es ", elementr.descripcion);
-              console.log(this.crearPreguntasList);
-              auxBool=false;
-              console.log("Lista de Preguntas: "+this.crearPreguntasList); 
-              this.deshabilitarGuardarPregunta(); 
-              this.deshabilitarAgregarPregunta(seccion.idSeccion);
-              this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
-          }
-        });
-      }
-    }
-    console.log("Elementos---> ", this.crearPreguntasList);
-    this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
-  }
-
-
-
-  ordenarEtiquetaV2(tipo,idPregunta,idAux,seccion,aOpciones){
-    this.opcionRespuestaList=[];
-    this.opcionRespuestaList2= aOpciones;
-    console.log("tipo",tipo);
-    console.log("idPregunta",idPregunta);
-    console.log("IdAux: ",idAux);
-    console.log("idSeccion: ",seccion);
-
-
-
-
-    console.log('mivalue', this.opcionRespuestaList2);
-    //console.log('valor xxx ', this.opcionRespuestaList2.find(sesOpcionesPK => sesOpcionesPK.sesOpcionesPK.idOpcion == 2933));
-    console.log('nevoo ', this.opcionRespuestaList2[1].sesOpcionesPK.idOpcion );
-    //////////////////////////////
-    
-    var auxBool=true;
-    if(idPregunta!=0){
-      console.log("idPregunta es diferente a 0: ", idPregunta);
-      this.crearPreguntasList.forEach(element => {
-          console.log("Si ",element.idPregunta,"=",idPregunta,"=",idPregunta );
-
-          if(element.idPregunta==idPregunta && element.sesSeccion.sesSeccionPK.idSeccion==seccion.idSeccion){
-              console.log("Entro");
- 
-                var order = document.getElementsByClassName("ordenar"+tipo+"-"+seccion.idSeccion+"-"+idAux);
-                element.opcionRespuestas=[];
                 for (let i = 0; i < order.length; i++) {
                   var cont=i+1;
                   this.opcionRespuestas=new OpcionRespuestas();
@@ -706,64 +659,6 @@ ngOnInit(): void {
                   this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
                   this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
                   this.opcionRespuestas.sesOpcionesPK.idOpcion = this.opcionRespuestaList2[i].sesOpcionesPK.idOpcion;
-                  
-                  element.opcionRespuestas.push(this.opcionRespuestas);
-                }
-              console.log("Lista de Preguntas: "+this.crearPreguntasList);
-              this.deshabilitarGuardarPregunta();
-              this.deshabilitarAgregarPregunta(seccion.idSeccion);
-              this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
-          }
-        });
-    }else{
-      console.log("IdPregunta es igual a 0 ", idPregunta);
-      this.crearPreguntasList.forEach(element => {
-        console.log("Si ",element.idPregunta,"=",idPregunta ,"&&" ,auxBool);
-
-        console.log(element);
-
-        if(element.idAux==idAux && element.sesSeccion.sesSeccionPK.idSeccion==seccion.idSeccion && auxBool){
-            console.log("Entro");
-            element.idAux=idAux;
-              var order = document.getElementsByClassName("ordenar"+tipo+"-"+seccion.idSeccion+"-"+idAux);
-              element.opcionRespuestas=[];
-              for (let i = 0; i < order.length; i++) {
-                var cont=i+1;
-                this.opcionRespuestas=new OpcionRespuestas();
-                this.opcionRespuestas.orden=cont;
-                this.opcionRespuestas.estado='A';
-                this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
-                this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
-                element.opcionRespuestas.push(this.opcionRespuestas);
-              }
-            console.log(element);
-            auxBool=false;
-            console.log("Lista de Preguntas: ",this.crearPreguntasList);  
-            this.deshabilitarGuardarPregunta();
-            this.deshabilitarAgregarPregunta(seccion.idSeccion);
-            this.deshabilitarAgregarEtiqueta(tipo,idPregunta,idAux,seccion);
-        }
-      });
-
-      if(auxBool){
-        console.log(" Entro SinId");
-        this.crearPreguntasList.forEach(elementr => {
-          console.log("Si ",elementr.idAux,"=","0","&&",elementr.sesSeccion.sesSeccionPK.idSeccion,"==",seccion.idSeccion,"&&",auxBool);
-
-         console.log("El id es",elementr.idAux );
-
-          if(elementr.idAux==0 && elementr.sesSeccion.sesSeccionPK.idSeccion==seccion.idSeccion && auxBool){
-              console.log("Entro seccion: "+seccion );
-              elementr.idAux=idAux;
-                var order = document.getElementsByClassName("ordenar"+tipo+"-"+seccion.idSeccion+"-"+idAux);
-                elementr.opcionRespuestas=[];
-                for (let i = 0; i < order.length; i++) {
-                  var cont=i+1;
-                  this.opcionRespuestas=new OpcionRespuestas();
-                  this.opcionRespuestas.orden=cont;
-                  this.opcionRespuestas.estado='A';
-                  this.opcionRespuestas.etiquetaOpcion=(<HTMLInputElement> order[i]).value;
-                  this.opcionRespuestas.sesOpcionesPK.idPregunta=idPregunta;
                   elementr.opcionRespuestas.push(this.opcionRespuestas);
                 }
               elementr.opcionRespuestas.push(this.opcionRespuestas);
@@ -784,5 +679,32 @@ ngOnInit(): void {
   }
 
 
+
+
+
+  //ELIMINAR LA ETIQUEDA -- Inabilita la etiqueta 
   
+ //elimina la etiqueta
+ eliminarEtiqueta(tipo,idPregunta,pregunta,idAux,seccion,aOpciones,i){
+    
+  pregunta.opcionRespuestas[i].estado = 'I';
+  //pregunta.opcionRespuestas.splice(i,1,pregunta.opcionRespuestas[i].estado);
+
+    console.log("id de la opcion a eliminar ", i);
+    console.log("Nombre de la etiqueta ->" + pregunta.opcionRespuestas[i].estado);
+    console.log("Nombre etiqueda ->" + pregunta.opcionRespuestas[i].etiquetaOpcion);
+
+    var NuevaListaOcpiones = pregunta.opcionRespuestas; 
+    pregunta.opcionRespuestas.forEach(element => console.log(element));
+
+    console.log("Elemento borrado " + pregunta.opcionRespuestas[i].etiquetaOpcion);
+ 
+    this.ordenarEtiquetaV2(tipo,idPregunta,idAux,seccion,NuevaListaOcpiones);
+
+
+
+}
+
+
+
 }

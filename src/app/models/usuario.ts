@@ -4,6 +4,7 @@ export class Usuario{
         public cedula: String,
         public correo: String,
         public estado: String,
+        public nick: String,
         public nombre: String,
         public unidadNegocio:number
     ){

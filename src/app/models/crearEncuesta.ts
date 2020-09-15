@@ -7,8 +7,8 @@ export class CrearEncuesta{
         public fechaFin:String;
         public link:String;
         public unidadNegocio:number;
-        public imagenCab: String;
-        public imagenMedi: String;
+        public imagenCabecera: String;
+        public imagenMedicion: String;
         public imagenPie: String;
         public notaPie:String;
         public idEncuesta:number;
@@ -23,8 +23,8 @@ export class CrearEncuesta{
         this.fechaFin="";
         this.link="";
         this.unidadNegocio=0;
-        this.imagenCab="";
-        this.imagenMedi="";
+        this.imagenCabecera="";
+        this.imagenMedicion="";
         this.imagenPie="";
         this.notaPie="";
         this.idEncuesta=0;

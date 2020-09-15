@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EncuestaService } from 'src/app/servicios/encuesta.service';
 import Swal from 'sweetalert2';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-encuesta',
@@ -18,6 +19,13 @@ export class EncuestaComponent implements OnInit {
   public crearEncuesta:CrearEncuesta;
   public usuario:Usuario;
   public idEncuesta:number;
+  public ulrImagenP:String;
+  public fechaImg:String;
+  public nickUser:String;
+
+  
+  private base64Image: string;
+
 
   constructor(
     private _route:ActivatedRoute,
@@ -28,18 +36,40 @@ export class EncuestaComponent implements OnInit {
     this.crearEncuesta=new CrearEncuesta();
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     console.log("idEncuesta",this.idEncuesta);
+    
+    
 
     if(this.idEncuesta!=0){
       this.getEncuestaXId(this.idEncuesta);
+      
     }
 
     if(this.crearEncuesta==null){
       this.crearEncuesta=new CrearEncuesta();
     }
-    console.log("Respuedta :", this.crearEncuesta);
+    console.log("Respuesta :", this.crearEncuesta);
    }
 
+  subirImagen(nombreUsuario):String{
+    this._encuestaService.postSubirImagen(nombreUsuario,this.imageB64).subscribe(Response=>{
+      console.log("Response" , Response);   
+      
+      if(Response.codigo==200){
+        this.ulrpublic = Response.mensaje;
+      }
+    },
+    error=>{
+      console.log(<any>error);
+      console.log("Error en el subida de la imagen" , error);
+    });
+
+    return this.ulrpublic;
+  }
+
+
   ngOnInit(): void {
+    
+
     $('#btn_enviarfile').on('change',function (e){
       if($(this).val()!=""){
               $("#txt-enviarfile").css("display","none");
@@ -60,7 +90,8 @@ export class EncuestaComponent implements OnInit {
     });
 
   }
-
+  public ulrpublic:String;
+  public imageB64:String;
   public url:any;
   onSelectFile(event) { // called each time file input changes
     if (event.target.files && event.target.files[0]) {
@@ -70,12 +101,16 @@ export class EncuestaComponent implements OnInit {
 
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = event.target.result;
+       // this.imageB64 = this.url.replace(/ /g, '+');
+        this.imageB64  = this.url;
+
+        //this.url = "https://www.40defiebre.com/wp-content/uploads/2015/10/imagenes.png";
         //this.crearEncuesta.imagenMedi=this.url;
         $("#img_logo").attr("src",this.url);
       }
+
     }
 
-    $("#txt_value").text(event.target.files[0].name);
   }
 
   setIdEncuesta():void{        
@@ -137,6 +172,26 @@ export class EncuestaComponent implements OnInit {
         //formatear valor de la fecha
         this.crearEncuesta.fechaInicio=this.crearEncuesta.fechaInicio.substring(0,10);
         this.crearEncuesta.fechaFin=this.crearEncuesta.fechaFin.substring(0,10);
+        this.crearEncuesta.imagenCabecera=this.crearEncuesta.imagenCabecera;
+
+        // seteo la imagen con la ul recuperada 
+
+        if(this.crearEncuesta.imagenCabecera.length>0){
+          console.log("Valor de la imagen guardada es " + this.crearEncuesta.imagenCabecera);
+          this.url = this.crearEncuesta.imagenCabecera;
+          $("#img_logo").attr("src",this.url);
+
+          $("#txt-enviarfile").css("display","none");
+          $("#btn_enviarfile").css("display","none");
+          $("#btn_eliminarfile").css("display","block");
+          $("#img_logo").css("display","block");
+          $("#txt_value").css("display","block");
+
+
+
+        }else{
+          console.log("Nuevo registro de encusta");
+        }
 
         localStorage.setItem("nombreEncuesta",JSON.stringify(this.crearEncuesta.titulo));
       }else{
@@ -149,38 +204,48 @@ export class EncuestaComponent implements OnInit {
     );
   }
 
+
   crearencuesta(){
     this.loading(true);
-    console.log("Actualizar"+this.crearEncuesta);
-    localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
+    this.ulrImagenP = this.subirImagen("ImgCab_"+this.usuario.nick+"_idEnc_"+this.idEncuesta);
 
-    let logo = (document.getElementById("btn_enviarfile") as HTMLInputElement).value;
+    setTimeout(() => {
 
-    this.idEncuesta=(JSON.parse(localStorage.getItem("idEncuesta")))==null?0:JSON.parse(localStorage.getItem("idEncuesta"));
-    this.crearEncuesta.idEncuesta=this.idEncuesta;
-    this.crearEncuesta.imagenCab=logo.split( '\\' ).pop();;
-    this.crearEncuesta.correo=this.usuario.correo;
-    this.crearEncuesta.unidadNegocio=this.usuario.unidadNegocio;
-    console.log(this.crearEncuesta);
-    
-    this._encuestaService.postCrearEncuesta(this.crearEncuesta).subscribe( Response=>{
-      console.log(Response);
-      if(Response.codigo==200){
-        console.log(Response.causa);
-        localStorage.setItem("idEncuesta",JSON.stringify(Response.causa));
-        console.log(this.usuario);
-        this.loading(false);
-        this.showModalConfirmacion(Response.mensaje);
-      }else{
-        this.loading(false);
-        this.showModalError(Response.mensaje);
-      }
-    },
-      error=>{
-        console.log(<any>error);
-      }
-    );
+      console.log("Actualizar"+this.crearEncuesta);
+      localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
+  
+      let logo = (document.getElementById("btn_enviarfile") as HTMLInputElement).value;
+  
+      this.idEncuesta=(JSON.parse(localStorage.getItem("idEncuesta")))==null?0:JSON.parse(localStorage.getItem("idEncuesta"));
+      this.crearEncuesta.idEncuesta=this.idEncuesta;
+      this.crearEncuesta.imagenCabecera= this.ulrpublic;
+      this.crearEncuesta.correo=this.usuario.correo;
+      this.crearEncuesta.unidadNegocio=this.usuario.unidadNegocio;
+      console.log(this.crearEncuesta);
+      
+      this._encuestaService.postCrearEncuesta(this.crearEncuesta).subscribe( Response=>{
+        console.log(Response);
+        if(Response.codigo==200){
+          console.log(Response.causa);
+          localStorage.setItem("idEncuesta",JSON.stringify(Response.causa));
+          console.log(this.usuario);
+          this.loading(false);
+          this.showModalConfirmacion(Response.mensaje);
+        }else{
+          this.loading(false);
+          this.showModalError(Response.mensaje);
+        }
+      },
+        error=>{
+          console.log(<any>error);
+        }
+      );
+     }, 1500);
+     
+
+
   }
+
 }
 
 

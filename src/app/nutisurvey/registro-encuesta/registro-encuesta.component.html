@@ -36,7 +36,8 @@
                     <th scope="col">Titulo</th>
                     <th scope="col">Modificado</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Diseñar</th>
+                    <th scope="col" style="text-align: center">Diseñar</th>
+                    <th scope="col" style="text-align: center">Ver Estadisticas</th>
                 </tr>
             </thead>
             <tbody *ngFor="let lista of listaEncuesta;let i = index">
@@ -45,7 +46,8 @@
                     <td>{{lista.titulo}}</td>
                     <td>{{lista.fechaInicio}}</td>
                     <td>{{lista.mensaje}}</td>
-                    <td><input id="btn-editar" (click)="getIdEncuesta(lista.sesEncuestaPK.idEncuesta)" type="button" /></td>
+                    <td style="text-align: center"><input id="btn-editar" (click)="getIdEncuesta(lista.sesEncuestaPK.idEncuesta)" type="button" /></td>
+                    <td style="text-align: center"><input id="btn-actualizar" (click)="actualizarEstadisticas(lista.sesEncuestaPK.idEncuesta)" type="button" /></td>
                 </tr>
             </tbody>
         </table>
@@ -53,19 +55,17 @@
     </div>
     <div class="box-right">
         <div class="box" id="box-up">
-
+            <label style="text-align: center">Total de Encuestas activas {{totalEncuesta}}</label>
+        </div>
+        <div class="box">
+            <label style="text-align: center">Total de respuesta {{numeroDeRespuestas}}</label>
         </div>
 
         <div class="box">
-
+            <label style="text-align: center">Total de Encuestas abiertas {{encuestasAbiertas}}</label>
         </div>
-
         <div class="box">
-
-        </div>
-
-        <div class="box">
-
+            <label style="text-align: center">Tiempo promedio de respuestas</label>
         </div>
         <input type="button" class="btn-crear" (click)="redidirigirPrincipal()" value="Crear Encuesta" />
     </div>

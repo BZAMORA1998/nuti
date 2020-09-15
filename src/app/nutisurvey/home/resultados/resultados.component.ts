@@ -22,7 +22,11 @@ export class ResultadosComponent implements OnInit {
   public opcionCierreEncuesta:string[]=["Imagen y Texto","Solo texto"];
   public seleccionado:string;
   public ngControl:NgControl;
+  public ulrImagenP:String;
+  public fechaImg:String;
+  public nickUser:String;
   
+  imga;
   constructor(
     private _route:ActivatedRoute,
     private _router:Router,
@@ -38,6 +42,22 @@ export class ResultadosComponent implements OnInit {
       this.getEncuestaXId(this.idEncuesta);
       
     }
+  }
+
+  subirImagen(nombreUsuario):String{
+    this._encuestaService.postSubirImagen(nombreUsuario,this.imageB64).subscribe(Response=>{
+      console.log("Response" , Response);   
+      
+      if(Response.codigo==200){
+        this.ulrpublic = Response.mensaje;
+      }
+    },
+    error=>{
+      console.log(<any>error);
+      console.log("Error en el subida de la imagen" , error);
+    });
+
+    return this.ulrpublic;
   }
 
   ngOnInit(): void {
@@ -61,7 +81,8 @@ export class ResultadosComponent implements OnInit {
     });
   }
 
-  
+  public ulrpublic:String;
+  public imageB64:String;
   public url:any;
   onSelectFile(event) { // called each time file input changes
     if (event.target.files && event.target.files[0]) {
@@ -72,6 +93,7 @@ export class ResultadosComponent implements OnInit {
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = event.target.result;
         //this.crearEncuesta.imagenMedi=this.url;
+        this.imageB64 = this.url;
         $("#img_logo").attr("src",this.url);
       }
     }
@@ -135,7 +157,20 @@ export class ResultadosComponent implements OnInit {
         this.crearEncuesta=Response.encuesta;
         console.log(this.crearEncuesta);
         localStorage.setItem("nombreEncuesta",JSON.stringify(this.crearEncuesta.titulo));
-        this.configurarCierreEncuenta();
+       // this.configurarCierreEncuenta();
+      
+        if(this.crearEncuesta.imagenPie.length>0){
+          console.log("Imagen pies " + this.crearEncuesta.imagenPie);
+          this.url = this.crearEncuesta.imagenPie;
+          $("#img_logo").attr("src",this.url);
+
+          $("#txt-enviarfile").css("display","none");
+          $("#btn_enviarfile").css("display","none");
+          $("#btn_eliminarfile").css("display","block");
+          $("#img_logo").css("display","block");
+          $("#txt_value").css("display","block");
+
+        }
         
       }else{
         console.log('Error');
@@ -149,35 +184,42 @@ export class ResultadosComponent implements OnInit {
   //Actualizo la encuesta
   finalizarInfoEncuesta(){
     this.loading(true);
-    console.log("Cierre de encueta" + this.crearEncuesta);
-    localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
+    this.ulrImagenP = this.subirImagen("ImgPie_"+this.usuario.nick+"_idEnc_"+this.idEncuesta);
 
-    let imagenPie = (document.getElementById("btn_enviarfile") as HTMLInputElement).value;
+    setTimeout(() => { 
+      console.log("Cierre de encueta" + this.crearEncuesta);
+      localStorage.setItem("crearEncuesta",JSON.stringify(this.crearEncuesta));
+  
+      let imagenPie = (document.getElementById("btn_enviarfile") as HTMLInputElement).value;
+  
+      this.idEncuesta=(JSON.parse(localStorage.getItem("idEncuesta")))==null?0:JSON.parse(localStorage.getItem("idEncuesta"));
+      this.crearEncuesta.idEncuesta=this.idEncuesta;
+      this.crearEncuesta.imagenPie=this.ulrpublic;
+      this.crearEncuesta.correo=this.usuario.correo;
+      this.crearEncuesta.unidadNegocio=this.usuario.unidadNegocio;
+      console.log(this.crearEncuesta);
+  
+      this._encuestaService.postCrearEncuesta(this.crearEncuesta).subscribe( Response=>{
+        console.log(Response);
+        if(Response.codigo==200){
+          console.log(Response.causa);
+          localStorage.setItem("idEncuesta",JSON.stringify(Response.causa));
+          console.log(this.usuario);
+          this.loading(false);
+          this.showModalConfirmacion(Response.mensaje);
+        }else{
+          this.loading(false);
+          this.showModalError(Response.mensaje);
+        }
+      },
+        error=>{
+          console.log(<any>error);
+        }
+      );
+    }, 1500);
 
-    this.idEncuesta=(JSON.parse(localStorage.getItem("idEncuesta")))==null?0:JSON.parse(localStorage.getItem("idEncuesta"));
-    this.crearEncuesta.idEncuesta=this.idEncuesta;
-    this.crearEncuesta.imagenPie=imagenPie.split('\\').pop();;
-    this.crearEncuesta.correo=this.usuario.correo;
-    this.crearEncuesta.unidadNegocio=this.usuario.unidadNegocio;
-    console.log(this.crearEncuesta);
 
-    this._encuestaService.postCrearEncuesta(this.crearEncuesta).subscribe( Response=>{
-      console.log(Response);
-      if(Response.codigo==200){
-        console.log(Response.causa);
-        localStorage.setItem("idEncuesta",JSON.stringify(Response.causa));
-        console.log(this.usuario);
-        this.loading(false);
-        this.showModalConfirmacion(Response.mensaje);
-      }else{
-        this.loading(false);
-        this.showModalError(Response.mensaje);
-      }
-    },
-      error=>{
-        console.log(<any>error);
-      }
-    );
+
   }
 
   configurarCierreEncuenta(){

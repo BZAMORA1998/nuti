@@ -19,6 +19,8 @@ export class RegistroEncuestaComponent implements OnInit {
   public pagina:number;
   public totpaginate:number;
   public usuario:Usuario;
+  public numeroDeRespuestas:number;
+  public encuestasAbiertas:number;
   constructor(
     private _encuestaService:EncuestaService,
     private _route:ActivatedRoute,
@@ -84,11 +86,49 @@ export class RegistroEncuestaComponent implements OnInit {
     this._router.navigate(['../notisurvey/home']);
   }
 
+  actualizarEstadisticas(idEncuesta){
+    console.log("idEncuesta para ver estadist "+ idEncuesta);
+    this.obtenerCantidadRespuestasAbiertas(idEncuesta);
+    this.obtenerCountRespuestas(idEncuesta);
+
+
+  }
+
 
   salir(){
     this._auth.logout();
     this._router.navigateByUrl('/login');
   }
 
+
+  obtenerCantidadRespuestasAbiertas(idEncuesta:number){
+    this._encuestaService.postObtenerEncuestasAbiertas(idEncuesta).subscribe(
+      Response=>{
+        if(Response.respuestaProceso.codigo==200){
+          this.encuestasAbiertas = Response.encuestasAbiertas;
+
+        }
+        console.log("respuerta de apliacones -> "  + this.encuestasAbiertas);
+      },
+      error=>{
+        console.log(<any>error);
+      }
+    );
+  }
+
+  obtenerCountRespuestas(idEncuesta:number){
+    this._encuestaService.postRespuestasPorEncuestaCount(idEncuesta).subscribe(
+      Response=>{
+        if(Response.respuestaProceso.codigo==200){
+          this.numeroDeRespuestas = Response.numeroDeRespuestas;
+
+        }
+        console.log("Numero respuestas -> "  + this.numeroDeRespuestas);
+      },
+      error=>{
+        console.log(<any>error);
+      }
+    );
+  }
 
 }

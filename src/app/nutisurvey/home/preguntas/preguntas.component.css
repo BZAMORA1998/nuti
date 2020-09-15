@@ -283,6 +283,12 @@ input[type=button]:disabled {
     width: 90% !important;
 }
 
+.button-eliminar {
+    position: absolute;
+    margin-left: 74%;
+    margin-top: -62px;
+}
+
 .modal-footer .btn-primary {
     background-color: #EA792D;
     border: none;
