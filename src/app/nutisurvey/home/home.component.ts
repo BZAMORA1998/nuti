@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
           this.nombreEncuesta="Nombre de la encuesta que esta realizando...";
         }
       //}, 1000);
+        console.log(this.router.url);
     }
 
     salir(){
@@ -35,5 +36,13 @@ export class HomeComponent implements OnInit {
 
     home(){
       return this.router.navigate(['../notisurvey/registro-encuesta']);
+    }
+
+    ocultarNavbarR(){
+      if(this.router.url=='/notisurvey/home/reportes'){
+        return false
+      }else{
+        return true
+      }
     }
 }

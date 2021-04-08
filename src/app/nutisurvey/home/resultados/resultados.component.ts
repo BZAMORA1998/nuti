@@ -8,6 +8,8 @@ import { CrearEncuesta } from 'src/app/models/crearEncuesta';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgControl } from '@angular/forms';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-resultados',
@@ -18,19 +20,25 @@ import { NgControl } from '@angular/forms';
 export class ResultadosComponent implements OnInit {
   public crearEncuesta:CrearEncuesta;
   public usuario:Usuario;
-  public idEncuesta:number
+  public idEncuesta:number;
   public opcionCierreEncuesta:string[]=["Imagen y Texto","Solo texto"];
   public seleccionado:string;
   public ngControl:NgControl;
   public ulrImagenP:String;
   public fechaImg:String;
   public nickUser:String;
+  public urlBase:String = 'http://notify.goitsa.me/uploads/notisurvey/';
+  public urlV:String ='http://notisurveyprod.s3-website-us-east-1.amazonaws.com/#/encuesta/';
+  public urlV2:String = '/1/adc1/adc2/adc3/adc4'
+
   
   imga;
   constructor(
     private _route:ActivatedRoute,
     private _router:Router,
-    private _encuestaService:EncuestaService
+    private _encuestaService:EncuestaService,
+    private clipboard: Clipboard  // Servicio para usar el portapapeles
+    //private snackBar: MatSnackBar  // Servicio para usar snackbars
   ) { 
     this.usuario=JSON.parse(localStorage.getItem("usuario"));
     this.crearEncuesta=new CrearEncuesta();
@@ -150,9 +158,9 @@ export class ResultadosComponent implements OnInit {
 
   //Obtengo el la encuesta de acuerdo al idProporcionado para hacer el update
   getEncuestaXId(idEncuesta){
-    this._encuestaService.getEncuestaXId(idEncuesta).subscribe(Response=>{
+    this._encuestaService.getEncuestaXIdPost(idEncuesta).subscribe(Response=>{
       console.log(Response);
-      if(Response.respuetaProceso.codigo==0){
+      if(Response.respuestaProceso.codigo==200){
         console.log(Response);
         this.crearEncuesta=Response.encuesta;
         console.log(this.crearEncuesta);
@@ -194,7 +202,7 @@ export class ResultadosComponent implements OnInit {
   
       this.idEncuesta=(JSON.parse(localStorage.getItem("idEncuesta")))==null?0:JSON.parse(localStorage.getItem("idEncuesta"));
       this.crearEncuesta.idEncuesta=this.idEncuesta;
-      this.crearEncuesta.imagenPie=this.ulrpublic;
+      this.crearEncuesta.imagenPie=this.urlBase+"ImgPie_"+this.usuario.nick+"_idEnc_"+this.idEncuesta+".jpg";
       this.crearEncuesta.correo=this.usuario.correo;
       this.crearEncuesta.unidadNegocio=this.usuario.unidadNegocio;
       console.log(this.crearEncuesta);
@@ -234,4 +242,26 @@ export class ResultadosComponent implements OnInit {
     }
   }
 
+  visualizarEncueta(){
+    let url: string = "http://notisurveyprod.s3-website-us-east-1.amazonaws.com/#/encuesta/"+this.idEncuesta+"/"+0+"/adc1/adc2/adc3/adc4";
+
+    //let url: string = "http://localhost:8083/notisurvey/resources/formulario/obtenerFormulario?idSurvey="+this.idEncuesta+"&ci=1715009450";
+
+
+
+    window.open(url, "_blank");
+  }
+
+
+
+  copyToClipboard(): void {
+    // Se copia el texto del input al portapapeles
+   // this.clipboard.copy(this.textControl.value);
+
+    // Se muestra un snackbar durante 2 segundos en la parte inferior
+    //this.snackBar.open('¡Texto copiado al portapapeles!', null, {
+      //duration: 2000,
+      //panelClass: 'snackbar'
+    //});
+  }
 }

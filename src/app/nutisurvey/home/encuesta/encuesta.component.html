@@ -4,8 +4,38 @@
             <nav class="step-process">
                 <ul>
                     <form>
+
                         <li class="step">
-                            <div class="up-image">
+                            <div class="nombre">
+                                <input (change)="setIdEncuesta()" type="text" autocomplete="off" name="titulo" #titulo="ngModel" [(ngModel)]="crearEncuesta.titulo" placeholder="Ingresar el nombre de la encuesta" />
+                            </div>
+                        </li>
+
+                        <li class="step">
+                            <div class="descripcion">
+                                <p>Descripción</p>
+                                <textarea (change)="setIdEncuesta()" autocomplete="off" placeholder="Ingresar máximo 100 caracteres" name="mensaje" #mensaje="ngModel" [(ngModel)]="crearEncuesta.mensaje"></textarea>
+                            </div>
+                        </li>
+
+                        <li class="step">
+                            <p id="fecha-validez">Fecha de validez</p>
+                            <div class="row w-100">
+                                <div class="col-12 col-sm-6  mt-3">
+                                    <p id="txt-fecha-inicio">Inicio:</p>
+                                    <input type="date" autocomplete="off" id="fecha-inicio" name="fechaInicio" #fechaInicio="ngModel" [(ngModel)]="crearEncuesta.fechaInicio" />
+                                </div>
+                                <div class="col-12 col-sm-6 mt-3">
+                                    <input type="date" autocomplete="off" id="fecha-fin" name="fechaFin" #fechaFin="ngModel" [(ngModel)]="crearEncuesta.fechaFin" />
+                                    <p id="txt-fecha-fin">Fin:</p>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <p id="fecha-validez">Imagen Cabecera</p>
+                            <br>
+                            <div class="up-image row w-100">
                                 <p id="txt-enviarfile">Agregar logo</p>
                                 <input (change)="onSelectFile($event)" type="file" id="btn_enviarfile" accept="image/png, image/jpeg" />
                                 <input type="button" id="btn_eliminarfile" value="Eliminar" />
@@ -14,28 +44,12 @@
                             </div>
                         </li>
                         <li class="step">
-                            <div class="nombre">
-                                <input (change)="setIdEncuesta()" type="text" autocomplete="off" name="titulo" #titulo="ngModel" [(ngModel)]="crearEncuesta.titulo" placeholder="Ingresar el nombre de la encuesta" />
+                            <p id="fecha-validez">Respuesta multiple </p>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" [checked]="crearEncuesta.multipleRespuesta=='S'" (click)="SetInputCheck()" class="custom-control-input" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">No / Si</label>
                             </div>
-                        </li>
-                        <li class="step">
-                            <div class="descripcion">
-                                <p>Descripción</p>
-                                <textarea (change)="setIdEncuesta()" autocomplete="off" placeholder="Ingresar máximo 100 caracteres" name="mensaje" #mensaje="ngModel" [(ngModel)]="crearEncuesta.mensaje"></textarea>
-                            </div>
-                        </li>
-                        <li class="step">
-                            <p id="fecha-validez">Fecha de validez</p>
-                            <div class="row w-100">
-                                <div class="col-12 col-sm-6  mt-3">
-                                    <p id="txt-fecha-inicio">Inicio:</p>
-                                    <input type="date" autocomplete="off" id="fecha-inicio" name="fechaInicio" #fechaInicio="ngModel" [(ngModel)]="crearEncuesta.fechaInicio" min="crearEncuesta.fechaInicio" />
-                                </div>
-                                <div class="col-12 col-sm-6 mt-3">
-                                    <input type="date" autocomplete="off" id="fecha-fin" name="fechaFin" #fechaFin="ngModel" [(ngModel)]="crearEncuesta.fechaFin" />
-                                    <p id="txt-fecha-fin">Fin:</p>
-                                </div>
-                            </div>
+
                             <div class="row w-100">
                                 <div class="col-12 pt-1">
                                     <input type="submit" (click)="crearencuesta()" [disabled]="fechaInicio.value=='' 
@@ -49,6 +63,8 @@
                                 </div>
                             </div>
                         </li>
+
+
                     </form>
                 </ul>
             </nav>

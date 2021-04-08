@@ -1,0 +1,110 @@
+<br>
+<div>
+    <p>REPORTE</p>
+</div>
+
+<div class="row w-100">
+    <div class="col-12 col-sm-6  mt-3">
+        <p id="txt-fecha-inicio">Inicio:</p>
+        <input type="date" autocomplete="off" id="fecha-inicio" name="fechaInicio" #fechaInicio="ngModel" [(ngModel)]="filtroEncuesta.fechaInicio" />
+    </div>
+    <div class="col-12 col-sm-6 mt-3">
+        <input type="date" autocomplete="off" id="fecha-fin" name="fechaFin" #fechaFin="ngModel" [(ngModel)]="filtroEncuesta.fechaFin" />
+        <p id="txt-fecha-fin">Fin:</p>
+    </div>
+</div>
+
+<div class="col-12 pt-1 center">
+    <input type="submit" (click)="getReporteList()" class="center" value="Cargar Datos " />&nbsp; &nbsp;<input type="submit" (click)="exportAsXLSX() " class="center " value="Exportar Excel " />
+
+
+</div>
+<br>
+<!-- <table class="table ">
+    <thead class="thead-dark ">
+        <tr style="border: 2px solid #ea792d; ">
+            <th scope="col ">IdParticipante</th>
+            <th scope="col ">IdPregunta</th>
+            <th scope="col ">Pregunta</th>
+            <th scope="col ">IdRespuesta</th>
+            <th scope="col ">Calificacion</th>
+            <th scope="col ">Dato Unico</th>
+            <th scope="col ">fechaRegistraEncuesta</th>
+            <th scope="col ">Dato Unico2</th>
+            <th scope="col ">Dato Unico3</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let lista of respuestaEncuesta;let i=i ndex ">
+        <tr style="border: 2px solid #dddddd; ">
+            <td>{{lista.idParticipante}}</td>
+            <td>{{lista.idPregunta}}</td>
+            <td>{{lista.preguntaServicio}}</td>
+            <td>{{lista.idRespuesta}}</td>
+            <td>{{lista.respuestaServicio}}</td>
+            <td>{{lista.datoUnico}}</td>
+            <td>{{lista.fechaRegistraEncuesta}}</td>
+            <td>{{lista.datoUnico2}}</td>
+            <td>{{lista.datoUnico3}}</td>
+        </tr>
+    </tbody>
+</table> -->
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="idParticipante">
+            <th mat-header-cell *matHeaderCellDef> CODIGO ENCUESTADO </th>
+            <td mat-cell *matCellDef="let element"> {{element.idParticipante}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="idPregunta">
+            <th mat-header-cell *matHeaderCellDef> CODIGO PREGUNTA </th>
+            <td mat-cell *matCellDef="let element"> {{element.idPregunta}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="preguntaServicio">
+            <th mat-header-cell *matHeaderCellDef> PREGUNTA </th>
+            <td mat-cell *matCellDef="let element"> {{element.preguntaServicio}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="idRespuesta">
+            <th mat-header-cell *matHeaderCellDef> CODIGO RESPUESTA </th>
+            <td mat-cell *matCellDef="let element"> {{element.idRespuesta}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="calificacion">
+            <th mat-header-cell *matHeaderCellDef> CALIFICACIÓN </th>
+            <td mat-cell *matCellDef="let element"> {{element.calificacion}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="respuestaServicio">
+            <th mat-header-cell *matHeaderCellDef> RESPUESTA </th>
+            <td mat-cell *matCellDef="let element"> {{element.respuestaServicio}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaRegistraEncuesta">
+            <th mat-header-cell *matHeaderCellDef> FECHA RESPUESTA</th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaRegistraEncuesta}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="datoUnico">
+            <th mat-header-cell *matHeaderCellDef> DATO ÚNICO 1 </th>
+            <td mat-cell *matCellDef="let element"> {{element.datoUnico}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="datoUnico2">
+            <th mat-header-cell *matHeaderCellDef> DATO ÚNICO 2 </th>
+            <td mat-cell *matCellDef="let element"> {{element.datoUnico2}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="datoUnico3">
+            <th mat-header-cell *matHeaderCellDef> DATO ÚNICO 3 </th>
+            <td mat-cell *matCellDef="let element"> {{element.datoUnico3}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

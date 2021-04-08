@@ -34,20 +34,22 @@
                 <tr style="border: 2px solid #ea792d;">
                     <th scope="col">Nro</th>
                     <th scope="col">Titulo</th>
-                    <th scope="col">Modificado</th>
+                    <!-- <th scope="col">Modificado</th> -->
                     <th scope="col">Descripcion</th>
                     <th scope="col" style="text-align: center">Diseñar</th>
                     <th scope="col" style="text-align: center">Ver Estadisticas</th>
+                    <th scope="col" style="text-align: center"> Reporte</th>
                 </tr>
             </thead>
             <tbody *ngFor="let lista of listaEncuesta;let i = index">
                 <tr style="border: 2px solid #dddddd;">
                     <th>{{i+1}}</th>
                     <td>{{lista.titulo}}</td>
-                    <td>{{lista.fechaInicio}}</td>
+                    <!-- <td>{{lista.fechaInicio}}</td> -->
                     <td>{{lista.mensaje}}</td>
                     <td style="text-align: center"><input id="btn-editar" (click)="getIdEncuesta(lista.sesEncuestaPK.idEncuesta)" type="button" /></td>
                     <td style="text-align: center"><input id="btn-actualizar" (click)="actualizarEstadisticas(lista.sesEncuestaPK.idEncuesta)" type="button" /></td>
+                    <td style="text-align: center"><input id="btn-editar" (click)="redirigirReporte(lista.sesEncuestaPK.idEncuesta)" type="button"></td>
                 </tr>
             </tbody>
         </table>

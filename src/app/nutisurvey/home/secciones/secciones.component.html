@@ -1,34 +1,38 @@
-<div class="container-fluid" >
-  <nav class="step-process" >
-    <p class="text-body">Definir nombre y descripcion a las secciones de su encuenta</p>
-    <form #formProducto="ngForm" class="mb-5">
-      <div class="row w-100">
-        <div class="col-12">
-            <ul  class="ul-step"  style="margin-left: 20px ;">
-                  <li *ngFor="let crear of crearSeccionList ; index as i" id="li-clonar">
-                    <div class="seccion">
-                        <p>Sección</p>
-                        <div class="form-group w-100">
-                              <input (change)="saveRespuestaInput($event.target.value,crear.sesSeccionPK.idSeccion,i+1)" class="form-control" name="titulo" value="{{crear.titulo}}" class="nombres" name="nombres" autocomplete="off" class="campo" type="text" placeholder="Ingresar el nombre" autofocus/>
-                              <textarea (change)="saveRespuestaTextArea($event.target.value,crear.sesSeccionPK.idSeccion,i+1)" class="form-control" name="descripcion" value="{{crear.descripcion}}" class="nombres" autocomplete="off" class="campo" placeholder="Ingresar descripcion, máximo 100 caracteres"></textarea>
-                        </div>
-                    </div>  
-                  </li>
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 text-right">
-                <input type="button" id="btn-agregarSeccion" (click)="agregarSeccion()" (click)="deshabilitarAgregarSeccion()" class="btn btn-primary mt-2" value="Agregar Sección" />
-          </div>
-        </div>
-        
-        <div class="row w-100 text-right">
-          <div class="col-12">
-          <input type="submit" value="Continuar"  id="btn-aceptar" class="btn btn-primary" (click)="saveSeccion()" />
-        </div>
-      </div>
-      <br><br><br>
-     </form>
-  </nav>
-</div> 
+<div class="container-fluid">
+    <nav class="step-process">
+        <p class="text-body">Definir nombre y descripcion a las secciones de su encuenta</p>
+        <form #formProducto="ngForm" class="mb-5">
+            <div class="row w-100">
+                <div class="col-12">
+                    <ul class="ul-step" style="margin-left: 20px ;">
+                        <li *ngFor="let crear of crearSeccionList ; index as i" id="li-clonar">
+                            <div class="seccion">
+                                <p>Sección</p>
+                                <div class="form-group w-100">
+                                    <input (change)="saveRespuestaInput($event.target.value,crear.sesSeccionPK.idSeccion,i+1)" class="form-control" name="titulo" value="{{crear.titulo}}" class="nombres" name="nombres" autocomplete="off" class="campo" type="text" placeholder="Ingresar el nombre"
+                                        autofocus/>
+                                    <textarea (change)="saveRespuestaTextArea($event.target.value,crear.sesSeccionPK.idSeccion,i+1)" class="form-control" name="descripcion" value="{{crear.descripcion}}" class="nombres" autocomplete="off" class="campo" placeholder="Ingresar descripcion, máximo 100 caracteres"></textarea>
+                                </div>
+                            </div>
+                            <!--   <div>
+                                <button class="class=btn btn-primary mt-2" (click)="exportAsXLSX()">Exportar Excel</button>
+                            </div> -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-right">
+                    <input type="button" id="btn-agregarSeccion" (click)="agregarSeccion()" (click)="deshabilitarAgregarSeccion()" class="btn btn-primary mt-2" value="Agregar Sección" />
+                </div>
+            </div>
+
+            <div class="row w-100 text-right">
+                <div class="col-12">
+                    <input type="submit" value="Continuar" id="btn-aceptar" class="btn btn-primary" (click)="saveSeccion()" />
+                </div>
+            </div>
+            <br><br><br>
+        </form>
+    </nav>
+</div>

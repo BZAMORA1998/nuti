@@ -120,6 +120,10 @@ h1 {
     border: 1px solid #bec3d2;
 }
 
+.marginLegth {
+    margin-left: 65px;
+}
+
 .step-process ul li p::before {
     position: absolute;
     content: counter(step1);
@@ -157,7 +161,7 @@ input[type=radio]:checked+label {
     border: 1px solid #ea792d;
 }
 
-label {
+.labelP {
     font-weight: normal;
     background: #fcfcfc;
     border: 1px solid #e7e7e7;

@@ -86,6 +86,14 @@ export class RegistroEncuestaComponent implements OnInit {
     this._router.navigate(['../notisurvey/home']);
   }
 
+  redirigirReporte(idEncuesta){
+    console.log("idEncuesta es:", idEncuesta);
+    localStorage.setItem("idEncuesta",JSON.stringify(idEncuesta));
+    return this._router.navigate(['../notisurvey/home/reportes']);
+  }
+  
+
+
   actualizarEstadisticas(idEncuesta){
     console.log("idEncuesta para ver estadist "+ idEncuesta);
     this.obtenerCantidadRespuestasAbiertas(idEncuesta);

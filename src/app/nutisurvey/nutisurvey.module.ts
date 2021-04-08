@@ -17,7 +17,6 @@ import { RegistroEncuestaComponent } from './registro-encuesta/registro-encuesta
     CommonModule,
     NutisurveyRoutingModule,
     FormsModule, 
-    SharedModule
-  ]
+    SharedModule ]
 })
 export class NutisurveyModule { }

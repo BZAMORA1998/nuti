@@ -5,6 +5,7 @@ import { EncuestaComponent } from './encuesta/encuesta.component';
 import { SeccionesComponent } from './secciones/secciones.component';
 import { PreguntasComponent } from './preguntas/preguntas.component';
 import { ResultadosComponent } from './resultados/resultados.component';
+import { ReporteComponent } from './reportes/reporte/reporte.component';
 import { AuthGuard } from '../../guards/auth.guard';
 
 
@@ -25,6 +26,9 @@ const routes: Routes = [
     },
     { 
       path: 'resultado-final',  component: ResultadosComponent,
+    },
+    {
+      path: 'reportes', component: ReporteComponent,
     },
     {
       path: '', redirectTo: 'diseño-encuesta', pathMatch: 'full'

@@ -6,6 +6,7 @@ export class CrearEncuesta{
         public fechaInicio:String;
         public fechaFin:String;
         public link:String;
+        public multipleRespuesta:string;
         public unidadNegocio:number;
         public imagenCabecera: String;
         public imagenMedicion: String;
@@ -22,6 +23,7 @@ export class CrearEncuesta{
         this.fechaInicio="";
         this.fechaFin="";
         this.link="";
+        this.multipleRespuesta="";
         this.unidadNegocio=0;
         this.imagenCabecera="";
         this.imagenMedicion="";

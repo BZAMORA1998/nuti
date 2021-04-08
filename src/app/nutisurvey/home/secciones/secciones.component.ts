@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ListaSecciones } from 'src/app/models/listaSecciones';
 import { SesSeccionPK } from 'src/app/models/sesSeccionPK';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SeccionService } from 'src/app/servicios/seccion.service';
 import { CrearSeccion } from 'src/app/models/crearSeccion';
 import Swal from 'sweetalert2';
+
+
 declare var require: any
 var $ = require('jquery');
 import 'jquery-ui-dist/jquery-ui';
@@ -20,7 +23,10 @@ export class SeccionesComponent implements OnInit {
   public crearS:CrearSeccion;
   public idEncuesta:number;
 
-  constructor(private _seccionService:SeccionService) {
+
+  constructor(private _seccionService:SeccionService,
+              private _route:ActivatedRoute,
+              private _router:Router,) {
     this.idEncuesta=Number(JSON.parse(localStorage.getItem("idEncuesta")));
     this.crearSeccionList=new Array<ListaSecciones>();
   }
@@ -204,6 +210,7 @@ deshabilitarAgregarSeccion(){
         this.refresh();;
       }
      });
+     this.Preguntas();
   }
 
   loading(activar){
@@ -240,5 +247,10 @@ deshabilitarAgregarSeccion(){
     setTimeout(()=>{
       window.location.reload();
     });
+  }
+
+
+  Preguntas(){
+    return this._router.navigate(['../notisurvey/home/preguntas']);
   }
 }

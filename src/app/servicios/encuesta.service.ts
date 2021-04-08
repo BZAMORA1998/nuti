@@ -29,7 +29,8 @@ export class EncuestaService{
 
       let headers = new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded');
-      return this._http.post(this.url+'encuesta/obtenerEncuestaPorId',body.toString,{headers:headers});
+
+      return this._http.post(this.url+'encuesta/obtenerEncuestaPorId',body.toString(),{headers:headers});
     }
 
     postCrearEncuesta(encuesta):Observable<any>{
@@ -42,6 +43,7 @@ export class EncuestaService{
          .set('link',encuesta.link)
          .set('unidadNegocio',encuesta.unidadNegocio)
          .set('imagenCab',encuesta.imagenCabecera)
+         .set('multipleResp',encuesta.multipleRespuesta)
          .set('imagenMedi',encuesta.imagenMedi)
          .set('imagenPie',encuesta.imagenPie)
          .set('notaPie',encuesta.notaPie)

@@ -21,21 +21,35 @@
                                             <p>.Enunciado</p>
                                             <input class="descripcion descripcion-{{seccion.sesSeccionPK.idSeccion}}" (change)="savePregunta($event.target.value,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" name="pregunta" value="{{pregunta.descripcion}}" autocomplete="off" class="campo" type="text"
                                                 placeholder="Ingresar pregunta" />
+
+
+                                            <div class="marginLegth">
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" [checked]="pregunta.requerida=='S'" class="custom-control-input" id="{{i}}-chek-PreObli" (click)="setObligatoriedadPregunta(pregunta.idPregunta,$event.target.id)" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}">
+                                                    <label class="custom-control-label" for="{{i}}-chek-PreObli">Pregunta Obligatoria </label>
+                                                </div>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" [checked]="pregunta.orientacionOpciones=='V'" class="custom-control-input" id="{{i}}-chek-Ori" (click)="setOrientacionPregunta(pregunta.idPregunta,$event.target.id)" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}">
+                                                    <label class="custom-control-label" for="{{i}}-chek-Ori">Horizonzal / Vertical </label>
+                                                </div>
+                                            </div>
+
+                                            <br>
                                             <p id="selc-pregunta">Seleccione el tipo de pregunta</p>
                                             <input [checked]="pregunta.tipo=='A' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-abierta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"
-                                            /><label id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" for="{{i}}-rd-abierta">Abierta</label>
+                                            /><label id="{{i}}-rd-abierta-label" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" for="{{i}}-rd-abierta" class="labelP">Abierta</label>
                                             <input [checked]="pregunta.tipo=='SN' && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-siOno" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"
-                                            /><label id="{{i}}-rd-siOno-label" for="{{i}}-rd-siOno" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Si o No</label>
+                                            /><label id="{{i}}-rd-siOno-label" for="{{i}}-rd-siOno" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="labelP">Si o No</label>
                                             <input [checked]="pregunta.tipo=='M'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multiple" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"
                                                 type="radio" /><label id="{{i}}-rd-multiple-label" for="{{i}}-rd-multiple" data-toggle="modal" [attr.data-target]="'#ModalM-'+i" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"
-                                                (click)="sorteable('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Multiple</label>
+                                                (click)="sorteable('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="labelP">Multiple</label>
                                             <!--(click)="ordenarEtiqueta('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"-->
                                             <input [checked]="pregunta.tipo=='MR'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-multipleRespuesta" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}"
                                                 type="radio" /><label id="{{i}}-rd-multipleRespuesta-label" for="{{i}}-rd-multipleRespuesta" data-toggle="modal" [attr.data-target]="'#ModalMR-'+i" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)"
-                                                (click)="sorteable('MR',pregunta.idPregunta,i+1,seccion.sesSeccionPK)">Multiple Respuesta</label>
+                                                (click)="sorteable('MR',pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="labelP">Multiple Respuesta</label>
                                             <!--(click)="ordenarEtiqueta('MR',pregunta.idPregunta,i+1,seccion.sesSeccionPK)"-->
                                             <input [checked]="pregunta.tipo=='F'  && seccion.sesSeccionPK.idSeccion==pregunta.sesSeccion.sesSeccionPK.idSeccion" id="{{i}}-rd-file" class="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" name="unidad-{{seccion.sesSeccionPK.idSeccion}}-{{i}}" type="radio"
-                                            /><label id="{{i}}-rd-file-label" for="{{i}}-rd-file" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)">File</label>
+                                            /><label id="{{i}}-rd-file-label" for="{{i}}-rd-file" (click)="saveTipoPregunta($event.target.id,pregunta.idPregunta,i+1,seccion.sesSeccionPK)" class="labelP">File</label>
                                         </div>
 
                                         <!-- Modal Respuesta multiple-->
@@ -54,6 +68,18 @@
                                                                 <p class="text-dark">Personaliza tu pregunta:<span style="color: #EA792D;"> {{pregunta.descripcion}}</span> </p>
                                                             </div>
                                                         </div>
+                                                        <!-- 
+                                                        <div class="marginLegth">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" [checked]="pregunta.requerida=='S'" class="custom-control-input" id="customSwitch1">
+                                                                <label class="custom-control-label" for="customSwitch1">Pregunta Obligatoria </label>
+                                                            </div>
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" [checked]="pregunta.orientacionOpciones=='H'" class="custom-control-input" id="customSwitch2">
+                                                                <label class="custom-control-label" for="customSwitch2">Horizonzal / Vertical </label>
+                                                            </div>
+                                                        </div> -->
+
                                                         <div class="row">
                                                             <div class="col-12 pt-3 pl-5">
                                                                 <p>Arrastre las respuesta en el orden deseado</p>
@@ -62,15 +88,11 @@
                                                         <div class="row">
                                                             <div class="col-12 pt-3 pl-5">
                                                                 <ul id="{{'sortableMR-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
-                                                                    <!--  <li *ngFor="let etiqueta of pregunta.opcionRespuestas" (blur)="ordenarEtiquetaV2('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK,etiqueta.sesOpcionesPK.idOpcion)" class="ui-state-default"><img class="ico-sort" src="../../../../assets/img/sort-solid.svg" width="25" height="25"><input type="text" value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarRM-'+seccion.sesSeccionPK.idSeccion+'-'+etiqueta.sesOpcionesPK.idOpcion}} form-control text-etiqueta">
-                                                                        (change)="ordenarEtiqueta('RM',pregunta.idPregunta,i+1,seccion.sesSeccionPK,etiqueta.sesOpcionesPK.idOpcion)"
-                                                                
-                                                                    </li> -->
                                                                     <ng-container *ngFor="let etiqueta of pregunta.opcionRespuestas ; index as j">
-                                                                        <li *ngIf="etiqueta.estado=='A'" (blur)="ordenarEtiquetaV2('MR',pregunta.idPregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas)" class="ui-state-default ">
+                                                                        <li [hidden]="etiqueta.estado=='I'" (blur)="ordenarEtiquetaV2('MR',pregunta.idPregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas)" class="ui-state-default hidden ">
                                                                             <img class="ico-sort" src="../../../../assets/img/sort-solid.svg" width="25" height="25">
                                                                             <input type="text" (blur)="ordenarEtiquetaV2('MR',pregunta.idPregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas)" value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarMR-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta">
-                                                                            <button type="button" (click)="eliminarEtiqueta('MR',pregunta.idPregunta,pregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas,j)" class="btn btn-danger button-eliminar">Quitar</button>
+                                                                            <button type="button" (click)="eliminarEtiqueta('MR',pregunta.idPregunta,pregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas,j)" (click)="ocultaritem()" class="btn btn-secondary button-eliminar">X</button>
                                                                         </li>
                                                                     </ng-container>
 
@@ -103,6 +125,11 @@
                                                                 <p class="text-dark">Personaliza tu pregunta:<span style="color: #EA792D;"> {{pregunta.descripcion}}</span> </p>
                                                             </div>
                                                         </div>
+
+
+
+
+
                                                         <div class="row">
                                                             <div class="col-12 pt-3 pl-5">
                                                                 <p>Arrastre las respuesta en el orden deseado</p>
@@ -112,10 +139,10 @@
                                                             <div class="col-12 pt-3 pl-5">
                                                                 <ul id="{{'sortableM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}}">
                                                                     <ng-container *ngFor="let etiqueta of pregunta.opcionRespuestas ; index as j">
-                                                                        <li *ngIf="etiqueta.estado=='A'" (blur)="ordenarEtiquetaV2('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas)" class="ui-state-default ">
+                                                                        <li [hidden]="etiqueta.estado=='I'" (blur)="ordenarEtiquetaV2('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas)" class="ui-state-default ">
                                                                             <img class="ico-sort" src="../../../../assets/img/sort-solid.svg" width="25" height="25">
                                                                             <input type="text" (blur)="ordenarEtiquetaV2('M',pregunta.idPregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas)" value="{{etiqueta.etiquetaOpcion}}" class="{{'ordenarM-'+seccion.sesSeccionPK.idSeccion+'-'+(i+1)}} form-control text-etiqueta">
-                                                                            <button type="button" (click)="eliminarEtiqueta('M',pregunta.idPregunta,pregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas,j)" class="btn btn-danger button-eliminar">Quitar</button>
+                                                                            <button type="button" (click)="eliminarEtiqueta('M',pregunta.idPregunta,pregunta,i+1,seccion.sesSeccionPK,pregunta.opcionRespuestas,j)" class="btn btn-secondary button-eliminar">X</button>
                                                                         </li>
                                                                     </ng-container>
 
@@ -145,7 +172,9 @@
     </div>
     <div class="row text-right" style="width: 95%;">
         <div class="col-12">
-            <input type="submit" value="Continuar" id="btn-aceptar" class="btn btn-primary" (click)="CrearPregunta()" />
+            <input type="submit" value="Continuar" id="btn-aceptar" class="btn btn-primary" (click)="CrearPreguntaYRedirigir()" />
+            <input type="submit" value="Guardar" id="btn-aceptar" class="btn btn-primary" (click)="CrearPregunta()" />
+
         </div>
     </div>
     <br><br><br>

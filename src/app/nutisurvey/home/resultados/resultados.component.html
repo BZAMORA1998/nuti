@@ -12,6 +12,9 @@
                     <br>
                     <form>
                         <li class="step">
+                            <p>Imagen Pie</p>
+                            <br>
+                            <br>
                             <div class="up-image">
                                 <p id="txt-enviarfile">Imagen Pie</p>
                                 <input (change)="onSelectFile($event)" type="file" id="btn_enviarfile" accept="image/png, image/jpeg" />
@@ -40,26 +43,31 @@
 
                             <div class="col-12 col-sm-12  mt-3">
                                 <div class="row w-60">
-                                    <input class="form-check-input" type="radio" name="accionB" value="accB" ngModel id="accionB" />
+                                    <input class="form-check-input" type="radio" name="accionB" value="accB" ngModel id="accionB" [checked]="crearEncuesta.link.length > 0" />
                                     <label>Inculir acción</label>
 
                                     <div class="nombre">
                                         <input (change)="setIdEncuesta()" class="form-control" name="link" class="nombres" name="link" #link="ngModel" [(ngModel)]="crearEncuesta.link" autocomplete="off" class="campo margin-left" type="text" placeholder="Ingresar el nombre" autofocus id="incluirAcc"
                                         />
                                     </div>
+
+
                                 </div>
 
                                 <div class="row w-100">
-                                    <input class="form-check-input" type="radio" name="accionB" value="accNB" ngModel id="accionNB" [checked]/><label>No incluir acción</label>
+                                    <input class="form-check-input" type="radio" name="accionB" value="accNB" ngModel id="accionNB" [checked]="crearEncuesta.link.length === 0 " /><label>No incluir acción</label>
 
                                 </div>
                             </div>
+
+
 
                             <div class="row w-100">
                                 <div class="col-12 pt-1">
                                     <input type="submit" (click)="finalizarInfoEncuesta()" [disabled]="notaPie.value=='' 
                                                                                       || !notaPie.valid" value="Finalizar" class="margin-left" />
-                                    <input type="button" [disabled]="notaPie.value=='' || !notaPie.valid" value="Visualizar Cierre">
+                                    <!--                                     <input type="button" [disabled]="notaPie.value=='' || !notaPie.valid" value="Visualizar Encuesta">-->
+                                    <input type="button" (click)="visualizarEncueta()" value="Ver Encuesta">
                                 </div>
                             </div>
                         </li>
